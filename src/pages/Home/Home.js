@@ -23,7 +23,7 @@ class Home extends Component {
                         <ButtonLogin onPress={() => NavigationService.navigate('Login')}>
                             <LabelButton> Fazer Login </LabelButton>
                         </ButtonLogin>
-                        <ButtonLRegister>
+                        <ButtonLRegister onPress={() => NavigationService.navigate('Register')}>
                             <LabelButton> Cadastra-se </LabelButton>
                         </ButtonLRegister>
                     </ContentButtons>

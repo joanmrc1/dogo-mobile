@@ -3,14 +3,18 @@ import { TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import NavigationService from '../../services/navigation';
 
-class Login extends Component {
+class Register extends Component {
+
     state = {
+        name: '',
+        birthday: '',
         email: '',
         password: '',
-    };
+        confirmPassword: '',
+    }
 
     render() {
-        const { email, password } = this.state;
+        const { name, birthday, email, password, confirmPassword } = this.state;
 
         return (
             <Content>
@@ -21,13 +25,28 @@ class Login extends Component {
 
                     <ContentCard>
                         <CardLogin>
-                            <LabelTitleCard>
-                                Olá
-                            </LabelTitleCard>
-                            <LabelSubTitleCard>
-                                faça login para continuar
-                            </LabelSubTitleCard>
+                            <ContentTitle>
+                                <LabelTitleCard>
+                                    Olá, preencha os campos
+                                </LabelTitleCard>
+                                <LabelSubTitleCard>
+                                    com seus dados
+                                </LabelSubTitleCard>
+                            </ContentTitle>
+
                             <ContentForm>
+                                <InputData
+                                    placeholder="Nome"
+                                    value={name}
+                                    onChangeText={text => this.setState({ name: text })}
+                                />
+
+                                <InputData
+                                    placeholder="Data de Nascimento"
+                                    value={birthday}
+                                    onChangeText={text => this.setState({ birthday: text })}
+                                />
+
                                 <InputData
                                     placeholder="E-mail"
                                     value={email}
@@ -39,20 +58,26 @@ class Login extends Component {
                                     value={password}
                                     onChangeText={text => this.setState({ password: text })}
                                 />
+
+                                <InputData
+                                    placeholder="Comfirma senha"
+                                    value={confirmPassword}
+                                    onChangeText={text => this.setState({ confirmPassword: text })}
+                                />
                             </ContentForm>
+                            
+                            <ContentButton>
+                                <ButtonSubmit>
+                                    <LabelButtonLogin> Cadastrar </LabelButtonLogin>
+                                </ButtonSubmit>
+                            </ContentButton>
 
-                            <ButtonLogin onPress={() => NavigationService.navigate('HomeAplication')}>
-                                <LabelButtonLogin> Acessar </LabelButtonLogin>
-                            </ButtonLogin>
-
-                            <ButtonFogotPassword>
-                                <LabelFogotPassword> Esqueceu a senha ? </LabelFogotPassword>
-                            </ButtonFogotPassword>
                         </CardLogin>
 
-                        <ButtonFogotPassword onPress={() => NavigationService.navigate('Register')}>
-                            <LabelFogotPassword> Não tem conta ? Cadastre-se </LabelFogotPassword>
-                        </ButtonFogotPassword>
+                        <ButtonBackLogin onPress={() => NavigationService.navigate('Login')}>
+                            <LabelFogotPassword> Já tem uma conta ? Faça login </LabelFogotPassword>
+                        </ButtonBackLogin>
+
                     </ContentCard>
                 </ScrollView>
             </Content>
@@ -60,8 +85,14 @@ class Login extends Component {
     }
 }
 
-const ButtonFogotPassword = styled(TouchableOpacity)`
-    padding: 10px;
+const ContentButton = styled.View`
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const ButtonBackLogin = styled(TouchableOpacity)`
+    padding: 0px 10px 10px 10px;
     flex-direction: row;
     justify-content: center;
 `;
@@ -79,7 +110,7 @@ const LabelButtonLogin = styled.Text`
     font-size: 17px;
 `;
 
-const ButtonLogin = styled(TouchableOpacity)`
+const ButtonSubmit = styled(TouchableOpacity)`
     border-radius: 20px;
     border: 1px solid #ffb300;
     height: 45px;
@@ -90,7 +121,6 @@ const ButtonLogin = styled(TouchableOpacity)`
     justify-content: center;
     align-items: center;
     width: 210px;
-    margin-top: 20px;
 `;
 
 const InputData = styled(TextInput)`
@@ -98,29 +128,37 @@ const InputData = styled(TextInput)`
     margin-top: 15px;
     padding-left: 15px;
     width: 100%;
+    height: 40px;
 `;
 
 const ContentForm = styled.View`
     flex-direction: column;
-    padding: 15px;
+    padding: 0px 15px 15px 15px;
     width: 100%;
+    align-items: center;
+`;
+
+const ContentTitle = styled.View`
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
 `;
 
 const LabelSubTitleCard = styled.Text`
     color: #c8c8c8;
-    font-size: 20;
+    font-size: 16;
     font-weight: bold;
-    text-align: center;
-    padding: 5px;
+    text-align: left;
+    margin-left: 10px;
 `;
 
 const LabelTitleCard = styled.Text`
     color: #ffb300;
-    font-size: 37;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
-    padding: 5px;
     margin-top: 20px;
+    margin-left: 10px;
 `;
 
 const CardLogin = styled.View`
@@ -128,12 +166,11 @@ const CardLogin = styled.View`
     border-radius: 10px;
     border: 1px solid white;
     background-color: white;
-    align-items: center;
-    height: 420px;
+    height: 430px;
     width: 270px;
     margin-top: 100px;
     elevation: 1;
-`;
+`
 
 const ContentCard = styled.View`
     width: 100%;
@@ -163,4 +200,4 @@ const Content = styled.View`
     width: 100%;
 `;
 
-export default Login;
+export default Register;
