@@ -20,7 +20,7 @@ class Register extends Component {
             <Content>
                 <ScrollView>
                     <ContentLogo>
-                        <ImgLogo source={require('../../assets/img/logo.jpeg')} />
+                        <ImgLogo source={require('../../assets/img/logo.png')} />
                     </ContentLogo>
 
                     <ContentCard>

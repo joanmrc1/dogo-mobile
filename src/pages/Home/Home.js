@@ -1,37 +1,32 @@
-import React, { Component } from 'react';
-import {ImageBackground, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { ImageBackground, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import NavigationService from '../../services/navigation';
 
-class Home extends Component {
-    
+export default function Home() {
 
-    render() {
-        return (
-            
-            <ImageBackground 
-                source={require('../../assets/img/background.jpeg')}
-                style={{width: '100%', height: '100%'}}
-            >
-                <Content>
-                    <ContentLogo>
-                        <ImgLogo source={require('../../assets/img/logo.jpeg')} />
-                        <LabelLogo>Você mais próximo do seu dog</LabelLogo>
-                    </ContentLogo>
+    return (
+        <ImageBackground
+            source={require('../../assets/img/background.jpeg')}
+            style={{ width: '100%', height: '100%' }}
+        >
+            <Content>
+                <ContentLogo>
+                    <ImgLogo source={require('../../assets/img/logo.png')} />
+                    <LabelLogo>Você mais próximo do seu dog</LabelLogo>
+                </ContentLogo>
 
-                    <ContentButtons>
-                        <ButtonLogin onPress={() => NavigationService.navigate('Login')}>
-                            <LabelButton> Fazer Login </LabelButton>
-                        </ButtonLogin>
-                        <ButtonLRegister onPress={() => NavigationService.navigate('Register')}>
-                            <LabelButton> Cadastra-se </LabelButton>
-                        </ButtonLRegister>
-                    </ContentButtons>
-                </Content>
-            </ImageBackground>
-                
-        );
-    }
+                <ContentButtons>
+                    <ButtonLogin onPress={() => NavigationService.navigate('Login')}>
+                        <LabelButton> Fazer Login </LabelButton>
+                    </ButtonLogin>
+                    <ButtonLRegister onPress={() => NavigationService.navigate('Register')}>
+                        <LabelButton> Cadastra-se </LabelButton>
+                    </ButtonLRegister>
+                </ContentButtons>
+            </Content>
+        </ImageBackground>
+    );
 }
 
 const ButtonLRegister = styled(TouchableOpacity)`
@@ -94,5 +89,3 @@ const Content = styled.View`
     flex-direction: column;
     justify-content: space-between;
 `;
-
-export default Home;

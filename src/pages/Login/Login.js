@@ -1,64 +1,77 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import NavigationService from '../../services/navigation';
 
-class Login extends Component {
-    state = {
-        email: '',
-        password: '',
-    };
+export default function Login() {
+    const error = useSelector(state => state.Login.error);
+    const dispatch = useDispatch();
 
-    render() {
-        const { email, password } = this.state;
+    const [email, setEmail] = useState('joanmrc96@gmail.com');
+    const [password, setPassword] = useState('123456');
 
-        return (
-            <Content>
-                <ScrollView>
-                    <ContentLogo>
-                        <ImgLogo source={require('../../assets/img/logo.jpeg')} />
-                    </ContentLogo>
-
-                    <ContentCard>
-                        <CardLogin>
-                            <LabelTitleCard>
-                                Olá
-                            </LabelTitleCard>
-                            <LabelSubTitleCard>
-                                faça login para continuar
-                            </LabelSubTitleCard>
-                            <ContentForm>
-                                <InputData
-                                    placeholder="E-mail"
-                                    value={email}
-                                    onChangeText={text => this.setState({ email: text })}
-                                />
-
-                                <InputData
-                                    placeholder="Senha"
-                                    value={password}
-                                    onChangeText={text => this.setState({ password: text })}
-                                />
-                            </ContentForm>
-
-                            <ButtonLogin onPress={() => NavigationService.navigate('HomeAplication')}>
-                                <LabelButtonLogin> Acessar </LabelButtonLogin>
-                            </ButtonLogin>
-
-                            <ButtonFogotPassword>
-                                <LabelFogotPassword> Esqueceu a senha ? </LabelFogotPassword>
-                            </ButtonFogotPassword>
-                        </CardLogin>
-
-                        <ButtonFogotPassword onPress={() => NavigationService.navigate('Register')}>
-                            <LabelFogotPassword> Não tem conta ? Cadastre-se </LabelFogotPassword>
-                        </ButtonFogotPassword>
-                    </ContentCard>
-                </ScrollView>
-            </Content>
-        );
+    function submitLogin() {
+        dispatch({ type: 'ASYNC_LOGIN', payload: { email, password } });
     }
+
+    return (
+        <ScrollView>
+            <Content>
+                <ContentLogo>
+                    <ImgLogo source={require('../../assets/img/logo.png')} />
+                </ContentLogo>
+
+                <ContentCard>
+                    <CardLogin>
+                        <LabelTitleCard>
+                            Olá
+                        </LabelTitleCard>
+
+                        <LabelSubTitleCard>
+                            faça login para continuar
+                        </LabelSubTitleCard>
+
+                        {error !== true ? (<LabelError>{error}</LabelError>) : null}
+
+                        <ContentForm>
+                            <InputData
+                                placeholder="E-mail"
+                                value={email}
+                                onChangeText={text => setEmail(text)}
+                            />
+
+                            <InputData
+                                secureTextEntry
+                                placeholder="Senha"
+                                value={password}
+                                onChangeText={text => setPassword(text)}
+                            />
+                        </ContentForm>
+
+                        <ButtonLogin onPress={submitLogin}>
+                            <LabelButtonLogin> Acessar </LabelButtonLogin>
+                        </ButtonLogin>
+
+                        <ButtonFogotPassword>
+                            <LabelFogotPassword> Esqueceu a senha ? </LabelFogotPassword>
+                        </ButtonFogotPassword>
+                    </CardLogin>
+
+                    <ButtonFogotPassword onPress={() => NavigationService.navigate('Register')}>
+                        <LabelFogotPassword> Não tem conta ? Cadastre-se </LabelFogotPassword>
+                    </ButtonFogotPassword>
+                </ContentCard>
+            </Content>
+        </ScrollView>
+    );
 }
+
+const LabelError = styled.Text`
+    color: red;
+    font-size: 19px;
+    font-weight: bold;
+`;
 
 const ButtonFogotPassword = styled(TouchableOpacity)`
     padding: 10px;
@@ -162,5 +175,3 @@ const Content = styled.View`
     height: 100%;
     width: 100%;
 `;
-
-export default Login;
