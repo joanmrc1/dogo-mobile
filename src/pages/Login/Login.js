@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import NavigationService from '../../services/navigation';
 
 export default function Login() {
-    const error = useSelector(state => state.Login.error);
+    const error = useSelector(state => state.login.error);
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState('joanmrc96@gmail.com');
@@ -59,7 +59,7 @@ export default function Login() {
                     </CardLogin>
 
                     <ButtonFogotPassword onPress={() => NavigationService.navigate('Register')}>
-                        <LabelFogotPassword> Não tem conta ? Cadastre-se </LabelFogotPassword>
+                        <LabelRegister> Não tem conta ? Cadastre-se </LabelRegister>
                     </ButtonFogotPassword>
                 </ContentCard>
             </Content>
@@ -83,7 +83,14 @@ const LabelFogotPassword = styled.Text`
     color: #a9a9a9;
     font-weight: 700;
     font-size: 14px;
-    margin-top: 17px;
+    margin-top: 10px;
+`;
+
+const LabelRegister = styled.Text`
+    color: #a9a9a9;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 26px;
 `;
 
 const LabelButtonLogin = styled.Text`
@@ -142,8 +149,8 @@ const CardLogin = styled.View`
     border: 1px solid white;
     background-color: white;
     align-items: center;
-    height: 420px;
-    width: 270px;
+    height: 430px;
+    width: 300px;
     margin-top: 100px;
     elevation: 1;
 `;

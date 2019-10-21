@@ -11,13 +11,16 @@ export function* asyncAuth({ payload }) {
     password: payload.password,
   };
 
+  console.tron.log(payload);
+
   try {
-    const { data } = yield call(api.post, 'login', body);
+    const { data } = yield call(api.post, '/login', body);
     
+    console.tron.log(data);
     // yield call(console.tron.log(data));
     // if (data.token === false) {
     //   yield put({
-    //     type: 'login/ERROR_LOGIN_AUTH',
+    //     type: 'ERROR_LOGIN',
     //     payload: { message: 'Email ou senha inválidos' },
     //   });
     // } else {
@@ -31,7 +34,7 @@ export function* asyncAuth({ payload }) {
   } catch (err) {
     console.tron.log(err)
     yield put({
-      type: 'login/ERROR_LOGIN_AUTH',
+      type: 'ERROR_LOGIN',
       payload: { message: 'Falha na conexão, tente novamente' },
     });
   }

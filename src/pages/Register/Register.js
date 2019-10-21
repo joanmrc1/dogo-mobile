@@ -1,89 +1,123 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect} from 'react';
 import { TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import NavigationService from '../../services/navigation';
 
-class Register extends Component {
+export default function Register() {
+    const error = useSelector(state => state.register.error);
+    const dispatch = useDispatch();
 
-    state = {
-        name: '',
-        birthday: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+    const [name, setName] = useState('joan');
+    const [birthday, setBirthday] = useState('27/10/1996');
+    const [email, setEmail] = useState('joanmrc96@gmail.com');
+    const [password, setPassword] = useState('123456');
+    const [confirmPassword, setConfirmPassword] = useState('123457');
+
+    useEffect(() => {
+        console.tron.log(error)
+    }, []);
+
+    function submitRegister() {
+        // if(!validateForm()) return;
+
+        const body = {
+            name,
+            birthday,
+            email,
+            password,
+        };
+
+        dispatch({ type: 'ASYNC_REGISTER', payload: body });
     }
 
-    render() {
-        const { name, birthday, email, password, confirmPassword } = this.state;
+    function validateForm() {
+        console.tron.log('opa');
+        if (password !== confirmPassword) {
+            dispatch({ 
+                type: 'ERROR_REGISTER', 
+                payload: 'senha e confirma senha estão diferentes.'
+            });
 
-        return (
-            <Content>
-                <ScrollView>
-                    <ContentLogo>
-                        <ImgLogo source={require('../../assets/img/logo.png')} />
-                    </ContentLogo>
-
-                    <ContentCard>
-                        <CardLogin>
-                            <ContentTitle>
-                                <LabelTitleCard>
-                                    Olá, preencha os campos
-                                </LabelTitleCard>
-                                <LabelSubTitleCard>
-                                    com seus dados
-                                </LabelSubTitleCard>
-                            </ContentTitle>
-
-                            <ContentForm>
-                                <InputData
-                                    placeholder="Nome"
-                                    value={name}
-                                    onChangeText={text => this.setState({ name: text })}
-                                />
-
-                                <InputData
-                                    placeholder="Data de Nascimento"
-                                    value={birthday}
-                                    onChangeText={text => this.setState({ birthday: text })}
-                                />
-
-                                <InputData
-                                    placeholder="E-mail"
-                                    value={email}
-                                    onChangeText={text => this.setState({ email: text })}
-                                />
-
-                                <InputData
-                                    placeholder="Senha"
-                                    value={password}
-                                    onChangeText={text => this.setState({ password: text })}
-                                />
-
-                                <InputData
-                                    placeholder="Comfirma senha"
-                                    value={confirmPassword}
-                                    onChangeText={text => this.setState({ confirmPassword: text })}
-                                />
-                            </ContentForm>
-                            
-                            <ContentButton>
-                                <ButtonSubmit>
-                                    <LabelButtonLogin> Cadastrar </LabelButtonLogin>
-                                </ButtonSubmit>
-                            </ContentButton>
-
-                        </CardLogin>
-
-                        <ButtonBackLogin onPress={() => NavigationService.navigate('Login')}>
-                            <LabelFogotPassword> Já tem uma conta ? Faça login </LabelFogotPassword>
-                        </ButtonBackLogin>
-
-                    </ContentCard>
-                </ScrollView>
-            </Content>
-        );
+            return false;
+        }
     }
+
+    return (
+        <Content>
+            <ScrollView>
+                <ContentLogo>
+                    <ImgLogo source={require('../../assets/img/logo.png')} />
+                </ContentLogo>
+
+                <ContentCard>
+                    <CardLogin>
+                        <ContentTitle>
+                            <LabelTitleCard>
+                                Olá, preencha os campos
+                            </LabelTitleCard>
+                            <LabelSubTitleCard>
+                                com seus dados
+                            </LabelSubTitleCard>
+                        </ContentTitle>
+                        {error !== true ? (<LabelError>{error}</LabelError>) : null}
+                        <ContentForm>
+                            <InputData
+                                placeholder="Nome"
+                                value={name}
+                                onChangeText={text => setName(text)}
+                            />
+
+                            <InputData
+                                placeholder="Data de Nascimento"
+                                value={birthday}
+                                onChangeText={text => setBirthday(text)}
+                            />
+
+                            <InputData
+                                placeholder="E-mail"
+                                value={email}
+                                onChangeText={text => setEmail(text)}
+                            />
+
+                            <InputData
+                                secureTextEntry
+                                placeholder="Senha"
+                                value={password}
+                                onChangeText={text => setPassword(text)}
+                            />
+
+                            <InputData
+                                secureTextEntry
+                                placeholder="Comfirma senha"
+                                value={confirmPassword}
+                                onChangeText={text => setConfirmPassword(text)}
+                            />
+                        </ContentForm>
+                        
+                        <ContentButton>
+                            <ButtonSubmit onPress={submitRegister}>
+                                <LabelButtonLogin> Cadastrar </LabelButtonLogin>
+                            </ButtonSubmit>
+                        </ContentButton>
+
+                    </CardLogin>
+
+                    <ButtonBackLogin onPress={() => NavigationService.navigate('Login')}>
+                        <LabelFogotPassword> Já tem uma conta ? Faça login </LabelFogotPassword>
+                    </ButtonBackLogin>
+
+                </ContentCard>
+            </ScrollView>
+        </Content>
+    );
 }
+
+const LabelError = styled.Text`
+    color: red;
+    font-size: 19px;
+    font-weight: bold;
+`;
 
 const ContentButton = styled.View`
     width: 100%;
@@ -166,8 +200,8 @@ const CardLogin = styled.View`
     border-radius: 10px;
     border: 1px solid white;
     background-color: white;
-    height: 430px;
-    width: 270px;
+    height: 450px;
+    width: 300px;
     margin-top: 100px;
     elevation: 1;
 `
@@ -199,5 +233,3 @@ const Content = styled.View`
     height: 100%;
     width: 100%;
 `;
-
-export default Register;
