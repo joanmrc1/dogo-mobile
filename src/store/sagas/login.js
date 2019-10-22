@@ -11,37 +11,49 @@ export function* asyncAuth({ payload }) {
     password: payload.password,
   };
 
-  console.tron.log(payload);
-
   try {
     const { data } = yield call(api.post, '/login', body);
-    
-    console.tron.log(data);
-    // yield call(console.tron.log(data));
-    // if (data.token === false) {
-    //   yield put({
-    //     type: 'ERROR_LOGIN',
-    //     payload: { message: 'Email ou senha inválidos' },
-    //   });
-    // } else {
-    //   yield call(AsyncStorage.multiSet, [
-    //     [`@DogoApp:token`, data.token],
-    //     [`@DogoApp:user`, JSON.stringify(data.user)],
-    //   ]);
 
-    //   yield call(NavigationService.navigate, 'HomeAplication');
-    // }
+    const response = yield call(verifyLogin, data);
+
+    if (!response) return;
+
+    yield call(AsyncStorage.multiSet, [
+      [`@DogoApp:token`, data.token.token],
+      [`@DogoApp:user`, JSON.stringify(data.user)],
+    ]);
+
+    yield call(NavigationService.navigate, 'HomeAplication');
+    
   } catch (err) {
-    console.tron.log(err)
+    console.tron.log('ERROR: ',err);
+    
     yield put({
       type: 'ERROR_LOGIN',
       payload: { message: 'Falha na conexão, tente novamente' },
     });
   }
+}
 
-  // function* removeLoading() {
-  //   yield put({
-  //     type: 'loading/NO_LOADING',
-  //   });
-  // }
+function* verifyLogin({uidField, passwordField}) {
+
+  if (typeof uidField !== 'undefined') {
+    yield put({
+      type: 'ERROR_LOGIN', 
+      message: 'Email não está cadastrado no sistema!'
+    });
+
+    return false;
+  }
+
+  if (typeof passwordField !== 'undefined') {
+    yield put({
+      type: 'ERROR_LOGIN', 
+      message: 'A senha está incorreta!'
+    });
+
+    return false;
+  }
+
+  return true;
 }

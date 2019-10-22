@@ -1,28 +1,24 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
-    asyncRegister: ['name','birthday','email','password'],
+    asyncRegister: ['name', 'birthday', 'email', 'password'],
     errorRegister: ['message'],
-    errorClear: [''],
+    errorClear: null
 });
-
-console.tron.log(Types, Creators)
 
 const INITIAL_STATE = {
     error: false,
+}
+
+const errorRegister = (state = INITIAL_STATE, action) => {
+    return { ...state, error: action.message}
 };
 
-const errorRegisterUser = (state = INITIAL_STATE, action) => [
-    ...state,
-    {error: action.message}
-];
-
-const errorClear = (state = INITIAL_STATE, action) => [
-    ...state,
-    {error: false},
-];
+const errorClear = (state = INITIAL_STATE, action) => {
+    return { ...state, error: action.message}
+};
 
 export default createReducer(INITIAL_STATE, {
-    [Types.ERROR_REGISTER]: errorRegisterUser,
-    [Types.ERROR_CLEAR]: errorClear,
+    [Types.ERROR_REGISTER]: errorRegister,
+    [Types.ERROR_CLEAR]: errorClear
 });

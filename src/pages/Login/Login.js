@@ -3,16 +3,27 @@ import { TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import NavigationService from '../../services/navigation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Login() {
     const error = useSelector(state => state.login.error);
     const dispatch = useDispatch();
 
-    const [email, setEmail] = useState('joanmrc96@gmail.com');
+    const [email, setEmail] = useState('joanmrc96@gmail.comm');
     const [password, setPassword] = useState('123456');
+
+    useEffect(() => {
+        console.tron.log(error);
+    }, []);
 
     function submitLogin() {
         dispatch({ type: 'ASYNC_LOGIN', payload: { email, password } });
+    }
+
+    function logout() {
+        AsyncStorage.removeItem("@DogoApp:token");
+        AsyncStorage.removeItem("@DogoApp:user");
+        NavigationService.navigate("Login");
     }
 
     return (
@@ -53,7 +64,7 @@ export default function Login() {
                             <LabelButtonLogin> Acessar </LabelButtonLogin>
                         </ButtonLogin>
 
-                        <ButtonFogotPassword>
+                        <ButtonFogotPassword onPress={logout}>
                             <LabelFogotPassword> Esqueceu a senha ? </LabelFogotPassword>
                         </ButtonFogotPassword>
                     </CardLogin>
@@ -69,7 +80,7 @@ export default function Login() {
 
 const LabelError = styled.Text`
     color: red;
-    font-size: 19px;
+    font-size: 16px;
     font-weight: bold;
 `;
 

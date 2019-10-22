@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import NavigationService from '../../services/navigation';
+
 
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-
 class HomeAplication extends Component {
+
+    logout = () => {
+        AsyncStorage.removeItem("@DogoApp:token");
+        AsyncStorage.removeItem("@DogoApp:user");
+        NavigationService.navigate("Login");
+    }
+    
     render() {
         return (
             <Content>

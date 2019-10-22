@@ -1,7 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
-import api from '~/services/api';
-
+import api from '~/services/api'; 
 import NavigationService from '../../services/navigation';
 
 export function* asyncRegister({ payload }) {
@@ -16,10 +15,8 @@ export function* asyncRegister({ payload }) {
   try {
     const { data } = yield call(api.post, '/register', body);
     
-    console.tron.log(data);
-    
     yield call(AsyncStorage.multiSet, [
-      [`@DogoApp:token`, data.token],
+      [`@DogoApp:token`, data.token.token ],
       [`@DogoApp:user`, JSON.stringify(data.user)],
     ]);
 
