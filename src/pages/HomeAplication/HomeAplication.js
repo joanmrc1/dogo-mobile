@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import NavigationService from '../../services/navigation';
-
-
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 class HomeAplication extends Component {
 
-    logout = () => {
-        AsyncStorage.removeItem("@DogoApp:token");
-        AsyncStorage.removeItem("@DogoApp:user");
-        NavigationService.navigate("Login");
-    }
-    
     render() {
         return (
             <Content>
@@ -28,11 +19,18 @@ class HomeAplication extends Component {
                 <ContentButtonLocation>
                     <ButtonLocation>
                         <Icon name="map-marker" size={28} color="#FFF" />
-                        <LabelButton> Localize seu Pet </LabelButton>
+                        <LabelButton> Meus Pets </LabelButton>
                     </ButtonLocation>
                 </ContentButtonLocation>
 
-                <ContentLabelInfo>
+                <ContentButtonLocation>
+                    <ButtonLocation>
+                        <Icon name="map-marker" size={28} color="#FFF" />
+                        <LabelButton> Meus Pets </LabelButton>
+                    </ButtonLocation>
+                </ContentButtonLocation>
+
+                {/* <ContentLabelInfo>
                     <LabelInfo> Informações do pet </LabelInfo>
                 </ContentLabelInfo>
 
@@ -51,7 +49,7 @@ class HomeAplication extends Component {
                         <Icon name="heartbeat" size={30} color="#ffb300" />
                         <LabelLastConsultation> Utilma consulta 09/09/2019 </LabelLastConsultation>
                     </Row>
-                </ContentInfoPet>
+                </ContentInfoPet> */}
             </Content>
         );
     }
@@ -146,7 +144,7 @@ const ButtonLocation = styled(TouchableOpacity)`
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    width: 250px;
+    width: 180px;
     margin-top: 20px;
 `;
 

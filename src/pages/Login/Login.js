@@ -9,7 +9,7 @@ export default function Login() {
     const error = useSelector(state => state.login.error);
     const dispatch = useDispatch();
 
-    const [email, setEmail] = useState('joanmrc96@gmail.comm');
+    const [email, setEmail] = useState('joanmrc96@gmail.com');
     const [password, setPassword] = useState('123456');
 
     useEffect(() => {
@@ -82,6 +82,7 @@ const LabelError = styled.Text`
     color: red;
     font-size: 16px;
     font-weight: bold;
+    margin-top: 10px;
 `;
 
 const ButtonFogotPassword = styled(TouchableOpacity)`

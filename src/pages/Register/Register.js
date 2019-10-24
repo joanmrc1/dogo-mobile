@@ -19,7 +19,7 @@ export default function Register() {
     }, []);
 
     function submitRegister() {
-        // if(!validateForm()) return;
+        if(!validateForm()) return;
 
         const body = {
             name,
@@ -36,7 +36,7 @@ export default function Register() {
         if (password !== confirmPassword) {
             dispatch({ 
                 type: 'ERROR_REGISTER', 
-                payload: 'senha e confirma senha estão diferentes.'
+                message: 'senha e confirma senha estão diferentes.'
             });
 
             return false;

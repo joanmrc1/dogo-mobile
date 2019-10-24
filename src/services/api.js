@@ -2,7 +2,7 @@ import { create } from 'apisauce';
 import Reactotron from 'reactotron-react-native';
 
 const api = create({
-  baseURL: 'https://1b992e7f.ngrok.io',
+  baseURL: 'https://db5b07de.ngrok.io',
 });
 
 api.addMonitor(Reactotron.apisauce);
