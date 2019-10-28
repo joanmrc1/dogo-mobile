@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import { ImageBackground, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import NavigationService from '../../services/navigation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Home() {
 
+    useState(async () => {
+        const token = await AsyncStorage.getItem("@DogoApp:token");
+
+        if(token !== null) {
+            NavigationService.navigate("HomeAplication");
+        }
+
+    }, []);
     return (
         <ImageBackground
             source={require('../../assets/img/background.jpeg')}

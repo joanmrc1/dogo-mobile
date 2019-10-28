@@ -8,27 +8,31 @@ class HomeAplication extends Component {
     render() {
         return (
             <Content>
-                <ContentImage>
-                    <ImgUser source={require('../../assets/img/userimg.jpg')} />
-                </ContentImage>
+                <CardRadiusTop>
+                    <ContentImage>
+                        <ImgUser source={require('../../assets/img/userimg.jpg')} />
+                    </ContentImage>
 
-                <ContentTitle>
-                    <LabelTitleCard> Bem Vindo, Joan Marcos </LabelTitleCard>
-                </ContentTitle>
+                    <ContentTitle>
+                        <LabelTitleCard> Bem Vindo, Joan Marcos </LabelTitleCard>
+                    </ContentTitle>
+                </CardRadiusTop>
 
-                <ContentButtonLocation>
-                    <ButtonLocation>
-                        <Icon name="map-marker" size={28} color="#FFF" />
-                        <LabelButton> Meus Pets </LabelButton>
-                    </ButtonLocation>
-                </ContentButtonLocation>
+                <CardRadius>
+                    <ContentButtonLocation>
+                        <ButtonLocation>
+                            <Icon name="map-marker" size={28} color="#FFF" />
+                            <LabelButton> Meus Pets </LabelButton>
+                        </ButtonLocation>
+                    </ContentButtonLocation>
 
-                <ContentButtonLocation>
-                    <ButtonLocation>
-                        <Icon name="map-marker" size={28} color="#FFF" />
-                        <LabelButton> Meus Pets </LabelButton>
-                    </ButtonLocation>
-                </ContentButtonLocation>
+                    <ContentButtonLocation>
+                        <ButtonLocation>
+                            <Icon name="map-marker" size={28} color="#FFF" />
+                            <LabelButton> Adicioar novo Pet </LabelButton>
+                        </ButtonLocation>
+                    </ContentButtonLocation>
+                </CardRadius>
 
                 {/* <ContentLabelInfo>
                     <LabelInfo> Informações do pet </LabelInfo>
@@ -54,6 +58,20 @@ class HomeAplication extends Component {
         );
     }
 }
+
+const CardRadiusTop = styled.View`
+    border: 1px solid #ffb300;
+    background-color: #ffb300;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+`;
+
+const CardRadius = styled.View`
+    border: 1px solid white;
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+`;
 
 const LabelLastConsultation = styled.Text`
     width: 100%;
@@ -144,7 +162,7 @@ const ButtonLocation = styled(TouchableOpacity)`
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    width: 180px;
+    /* width: 180px; */
     margin-top: 20px;
 `;
 
@@ -159,7 +177,7 @@ const ContentTitle = styled.View`
 `;
 
 const LabelTitleCard = styled.Text`
-    color: #ffb300;
+    color: #fff;
     font-size: 25;
     font-weight: bold;
     text-align: center;
@@ -168,9 +186,9 @@ const LabelTitleCard = styled.Text`
 `;
 
 const ImgUser = styled.Image`
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
     margin-top: 10px;
 `;
 
