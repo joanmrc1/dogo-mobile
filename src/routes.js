@@ -2,12 +2,11 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import Main from '~/pages/Main';
 import Home from '~/pages/Home/Home';
 import Login from '~/pages/Login/Login';
 import Register from '~/pages/Register/Register';
-import HomeAplication from '~/pages/HomeAplication/HomeAplication';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AplicationNavigator from './AplicationStack';
 
 const AuthStack = createStackNavigator({
     Home: {
@@ -25,18 +24,7 @@ const AuthStack = createStackNavigator({
 });
 
 const HomeAplicationStack = createBottomTabNavigator({
-    HomeAplication: {
-        screen: HomeAplication,
-        navigationOptios: {
-            tabBarLabel: 'Incio',
-            // tabBarIcon: ({ tintColor }) => (
-            //     <Icon name="home" color={tintColor} size={24}>
-            // );
-        },
-    },
-    MainApp: {
-        screen: Main,
-    },
+    HomeApp: { screen: AplicationNavigator },
 },
 {
     headerMode: 'none',
