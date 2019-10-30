@@ -5,54 +5,31 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import HomeAplication from '~/pages/HomeAplication/HomeAplication';
-import Main from '~/pages/Main';
+import Pets from '~/pages/Pets/PetsScreen';
+import Profile from '~/pages/Profile/ProfileScreen';
 
 const AplicationNavigator = createStackNavigator({
 	HomeAplication: {
         screen: HomeAplication,
         navigationOptios: {
-            theaderTitle: 'Camera',
-	        header: null,
-	        headerVisible: true,
+            theaderTitle: 'Home',
 	        headerStyle: {
 	          backgroundColor: '#ccc',
 	        },
-	        headerTitleStyle: Platform.select({
-	          android: {
-	            flex: 1,
-	            textAlign: 'center',
-	            paddingRight: 45,
-	            color: '#fff',
-	          },
-	          ios: {
-	            color: '#fff',
-	          },
-	        }),
-
-            headerLeft: (
-	          <Icon
-	            style={{ color: '#fff' }}
-	            name="arrow-left"
-	            onPress={() => navigation.goBack(null)}
-	            size={16}
-	          />
-	        ),
         },
     },
-    Main: {
-        screen: Main,
+    Pets: {
+        screen: Pets,
         navigationOptios: {
-            tabBarLabel: 'Main BB',
-            headerTitle: 'Main',
-            header: null,
-            headerLeft: (
-	          <Icon
-	            style={{ color: '#fff' }}
-	            name="arrow-left"
-	            onPress={() => navigation.goBack(null)}
-	            size={16}
-	          />
-	        ),
+            tabBarLabel: 'Meus Pets',
+            headerTitle: 'Pets',
+        },
+    },
+    Profile: {
+        screen: Profile,
+        navigationOptios: {
+            tabBarLabel: 'Meus Pets',
+            headerTitle: 'Pets',
         },
     },
 });
