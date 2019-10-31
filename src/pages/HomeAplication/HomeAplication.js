@@ -21,17 +21,18 @@ class HomeAplication extends Component {
                 <CardRadius>
                     <ContentButtonLocation>
                         <ButtonLocation>
-                            <Icon name="map-marker" size={28} color="#FFF" />
+                            <Icon name="paw" size={28} color="#FFF" />
                             <LabelButton> Meus Pets </LabelButton>
+                            <Icon name="paw" size={28} color="#FFF" />
                         </ButtonLocation>
                     </ContentButtonLocation>
 
-                    <ContentButtonLocation>
+                    {/*<ContentButtonLocation>
                         <ButtonLocation>
                             <Icon name="map-marker" size={28} color="#FFF" />
                             <LabelButton> Adicioar novo Pet </LabelButton>
                         </ButtonLocation>
-                    </ContentButtonLocation>
+                    </ContentButtonLocation>*/}
                 </CardRadius>
 
                 {/* <ContentLabelInfo>
@@ -150,6 +151,8 @@ const LabelButton = styled.Text`
     color: white;
     font-weight: 700;
     font-size: 19px;
+    margin-right: 5px;
+    margin-left: 5px;
 `;
 
 const ButtonLocation = styled(TouchableOpacity)`
@@ -182,12 +185,12 @@ const LabelTitleCard = styled.Text`
     font-weight: bold;
     text-align: center;
     padding: 5px;
-    margin-top: 20px;
+    margin: 5px 0 5px 0;
 `;
 
 const ImgUser = styled.Image`
-    width: 130px;
-    height: 130px;
+    width: 120px;
+    height: 120px;
     border-radius: 100px;
     margin-top: 10px;
 `;

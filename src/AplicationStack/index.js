@@ -32,6 +32,9 @@ const AplicationNavigator = createStackNavigator({
             headerTitle: 'Pets',
         },
     },
+},
+{
+    headerMode: 'none',
 });
 
 export default AplicationNavigator;

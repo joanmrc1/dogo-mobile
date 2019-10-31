@@ -1,3 +1,5 @@
+import React from 'react';
+import { View } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -7,7 +9,11 @@ import Login from '~/pages/Login/Login';
 import Register from '~/pages/Register/Register';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AplicationNavigator from './AplicationStack';
-import BottomContent from './AplicationStack/BottomContainer';
+import BottomContainer from './AplicationStack/BottomContainer';
+
+import HomeAplication from '~/pages/HomeAplication/HomeAplication';
+import Pets from '~/pages/Pets/PetsScreen';
+import Profile from '~/pages/Profile/ProfileScreen';
 
 const AuthStack = createStackNavigator({
     Home: {
@@ -25,26 +31,36 @@ const AuthStack = createStackNavigator({
 });
 
 const HomeAplicationStack = createBottomTabNavigator({
-    HomeApp: { screen: AplicationNavigator },
+    HomeApp: { 
+        screen: AplicationNavigator,
+        navigationOptions: {
+            showLabel: false,
+            tabBarIcon: ({tintColor}) => <Icon name='home' color={tintColor} size={28}/>,
+            tabBarOptions: { activeTintColor:'blue'},
+        },
+    },
+    Pets: { 
+        screen: Pets,
+        navigationOptions: {
+            tabBarLabel: null,
+            tabBarIcon: ({tintColor}) => <Icon name='paw' color={tintColor} size={33}/>,
+            tabBarOptions: { activeTintColor:'blue'},
+        },
+    },
+    Profile: { 
+        screen: Profile,
+        navigationOptions: {
+            tabBarLabel: null,
+            tabBarIcon: ({tintColor}) => <Icon name='id-badge' color={tintColor} size={28}/>,
+            tabBarOptions: { activeTintColor:'blue'},
+        },
+    },
 },
 {
-    headerMode: 'none',
     initialRoutes: 'HomeAplication',
-    activeTintColor: '#e91e63',
-    // tabBarComponent: BottomContainer,
-    tabBarOptions: {
-      showIcon: true,
-      showLabel: false,
-      iconStyle: {
-        width: 32,
-        height: 32,
-      },
-      style: {
-        height: 70,
-        backgroundColor: '#fff',
-      },
-    },
-});
+    // tabBarComponent: props => (<BottomContainer {...props} />),
+  }
+);
 
 
 const Routes = createAppContainer(
@@ -54,8 +70,6 @@ const Routes = createAppContainer(
     },
     {
         initialRouteName: 'Auth',
-        activeTintColor: 'orange',
-        activeBackgroundColor: 'orange'
     }),
 );
 
