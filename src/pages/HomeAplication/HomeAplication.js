@@ -3,62 +3,119 @@ import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-class HomeAplication extends Component {
+export default function HomeAplication() {
 
-    render() {
-        return (
-            <Content>
-                <CardRadiusTop>
+    return (
+        <Content>
+            <CardRadiusTop>
+                <ContentImage>
+                    <ImgUser source={require('../../assets/img/userimg.jpg')} />
+                </ContentImage>
+
+                <ContentTitle>
+                    <LabelTitleCard> Bem Vindo, Joan Marcos </LabelTitleCard>
+                </ContentTitle>
+            </CardRadiusTop>
+
+            <Card>
+                <CardContentInfoPet>
+                    <ContentLabelInfo>
+                        <LabelInfo> Informações do pet </LabelInfo>
+                        <Icon name="gratipay" size={20} color="#ffb300" />
+                    </ContentLabelInfo>
+
+                    <CardInfoPets>
+                        <Row>
+                            <Icon name="heart" size={20} color="#ffb300" />
+                            <LabelBirthday> Você tem 2 pets </LabelBirthday>
+                        </Row>
+                    </CardInfoPets>
+
+                    <CardInfoPets>
+                        <Row>
+                            <Icon name="heartbeat" size={20} color="#ffb300" />
+                            <LabelLastConsultation> Utilma consulta 09/09/2019 </LabelLastConsultation>
+                        </Row>
+                    </CardInfoPets>
+                </CardContentInfoPet>
+
+                <CardPet>
                     <ContentImage>
-                        <ImgUser source={require('../../assets/img/userimg.jpg')} />
+                        <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
                     </ContentImage>
+                    <ContentInfoPet>
+                        <ContentRow> 
+                            <Row>
+                                <Icon name="book" size={20} color="#FFF" />
+                                <LabelNamePet>
+                                    Ragnar Lord
+                                </LabelNamePet>
+                            </Row>
 
-                    <ContentTitle>
-                        <LabelTitleCard> Bem Vindo, Joan Marcos </LabelTitleCard>
-                    </ContentTitle>
-                </CardRadiusTop>
+                            <Row>
+                                <Icon name="paw" size={20} color="#FFF" />
+                                <LabelNamePet>
+                                    10 anos
+                                </LabelNamePet>
+                            </Row>
 
-                <CardRadius>
-                    <ContentButtonLocation>
-                        <ButtonLocation>
-                            <Icon name="paw" size={28} color="#FFF" />
-                            <LabelButton> Meus Pets </LabelButton>
-                            <Icon name="paw" size={28} color="#FFF" />
-                        </ButtonLocation>
-                    </ContentButtonLocation>
-
-                    {/*<ContentButtonLocation>
-                        <ButtonLocation>
-                            <Icon name="map-marker" size={28} color="#FFF" />
-                            <LabelButton> Adicioar novo Pet </LabelButton>
-                        </ButtonLocation>
-                    </ContentButtonLocation>*/}
-                </CardRadius>
-
-                {/* <ContentLabelInfo>
-                    <LabelInfo> Informações do pet </LabelInfo>
-                </ContentLabelInfo>
-
-                <ContentInfoPet>
-                    <Row>
-                        <Icon name="star" size={30} color="#ffb300" />
-                        <LabelDateInfo> 10/09/2019 (19 anos) </LabelDateInfo>
-                    </Row>
-
-                    <Row>
-                        <Icon name="birthday-cake" size={30} color="#ffb300" />
-                        <LabelBirthday> Faltam 2 dias para o aniversário </LabelBirthday>
-                    </Row>
-
-                    <Row>
-                        <Icon name="heartbeat" size={30} color="#ffb300" />
-                        <LabelLastConsultation> Utilma consulta 09/09/2019 </LabelLastConsultation>
-                    </Row>
-                </ContentInfoPet> */}
-            </Content>
-        );
-    }
+                            <Row>
+                                <Icon name="venus-mars" size={20} color="#FFF" />
+                                <LabelNamePet>
+                                   Masculino
+                                </LabelNamePet>
+                            </Row>
+                        </ContentRow>
+                        <IconStar>
+                            <Icon name="star" size={20} color="#FFF" />
+                        </IconStar>
+                    </ContentInfoPet>
+                </CardPet>
+            </Card>
+        </Content>
+    );
 }
+
+const ContentRow = styled.View`
+`;
+
+const IconStar = styled.View`
+    padding: 5px;
+`;
+
+const LabelNamePet = styled.Text`
+    font-size: 17px;
+    color: #FFF;
+    margin-left: 10px;
+`;
+
+const ContentInfoPet = styled.View`
+    border: 1px solid #ffb300;
+    border-radius: 30px;
+    width: 70%;
+    background-color: #ffb300;
+    padding: 0px 10px;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+const CardPet = styled.View`
+    border: 1px solid #ffb300;
+    border-radius: 30px;
+    margin-top: 10px;
+    flex-direction: row;
+`;
+
+const CardContentInfoPet = styled.View`
+    padding: 5px;
+    margin-top: 10px;
+`;
+
+const CardInfoPets = styled.View`
+    border: 1px solid #ffb300;
+    border-radius: 30px;
+    margin-top: 10px;
+`;
 
 const CardRadiusTop = styled.View`
     border: 1px solid #ffb300;
@@ -67,7 +124,7 @@ const CardRadiusTop = styled.View`
     border-bottom-right-radius: 30px;
 `;
 
-const CardRadius = styled.View`
+const Card = styled.View`
     border: 1px solid white;
     height: 100%;
     background-color: white;
@@ -76,35 +133,23 @@ const CardRadius = styled.View`
 
 const LabelLastConsultation = styled.Text`
     width: 100%;
-    font-size: 20px;
+    font-size: 16px;
     color: #a9a9a9;
-    border-bottom-color: #e8e8e8;
-    border-bottom-width: 1px;
-    border-top-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border: solid;
     padding: 5px;
     margin-left: 5px;
 `;
 
 const LabelBirthday = styled.Text`
-    font-size: 20px;
+    font-size: 16px;
     margin-left: 5px;
     color: #a9a9a9;
-    border-bottom-color: #e8e8e8;
-    border-bottom-width: 1px;
-    border-top-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border: solid;
     padding: 5px;
 `;
 
 const LabelDateInfo = styled.Text`
     padding: 5px;
     margin-left: 5px;
-    font-size: 20px;
+    font-size: 16px;
     color: #a9a9a9;
     border-bottom-color: #e8e8e8;
     border-bottom-width: 1px;
@@ -117,21 +162,8 @@ const LabelDateInfo = styled.Text`
 const Row = styled.View`
     padding: 5px;
     flex-direction: row;
-    width: 250px;
     align-content: center;
     align-items: center;
-    border: 1px solid transparent;
-    /* border: 1px solid red; */
-`;
-
-const ContentInfoPet = styled.View`
-    align-items: center;
-    margin-top: 15px;
-    width: 100%;
-    align-items: center;
-    align-content: center;
-    /* border: 1px solid red; */
-    justify-content: space-between;
 `;
 
 const LabelInfo = styled.Text`
@@ -141,10 +173,12 @@ const LabelInfo = styled.Text`
 `;
 
 const ContentLabelInfo = styled.View`
-    margin-top: 30px;
+    margin-top: 5px;
     padding: 10px;
     width: 100%;
     align-items: center;
+    flex-direction: row;
+    justify-content: center;
 `;
 
 const LabelButton = styled.Text`
@@ -169,11 +203,6 @@ const ButtonLocation = styled(TouchableOpacity)`
     margin-top: 20px;
 `;
 
-const ContentButtonLocation = styled.View`
-    flex-direction: column;
-    align-items: center;
-`;
-
 const ContentTitle = styled.View`
     flex-direction: column;
     align-items: center;
@@ -195,15 +224,18 @@ const ImgUser = styled.Image`
     margin-top: 10px;
 `;
 
+const ImgPet = styled.Image`
+    width: 90px;
+    height: 90px;
+    border-radius: 100px;
+`;
+
 const ContentImage = styled.View`
-    flex-direction: column;
-    align-items: center;
     padding: 10px;
+    align-items: center;
 `;
 
 const Content = styled.View`
     height: 100%;
     width: 100%;
 `;
-
-export default HomeAplication;

@@ -36,7 +36,7 @@ const HomeAplicationStack = createBottomTabNavigator({
         navigationOptions: {
             showLabel: false,
             tabBarIcon: ({tintColor}) => <Icon name='home' color={tintColor} size={28}/>,
-            tabBarOptions: { activeTintColor:'blue'},
+            tabBarOptions: { activeTintColor:'#ffb300'},
         },
     },
     Pets: { 
@@ -44,7 +44,7 @@ const HomeAplicationStack = createBottomTabNavigator({
         navigationOptions: {
             tabBarLabel: null,
             tabBarIcon: ({tintColor}) => <Icon name='paw' color={tintColor} size={33}/>,
-            tabBarOptions: { activeTintColor:'blue'},
+            tabBarOptions: { activeTintColor:'#ffb300'},
         },
     },
     Profile: { 
@@ -52,7 +52,7 @@ const HomeAplicationStack = createBottomTabNavigator({
         navigationOptions: {
             tabBarLabel: null,
             tabBarIcon: ({tintColor}) => <Icon name='id-badge' color={tintColor} size={28}/>,
-            tabBarOptions: { activeTintColor:'blue'},
+            tabBarOptions: { activeTintColor:'#ffb300'},
         },
     },
 },
