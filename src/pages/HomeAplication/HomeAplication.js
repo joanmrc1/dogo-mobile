@@ -102,12 +102,11 @@ const ContentInfoPet = styled.View`
 const CardPet = styled.View`
     border: 1px solid #ffb300;
     border-radius: 30px;
-    margin-top: 10px;
+    margin-top: 20px;
     flex-direction: row;
 `;
 
 const CardContentInfoPet = styled.View`
-    padding: 5px;
     margin-top: 10px;
 `;
 
@@ -129,6 +128,7 @@ const Card = styled.View`
     height: 100%;
     background-color: white;
     border-radius: 30px;
+    padding: 5px;
 `;
 
 const LabelLastConsultation = styled.Text`
@@ -218,10 +218,9 @@ const LabelTitleCard = styled.Text`
 `;
 
 const ImgUser = styled.Image`
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 100px;
-    margin-top: 10px;
 `;
 
 const ImgPet = styled.Image`
