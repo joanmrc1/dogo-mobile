@@ -3,61 +3,118 @@ import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-class HomeAplication extends Component {
-  render() {
+export default function HomeAplication() {
+
     return (
-      <Content>
-        <CardRadiusTop>
-          <ContentImage>
-            <ImgUser source={require('../../assets/img/userimg.jpg')} />
-          </ContentImage>
+        <Content>
+            <CardRadiusTop>
+                <ContentImage>
+                    <ImgUser source={require('../../assets/img/userimg.jpg')} />
+                </ContentImage>
 
-          <ContentTitle>
-            <LabelTitleCard> Bem Vindo, Joan Marcos </LabelTitleCard>
-          </ContentTitle>
-        </CardRadiusTop>
+                <ContentTitle>
+                    <LabelTitleCard> Bem Vindo, Joan Marcos </LabelTitleCard>
+                </ContentTitle>
+            </CardRadiusTop>
 
-        <CardRadius>
-          <ContentButtonLocation>
-            <ButtonLocation>
-              <Icon name="paw" size={28} color="#FFF" />
-              <LabelButton> Meus Pets </LabelButton>
-              <Icon name="paw" size={28} color="#FFF" />
-            </ButtonLocation>
-          </ContentButtonLocation>
+            <Card>
+                <CardContentInfoPet>
+                    <ContentLabelInfo>
+                        <LabelInfo> Informações do pet </LabelInfo>
+                        <Icon name="gratipay" size={20} color="#ffb300" />
+                    </ContentLabelInfo>
 
-          {/*<ContentButtonLocation>
-                        <ButtonLocation>
-                            <Icon name="map-marker" size={28} color="#FFF" />
-                            <LabelButton> Adicioar novo Pet </LabelButton>
-                        </ButtonLocation>
-                    </ContentButtonLocation>*/}
-        </CardRadius>
+                    <CardInfoPets>
+                        <Row>
+                            <Icon name="heart" size={20} color="#ffb300" />
+                            <LabelBirthday> Você tem 2 pets </LabelBirthday>
+                        </Row>
+                    </CardInfoPets>
 
-        {/* <ContentLabelInfo>
-                    <LabelInfo> Informações do pet </LabelInfo>
-                </ContentLabelInfo>
+                    <CardInfoPets>
+                        <Row>
+                            <Icon name="heartbeat" size={20} color="#ffb300" />
+                            <LabelLastConsultation> Utilma consulta 09/09/2019 </LabelLastConsultation>
+                        </Row>
+                    </CardInfoPets>
+                </CardContentInfoPet>
 
-                <ContentInfoPet>
-                    <Row>
-                        <Icon name="star" size={30} color="#ffb300" />
-                        <LabelDateInfo> 10/09/2019 (19 anos) </LabelDateInfo>
-                    </Row>
+                <CardPet>
+                    <ContentImage>
+                        <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
+                    </ContentImage>
+                    <ContentInfoPet>
+                        <ContentRow> 
+                            <Row>
+                                <Icon name="book" size={20} color="#FFF" />
+                                <LabelNamePet>
+                                    Ragnar Lord
+                                </LabelNamePet>
+                            </Row>
 
-                    <Row>
-                        <Icon name="birthday-cake" size={30} color="#ffb300" />
-                        <LabelBirthday> Faltam 2 dias para o aniversário </LabelBirthday>
-                    </Row>
+                            <Row>
+                                <Icon name="paw" size={20} color="#FFF" />
+                                <LabelNamePet>
+                                    10 anos
+                                </LabelNamePet>
+                            </Row>
 
-                    <Row>
-                        <Icon name="heartbeat" size={30} color="#ffb300" />
-                        <LabelLastConsultation> Utilma consulta 09/09/2019 </LabelLastConsultation>
-                    </Row>
-                </ContentInfoPet> */}
-      </Content>
+                            <Row>
+                                <Icon name="venus-mars" size={20} color="#FFF" />
+                                <LabelNamePet>
+                                   Masculino
+                                </LabelNamePet>
+                            </Row>
+                        </ContentRow>
+                        <IconStar>
+                            <Icon name="star" size={20} color="#FFF" />
+                        </IconStar>
+                    </ContentInfoPet>
+                </CardPet>
+            </Card>
+        </Content>
     );
-  }
 }
+
+const ContentRow = styled.View`
+`;
+
+const IconStar = styled.View`
+    padding: 5px;
+`;
+
+const LabelNamePet = styled.Text`
+    font-size: 17px;
+    color: #FFF;
+    margin-left: 10px;
+`;
+
+const ContentInfoPet = styled.View`
+    border: 1px solid #ffb300;
+    border-radius: 30px;
+    width: 70%;
+    background-color: #ffb300;
+    padding: 0px 10px;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+const CardPet = styled.View`
+    border: 1px solid #ffb300;
+    border-radius: 30px;
+    margin-top: 20px;
+    flex-direction: row;
+`;
+
+const CardContentInfoPet = styled.View`
+    margin-top: 10px;
+`;
+
+const CardInfoPets = styled.View`
+    border: 1px solid #ffb300;
+    border-radius: 30px;
+    margin-top: 10px;
+`;
 
 const CardRadiusTop = styled.View`
   border: 1px solid #ffb300;
@@ -66,71 +123,47 @@ const CardRadiusTop = styled.View`
   border-bottom-right-radius: 30px;
 `;
 
-const CardRadius = styled.View`
-  border: 1px solid white;
-  height: 100%;
-  background-color: white;
-  border-radius: 30px;
+const Card = styled.View`
+    border: 1px solid white;
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+    padding: 5px;
 `;
 
 const LabelLastConsultation = styled.Text`
-  width: 100%;
-  font-size: 20px;
-  color: #a9a9a9;
-  border-bottom-color: #e8e8e8;
-  border-bottom-width: 1px;
-  border-top-width: 0px;
-  border-left-width: 0px;
-  border-right-width: 0px;
-  border: solid;
-  padding: 5px;
-  margin-left: 5px;
+    width: 100%;
+    font-size: 16px;
+    color: #a9a9a9;
+    padding: 5px;
+    margin-left: 5px;
 `;
 
 const LabelBirthday = styled.Text`
-  font-size: 20px;
-  margin-left: 5px;
-  color: #a9a9a9;
-  border-bottom-color: #e8e8e8;
-  border-bottom-width: 1px;
-  border-top-width: 0px;
-  border-left-width: 0px;
-  border-right-width: 0px;
-  border: solid;
-  padding: 5px;
+    font-size: 16px;
+    margin-left: 5px;
+    color: #a9a9a9;
+    padding: 5px;
 `;
 
 const LabelDateInfo = styled.Text`
-  padding: 5px;
-  margin-left: 5px;
-  font-size: 20px;
-  color: #a9a9a9;
-  border-bottom-color: #e8e8e8;
-  border-bottom-width: 1px;
-  border-top-width: 0px;
-  border-left-width: 0px;
-  border-right-width: 0px;
-  border: solid;
-`;
+    padding: 5px;
+    margin-left: 5px;
+    font-size: 16px;
+    color: #a9a9a9;
+    border-bottom-color: #e8e8e8;
+    border-bottom-width: 1px;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border: solid;
+`
 
 const Row = styled.View`
-  padding: 5px;
-  flex-direction: row;
-  width: 250px;
-  align-content: center;
-  align-items: center;
-  border: 1px solid transparent;
-  /* border: 1px solid red; */
-`;
-
-const ContentInfoPet = styled.View`
-  align-items: center;
-  margin-top: 15px;
-  width: 100%;
-  align-items: center;
-  align-content: center;
-  /* border: 1px solid red; */
-  justify-content: space-between;
+    padding: 5px;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
 `;
 
 const LabelInfo = styled.Text`
@@ -140,10 +173,12 @@ const LabelInfo = styled.Text`
 `;
 
 const ContentLabelInfo = styled.View`
-  margin-top: 30px;
-  padding: 10px;
-  width: 100%;
-  align-items: center;
+    margin-top: 5px;
+    padding: 10px;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
 `;
 
 const LabelButton = styled.Text`
@@ -168,11 +203,6 @@ const ButtonLocation = styled(TouchableOpacity)`
   margin-top: 20px;
 `;
 
-const ContentButtonLocation = styled.View`
-  flex-direction: column;
-  align-items: center;
-`;
-
 const ContentTitle = styled.View`
   flex-direction: column;
   align-items: center;
@@ -188,21 +218,23 @@ const LabelTitleCard = styled.Text`
 `;
 
 const ImgUser = styled.Image`
-  width: 120px;
-  height: 120px;
-  border-radius: 100px;
-  margin-top: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+`;
+
+const ImgPet = styled.Image`
+    width: 90px;
+    height: 90px;
+    border-radius: 100px;
 `;
 
 const ContentImage = styled.View`
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
+    padding: 10px;
+    align-items: center;
 `;
 
 const Content = styled.View`
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 `;
-
-export default HomeAplication;

@@ -32,37 +32,30 @@ const AuthStack = createStackNavigator(
   },
 );
 
-const HomeAplicationStack = createBottomTabNavigator(
-  {
-    Inicio: {
-      screen: AplicationNavigator,
-      navigationOptions: {
-        showLabel: false,
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="home" color={tintColor} size={28} />
-        ),
-        tabBarOptions: {activeTintColor: 'blue'},
-      },
+const HomeAplicationStack = createBottomTabNavigator({
+    HomeApp: { 
+        screen: AplicationNavigator,
+        navigationOptions: {
+            showLabel: false,
+            tabBarIcon: ({tintColor}) => <Icon name='home' color={tintColor} size={28}/>,
+            tabBarOptions: { activeTintColor:'#ffb300'},
+        },
     },
-    Pets: {
-      screen: Pets,
-      navigationOptions: {
-        tabBarLabel: null,
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="paw" color={tintColor} size={33} />
-        ),
-        tabBarOptions: {activeTintColor: 'blue'},
-      },
+    Pets: { 
+        screen: Pets,
+        navigationOptions: {
+            tabBarLabel: null,
+            tabBarIcon: ({tintColor}) => <Icon name='paw' color={tintColor} size={33}/>,
+            tabBarOptions: { activeTintColor:'#ffb300'},
+        },
     },
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        tabBarLabel: null,
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="id-badge" color={tintColor} size={28} />
-        ),
-        tabBarOptions: {activeTintColor: 'blue'},
-      },
+    Profile: { 
+        screen: Profile,
+        navigationOptions: {
+            tabBarLabel: null,
+            tabBarIcon: ({tintColor}) => <Icon name='id-badge' color={tintColor} size={28}/>,
+            tabBarOptions: { activeTintColor:'#ffb300'},
+        },
     },
   },
   {
