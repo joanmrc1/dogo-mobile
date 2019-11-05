@@ -7,8 +7,9 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import HomeAplication from '~/pages/HomeAplication/HomeAplication';
 import Pets from '~/pages/Pets/PetsScreen';
 import Profile from '~/pages/Profile/ProfileScreen';
+import RegisterPet from '~/pages/Pets/Register';
 
-const AplicationNavigator = createStackNavigator({
+export const AplicationNavigator = createStackNavigator({
 	HomeAplication: {
         screen: HomeAplication,
         navigationOptios: {
@@ -18,18 +19,33 @@ const AplicationNavigator = createStackNavigator({
 	        },
         },
     },
-    Pets: {
-        screen: Pets,
-        navigationOptios: {
-            tabBarLabel: 'Meus Pets',
-            headerTitle: 'Pets',
-        },
-    },
     Profile: {
         screen: Profile,
         navigationOptios: {
             tabBarLabel: 'Meus Pets',
             headerTitle: 'Pets',
+        },
+    }
+},
+{
+    headerMode: 'none',
+}); 
+
+export const AplicationNavigatorPet = createStackNavigator({
+    Pets: {
+        screen: Pets,
+        navigationOptios: {
+            header: null,
+            headerMode: 'none'
+        },
+    },
+
+    RegisterPet: {
+        screen: RegisterPet,
+        navigationOptios: {
+            tabBarLabel: 'Meus Pets',
+            headerTitle: 'Cadastro de Pet',
+            headerShown: false
         },
     },
 },
@@ -37,4 +53,3 @@ const AplicationNavigator = createStackNavigator({
     headerMode: 'none',
 });
 
-export default AplicationNavigator;

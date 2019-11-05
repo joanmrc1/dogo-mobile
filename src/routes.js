@@ -8,7 +8,7 @@ import Home from '~/pages/Home/Home';
 import Login from '~/pages/Login/Login';
 import Register from '~/pages/Register/Register';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import AplicationNavigator from './AplicationStack';
+import { AplicationNavigator, AplicationNavigatorPet} from './AplicationStack';
 import BottomContainer from './AplicationStack/BottomContainer';
 
 import HomeAplication from '~/pages/HomeAplication/HomeAplication';
@@ -39,8 +39,8 @@ const HomeAplicationStack = createBottomTabNavigator({
             tabBarOptions: { activeTintColor:'#ffb300'},
         },
     },
-    Pets: { 
-        screen: Pets,
+    Pets: {
+        screen: AplicationNavigatorPet,
         navigationOptions: {
             tabBarLabel: null,
             tabBarIcon: ({tintColor}) => <Icon name='paw' color={tintColor} size={33}/>,

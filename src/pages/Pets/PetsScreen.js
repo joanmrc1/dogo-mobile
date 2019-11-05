@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Item, Input } from 'native-base';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import NavigationService from '../../services/navigation';
 
 export default function PetsScreen() {
 	return (
@@ -21,44 +21,105 @@ export default function PetsScreen() {
 	          	<LabelSubTitle> Listagem de todos os seus queridos pets </LabelSubTitle>
           	</ContentSerach>
 
-          	<ContentCard> 
-	          	<CardPet>
-	                <ContentImage>
-	                    <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
-	                </ContentImage>
-	                <ContentInfoPet>
-	                    <ContentRow> 
-	                        <Row>
-	                            <Icon name="book" size={20} color="#FFF" />
-	                            <LabelNamePet>
-	                                Ragnar Lord
-	                            </LabelNamePet>
-	                        </Row>
+          	<ContentCard>
+          		<ContentButton> 
+          			<ButtonAddPet onPress={() => NavigationService.navigate('RegisterPet')}> 
+          				<LabelButton> 🐱 Adicionar Pet 🐶 </LabelButton>
+          			</ButtonAddPet>
+          		</ContentButton>
+          		<ScrollView> 
+		          	<CardPet>
+		                <ContentImage>
+		                    <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
+		                </ContentImage>
+		                <ContentInfoPet>
+		                    <ContentRow> 
+		                        <Row>
+		                            <Icon name="book" size={20} color="#FFF" />
+		                            <LabelNamePet>
+		                                Ragnar Lord
+		                            </LabelNamePet>
+		                        </Row>
 
-	                        <Row>
-	                            <Icon name="paw" size={20} color="#FFF" />
-	                            <LabelNamePet>
-	                                10 anos
-	                            </LabelNamePet>
-	                        </Row>
+		                        <Row>
+		                            <Icon name="paw" size={20} color="#FFF" />
+		                            <LabelNamePet>
+		                                10 anos
+		                            </LabelNamePet>
+		                        </Row>
 
-	                        <Row>
-	                            <Icon name="venus-mars" size={20} color="#FFF" />
-	                            <LabelNamePet>
-	                               Masculino
-	                            </LabelNamePet>
-	                        </Row>
-	                    </ContentRow>
+		                        <Row>
+		                            <Icon name="venus-mars" size={20} color="#FFF" />
+		                            <LabelNamePet>
+		                               Masculino
+		                            </LabelNamePet>
+		                        </Row>
+		                    </ContentRow>
 
-	                    <TouchableOpacity> 
-	                    	<Icon name="chevron-right" size={30} color="#FFF" />
-	                    </TouchableOpacity>
-	                </ContentInfoPet>
-	            </CardPet>
+		                    <ButtonArrow> 
+		                    	<Icon name="chevron-right" size={28} color="#FFF" />
+		                    </ButtonArrow>
+		                </ContentInfoPet>
+		            </CardPet>
+
+		            <CardPet>
+		                <ContentImage>
+		                    <ImgPet source={require('../../assets/img/gato.jpeg')} />
+		                </ContentImage>
+		                <ContentInfoPet>
+		                    <ContentRow> 
+		                        <Row>
+		                            <Icon name="book" size={20} color="#FFF" />
+		                            <LabelNamePet>
+		                                Gatolina
+		                            </LabelNamePet>
+		                        </Row>
+
+		                        <Row>
+		                            <Icon name="paw" size={20} color="#FFF" />
+		                            <LabelNamePet>
+		                                6 anos
+		                            </LabelNamePet>
+		                        </Row>
+
+		                        <Row>
+		                            <Icon name="venus-mars" size={20} color="#FFF" />
+		                            <LabelNamePet>
+		                               Feminina
+		                            </LabelNamePet>
+		                        </Row>
+		                    </ContentRow>
+
+		                    <ButtonArrow> 
+		                    	<Icon name="chevron-right" size={28} color="#FFF" />
+		                    </ButtonArrow>
+		                </ContentInfoPet>
+		            </CardPet>
+	            </ScrollView>
             </ContentCard>
 		</Content>
 	);	
 }
+
+const ButtonAddPet = styled(TouchableOpacity)`
+	padding: 8px;
+	border: 1px solid red;
+	margin-top: 10px;
+	background-color: #ffb300;
+	border: 1px solid #ffb300;
+	border-radius: 10px;
+	align-content: center;
+`;
+
+const ContentButton = styled.View`
+	justify-content: center;
+	align-items: center;
+`;
+
+const ButtonArrow = styled(TouchableOpacity)`
+	padding: 8px;
+	margin-right: 5px;
+`;
 
 const ContentCard = styled.View``;
 
@@ -84,6 +145,11 @@ const LabelNamePet = styled.Text`
     font-size: 17px;
     color: #FFF;
     margin-left: 10px;
+`;
+
+const LabelButton = styled.Text`
+    font-size: 17px;
+    color: #FFF;
 `;
 
 const ContentRow = styled.View`
@@ -124,13 +190,13 @@ const LabelTitleName = styled.Text`
 const ContentSerach = styled.View`
 	border-bottom-right-radius: 20px;
 	padding: 5px;
-	background-color: #717db1;
+	background-color: #ffb300;
 `;
 
 const ItemSearch = styled(Item)`
 	padding-left: 4px;
-	border: 1px solid #9ba6d0;
-	backgroundColor: #9ba6d0;
+	border: 1px solid #d6a020;
+	backgroundColor: #d6a020;
 `;
 
 const ContentInputSerach = styled.View`
