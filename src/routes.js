@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createStackNavigator } from 'react-navigation-stack';
+// import {View} from 'react-native';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createStackNavigator} from 'react-navigation-stack';
 
 import Home from '~/pages/Home/Home';
 import Login from '~/pages/Login/Login';
@@ -15,20 +15,22 @@ import HomeAplication from '~/pages/HomeAplication/HomeAplication';
 import Pets from '~/pages/Pets/PetsScreen';
 import Profile from '~/pages/Profile/ProfileScreen';
 
-const AuthStack = createStackNavigator({
+const AuthStack = createStackNavigator(
+  {
     Home: {
-        screen: Home,
+      screen: Home,
     },
     Login: {
-        screen: Login,
+      screen: Login,
     },
     Register: {
-        screen: Register,
-    }
-},
-{
-    headerMode: 'none'
-});
+      screen: Register,
+    },
+  },
+  {
+    headerMode: 'none',
+  },
+);
 
 const HomeAplicationStack = createBottomTabNavigator({
     HomeApp: { 
@@ -55,22 +57,23 @@ const HomeAplicationStack = createBottomTabNavigator({
             tabBarOptions: { activeTintColor:'#ffb300'},
         },
     },
-},
-{
+  },
+  {
     initialRoutes: 'HomeAplication',
     // tabBarComponent: props => (<BottomContainer {...props} />),
-  }
+  },
 );
 
-
 const Routes = createAppContainer(
-    createSwitchNavigator({
-        Auth: AuthStack,
-        Aplication: HomeAplicationStack,
+  createSwitchNavigator(
+    {
+      Auth: AuthStack,
+      Aplication: HomeAplicationStack,
     },
     {
-        initialRouteName: 'Auth',
-    }),
+      initialRouteName: 'Auth',
+    },
+  ),
 );
 
 export default Routes;

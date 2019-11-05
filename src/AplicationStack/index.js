@@ -1,7 +1,7 @@
 import React from 'react';
-import { Platform, View, TouchableOpacity } from 'react-native';
+import {Platform, View, TouchableOpacity} from 'react-native';
 
-import { createStackNavigator } from 'react-navigation-stack';
+import {createStackNavigator} from 'react-navigation-stack';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import HomeAplication from '~/pages/HomeAplication/HomeAplication';
@@ -14,11 +14,11 @@ export const AplicationNavigator = createStackNavigator({
         screen: HomeAplication,
         navigationOptios: {
             theaderTitle: 'Home',
-	        headerStyle: {
-	          backgroundColor: '#ccc',
-	        },
+            headerStyle: {
+              backgroundColor: '#ccc',
+            },
         },
-    },
+      },
     Profile: {
         screen: Profile,
         navigationOptios: {
@@ -48,8 +48,9 @@ export const AplicationNavigatorPet = createStackNavigator({
             headerShown: false
         },
     },
-},
-{
+  },
+  {
     headerMode: 'none',
-});
+  },
+);
 

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, {Component} from 'react';
+import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -117,10 +117,10 @@ const CardInfoPets = styled.View`
 `;
 
 const CardRadiusTop = styled.View`
-    border: 1px solid #ffb300;
-    background-color: #ffb300;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+  border: 1px solid #ffb300;
+  background-color: #ffb300;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 `;
 
 const Card = styled.View`
@@ -157,7 +157,7 @@ const LabelDateInfo = styled.Text`
     border-left-width: 0px;
     border-right-width: 0px;
     border: solid;
-`;
+`
 
 const Row = styled.View`
     padding: 5px;
@@ -167,9 +167,9 @@ const Row = styled.View`
 `;
 
 const LabelInfo = styled.Text`
-    font-size: 20px;
-    color: #ffb300;
-    font-weight: bold;
+  font-size: 20px;
+  color: #ffb300;
+  font-weight: bold;
 `;
 
 const ContentLabelInfo = styled.View`
@@ -182,39 +182,39 @@ const ContentLabelInfo = styled.View`
 `;
 
 const LabelButton = styled.Text`
-    color: white;
-    font-weight: 700;
-    font-size: 19px;
-    margin-right: 5px;
-    margin-left: 5px;
+  color: white;
+  font-weight: 700;
+  font-size: 19px;
+  margin-right: 5px;
+  margin-left: 5px;
 `;
 
 const ButtonLocation = styled(TouchableOpacity)`
-    border-radius: 15px;
-    border: 1px solid #ffb300;
-    height: 55px;
-    background-color: #ffb300;
-    elevation: 15;
-    padding: 10px;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    /* width: 180px; */
-    margin-top: 20px;
+  border-radius: 15px;
+  border: 1px solid #ffb300;
+  height: 55px;
+  background-color: #ffb300;
+  elevation: 15;
+  padding: 10px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  /* width: 180px; */
+  margin-top: 20px;
 `;
 
 const ContentTitle = styled.View`
-    flex-direction: column;
-    align-items: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const LabelTitleCard = styled.Text`
-    color: #fff;
-    font-size: 25;
-    font-weight: bold;
-    text-align: center;
-    padding: 5px;
-    margin: 5px 0 5px 0;
+  color: #fff;
+  font-size: 25;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+  margin: 5px 0 5px 0;
 `;
 
 const ImgUser = styled.Image`

@@ -1,4 +1,4 @@
-import { create } from 'apisauce';
+import {create} from 'apisauce';
 import Reactotron from 'reactotron-react-native';
 
 const api = create({
