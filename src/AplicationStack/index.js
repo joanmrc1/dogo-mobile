@@ -39,7 +39,6 @@ export const AplicationNavigatorPet = createStackNavigator({
             headerMode: 'none'
         },
     },
-
     RegisterPet: {
         screen: RegisterPet,
         navigationOptios: {
