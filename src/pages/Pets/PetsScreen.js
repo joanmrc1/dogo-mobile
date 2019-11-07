@@ -1,13 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Dimensions, Platform } from 'react-native';
 import { Item, Input } from 'native-base';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationService from '../../services/navigation';
 
 export default function PetsScreen() {
+
+	const [isVisibleModal, setIsVisibleModal] = useState(false);
+
+	const ModalNavigate = () => {
+		const deviceWidth = Dimensions.get("window").width;
+		const deviceHeight = Platform.OS === "ios"
+			? Dimensions.get("window").height
+			: require("react-native-extra-dimensions-android").get("REAL_WINDOW_HEIGHT");
+
+		return (
+			<Modal
+				isVisible={isVisibleModal}
+				deviceWidth={deviceWidth}
+				deviceHeight={deviceHeight}
+			>
+				<View style={{ flex: 1 }}>
+				  <Text>I am the modal content!</Text>
+				</View>
+			</Modal>
+		)
+	};
+
 	return (
 		<Content>
+			<ModalNavigate />
+
 			<ContentSerach>
 				<ContentInputSerach>
 					<ItemSearch rounded>
@@ -28,7 +52,7 @@ export default function PetsScreen() {
           			</ButtonAddPet>
           		</ContentButton>
           		<ScrollView> 
-		          	<CardPet>
+		          	<CardPet onPress={() => setIsVisibleModal(true)}>
 		                <ContentImage>
 		                    <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
 		                </ContentImage>
@@ -166,7 +190,7 @@ const ContentImage = styled.View`
     align-items: center;
 `;
 
-const CardPet = styled.View`
+const CardPet = styled(TouchableOpacity)`
     border: 1px solid #ffb300;
     border-radius: 30px;
     margin-top: 20px;
