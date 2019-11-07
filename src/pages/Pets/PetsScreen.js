@@ -4,6 +4,7 @@ import { Item, Input } from 'native-base';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationService from '../../services/navigation';
+import Modal from "react-native-modal";
 
 export default function PetsScreen() {
 
