@@ -10,6 +10,11 @@ export default function PetsScreen() {
 
 	const [isVisibleModal, setIsVisibleModal] = useState(false);
 
+	function handlewNavigatePress(route) {
+		setIsVisibleModal(false);
+		NavigationService.navigate(route);
+	}
+
 	const ModalNavigate = () => {
 		const deviceWidth = Dimensions.get("window").width;
 		const deviceHeight = Platform.OS === "ios"
@@ -21,10 +26,32 @@ export default function PetsScreen() {
 				isVisible={isVisibleModal}
 				deviceWidth={deviceWidth}
 				deviceHeight={deviceHeight}
+				onBackdropPress={() => setIsVisibleModal(false)}
 			>
-				<View style={{ flex: 1 }}>
-				  <Text>I am the modal content!</Text>
-				</View>
+				<ContentModal>
+					<LabelTitleModal> 
+						Selecione a Informação 
+					</LabelTitleModal>
+					<ContentButtonSelect>
+						<Row>
+							<ButtonNavigateSelect onPress={() => handlewNavigatePress('Vermifugation')}> 
+		          				<LabelButtonSelect> Vermifugação > </LabelButtonSelect>
+		          			</ButtonNavigateSelect>
+						</Row>
+
+						<Row>
+							<ButtonNavigateSelect onPress={() => handlewNavigatePress('')}> 
+		          				<LabelButtonSelect> Vacinas > </LabelButtonSelect>
+		          			</ButtonNavigateSelect>
+						</Row>
+
+						<Row>
+							<ButtonNavigateSelect onPress={() => handlewNavigatePress('')}> 
+		          				<LabelButtonSelect> Minhas Informações > </LabelButtonSelect>
+		          			</ButtonNavigateSelect>
+						</Row>
+					</ContentButtonSelect>
+				</ContentModal>
 			</Modal>
 		)
 	};
@@ -125,6 +152,43 @@ export default function PetsScreen() {
 		</Content>
 	);	
 }
+
+const LabelButtonSelect = styled.Text`
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFF;
+    text-align: center;
+`;
+
+const ButtonNavigateSelect = styled(TouchableOpacity)`
+	padding: 10px;
+	margin-top: 10px;
+	background-color: #ffb300;
+	border: 1px solid #ffb300;
+	border-radius: 10px;
+	align-content: center;
+	width: 100%;
+`;
+
+const ContentButtonSelect = styled.View`
+`;
+
+const LabelTitleModal = styled.Text`
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	color: #ffb300;
+	margin-top: 5px;
+`;
+
+const ContentModal = styled.View`
+	width: 100%;
+	height: 280px;
+	backgroundColor: #FFF;
+	border: 1px solid #FFF;
+	border-radius: 10px;
+	padding: 5px;
+`;
 
 const ButtonAddPet = styled(TouchableOpacity)`
 	padding: 8px;
