@@ -24,7 +24,7 @@ export default function RegisterPet() {
 	return (
 		<Content>
 			<ScrollView>
-				<Header>
+				{/*<Header>
 					<ContentIcon onPress={() => BackRoute()}>
 						<IconArrow active name='arrow-left' size={30} color={'#FFF'}/>
 					</ContentIcon>
@@ -33,7 +33,7 @@ export default function RegisterPet() {
 							Cadastro de Pet <Icon active name='paw' size={25} color={'#FFF'}/>
 						</LabelTitle>
 					</ContentHeaderTitle>
-				</Header>
+				</Header>*/}
 
 				<ContentForm>
 					<ItemRow rounded>
