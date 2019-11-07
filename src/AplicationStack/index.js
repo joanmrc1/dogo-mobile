@@ -48,11 +48,12 @@ export const AplicationNavigatorPet = createStackNavigator({
     Vermifugation: {
         screen: Vermifugation,
         navigationOptions: () => ({
-            title: `Selecionar Infomação`,
+            title: `Vermifugação`,
         }),
     },
   },
   {
+    headerLayoutPreset: 'center',
     defaultNavigationOptions: {
         headerTintColor: `#FFF`,
         headerStyle: {
