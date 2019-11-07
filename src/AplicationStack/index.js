@@ -5,9 +5,10 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import HomeAplication from '~/pages/HomeAplication/HomeAplication';
-import Pets from '~/pages/Pets/PetsScreen';
 import Profile from '~/pages/Profile/ProfileScreen';
+import Pets from '~/pages/Pets/PetsScreen';
 import RegisterPet from '~/pages/Pets/Register';
+import Vermifugation from '~/pages/Pets/Vermifugation';
 
 export const AplicationNavigator = createStackNavigator({
 	HomeAplication: {
@@ -34,22 +35,34 @@ export const AplicationNavigator = createStackNavigator({
 export const AplicationNavigatorPet = createStackNavigator({
     Pets: {
         screen: Pets,
-        navigationOptios: {
-            header: null,
-            headerMode: 'none'
-        },
+        navigationOptions: () => ({
+            headerShown: false
+        }),
     },
     RegisterPet: {
         screen: RegisterPet,
-        navigationOptios: {
-            tabBarLabel: 'Meus Pets',
-            headerTitle: 'Cadastro de Pet',
-            headerShown: false
-        },
+        navigationOptions: () => ({
+            title: `Cadastro de Pet`,
+        }),
+    },
+    Vermifugation: {
+        screen: Vermifugation,
+        navigationOptions: () => ({
+            title: `Selecionar Infomação`,
+        }),
     },
   },
   {
-    headerMode: 'none',
-  },
+    defaultNavigationOptions: {
+        headerTintColor: `#FFF`,
+        headerStyle: {
+            backgroundColor: '#ffb300',
+        },
+        headerTitleStyle: {
+            fontSize: 22,
+            fontWeight: 'bold',
+            textAlign: 'center',
+        },
+    },
+  }
 );
-
