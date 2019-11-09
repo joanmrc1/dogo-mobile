@@ -37,10 +37,10 @@ export default function Login() {
 
         <ContentCard>
           <CardLogin>
-            <LabelTitleCard>Olá</LabelTitleCard>
-
-            <LabelSubTitleCard>faça login para continuar</LabelSubTitleCard>
-
+            <Welcome>
+              <LabelTitleCard>Olá,</LabelTitleCard>
+              <LabelSubTitleCard>faça login para continuar</LabelSubTitleCard>
+            </Welcome>
             {error !== true ? <LabelError>{error}</LabelError> : null}
 
             <ContentForm>
@@ -77,13 +77,19 @@ export default function Login() {
 
           <ButtonFogotPassword
             onPress={() => NavigationService.navigate('Inicio')}>
-            <LabelRegister> Não tem conta ? Cadastre-se </LabelRegister>
+            <LabelRegister> Não tem conta? Cadastre-se </LabelRegister>
           </ButtonFogotPassword>
         </ContentCard>
       </Content>
     </ScrollView>
   );
 }
+
+const Welcome = styled.View`
+  width: 100%;
+  padding: 0px 20px;
+  align-items: flex-start;
+`;
 
 const LabelError = styled.Text`
   color: red;
@@ -99,14 +105,14 @@ const ButtonFogotPassword = styled(TouchableOpacity)`
 `;
 
 const LabelFogotPassword = styled.Text`
-  color: #a9a9a9;
+  color: #076775;
   font-weight: 700;
   font-size: 14px;
   margin-top: 10px;
 `;
 
 const LabelRegister = styled.Text`
-  color: #a9a9a9;
+  color: #076775;
   font-weight: 700;
   font-size: 14px;
   margin-top: 26px;
@@ -120,10 +126,10 @@ const LabelButtonLogin = styled.Text`
 
 const ButtonLogin = styled(TouchableOpacity)`
   border-radius: 20px;
-  border: 1px solid #ffb300;
+  border: 1px solid #08d2ce;
   height: 45px;
-  background-color: #ffb300;
-  elevation: 11;
+  background-color: #08d2ce;
+  elevation: 7;
   padding: 10px;
   flex-direction: row;
   justify-content: center;
@@ -164,7 +170,7 @@ const ContentForm = styled.View`
 `;
 
 const LabelSubTitleCard = styled.Text`
-  color: #c8c8c8;
+  color: #08d2ce;
   font-size: 20;
   font-weight: bold;
   text-align: center;
@@ -172,7 +178,7 @@ const LabelSubTitleCard = styled.Text`
 `;
 
 const LabelTitleCard = styled.Text`
-  color: #ffb300;
+  color: #076775;
   font-size: 37;
   font-weight: bold;
   text-align: center;
@@ -202,7 +208,7 @@ const ContentCard = styled.View`
 const ContentLogo = styled.View`
   height: 260px;
   width: 100%;
-  background-color: #ffb300;
+  background-color: #08d2ce;
   position: absolute;
   flex-direction: column;
   justify-content: flex-start;
