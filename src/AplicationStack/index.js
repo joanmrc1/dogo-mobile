@@ -10,60 +10,63 @@ import Pets from '~/pages/Pets/PetsScreen';
 import RegisterPet from '~/pages/Pets/Register';
 import Vermifugation from '~/pages/Pets/Vermifugation';
 
-export const AplicationNavigator = createStackNavigator({
-	HomeAplication: {
-        screen: HomeAplication,
-        navigationOptios: {
-            theaderTitle: 'Home',
-            headerStyle: {
-              backgroundColor: '#ccc',
-            },
+export const AplicationNavigator = createStackNavigator(
+  {
+    HomeAplication: {
+      screen: HomeAplication,
+      navigationOptios: {
+        theaderTitle: 'Home',
+        headerStyle: {
+          backgroundColor: '#ccc',
         },
       },
+    },
     Profile: {
-        screen: Profile,
-        navigationOptios: {
-            tabBarLabel: 'Meus Pets',
-            headerTitle: 'Pets',
-        },
-    }
-},
-{
+      screen: Profile,
+      navigationOptios: {
+        tabBarLabel: 'Meus Pets',
+        headerTitle: 'Pets',
+      },
+    },
+  },
+  {
     headerMode: 'none',
-}); 
+  },
+);
 
-export const AplicationNavigatorPet = createStackNavigator({
+export const AplicationNavigatorPet = createStackNavigator(
+  {
     Pets: {
-        screen: Pets,
-        navigationOptions: () => ({
-            headerShown: false
-        }),
+      screen: Pets,
+      navigationOptions: () => ({
+        headerShown: false,
+      }),
     },
     RegisterPet: {
-        screen: RegisterPet,
-        navigationOptions: () => ({
-            title: `Cadastro de Pet`,
-        }),
+      screen: RegisterPet,
+      navigationOptions: () => ({
+        title: 'Cadastro de Pet',
+      }),
     },
     Vermifugation: {
-        screen: Vermifugation,
-        navigationOptions: () => ({
-            title: `Vermifugação`,
-        }),
+      screen: Vermifugation,
+      navigationOptions: () => ({
+        title: 'Vermifugação',
+      }),
     },
   },
   {
     headerLayoutPreset: 'center',
     defaultNavigationOptions: {
-        headerTintColor: `#FFF`,
-        headerStyle: {
-            backgroundColor: '#ffb300',
-        },
-        headerTitleStyle: {
-            fontSize: 22,
-            fontWeight: 'bold',
-            textAlign: 'center',
-        },
+      headerTintColor: '#FFF',
+      headerStyle: {
+        backgroundColor: '#08d2ce',
+      },
+      headerTitleStyle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
     },
-  }
+  },
 );

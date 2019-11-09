@@ -45,7 +45,7 @@ const HomeAplicationStack = createBottomTabNavigator(
           </View>
         ),
         tabBarOptions: {
-          activeTintColor: '#ffb300',
+          activeTintColor: '#08d2ce',
           inactiveTintColor: 'rgba(0,0,0,0.41)',
           style: {
             position: 'absolute',
@@ -71,7 +71,7 @@ const HomeAplicationStack = createBottomTabNavigator(
           </View>
         ),
         tabBarOptions: {
-          activeTintColor: '#ffb300',
+          activeTintColor: '#08d2ce',
           inactiveTintColor: 'rgba(0,0,0,0.41)',
           style: {
             position: 'absolute',
@@ -97,7 +97,7 @@ const HomeAplicationStack = createBottomTabNavigator(
           </View>
         ),
         tabBarOptions: {
-          activeTintColor: '#ffb300',
+          activeTintColor: '#08d2ce',
           inactiveTintColor: 'rgba(0,0,0,0.41)',
           style: {
             position: 'absolute',
