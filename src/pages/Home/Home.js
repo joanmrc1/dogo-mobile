@@ -8,6 +8,10 @@ export default function Home() {
   useState(async () => {
     const token = await AsyncStorage.getItem('@DogoApp:token');
 
+    if (__DEV__) {
+      NavigationService.navigate('HomeAplication');
+    }
+
     if (token !== null) {
       NavigationService.navigate('HomeAplication');
     }

@@ -9,6 +9,7 @@ import Profile from '~/pages/Profile/ProfileScreen';
 import Pets from '~/pages/Pets/PetsScreen';
 import RegisterPet from '~/pages/Pets/Register';
 import Vermifugation from '~/pages/Pets/Vermifugation';
+import Vaccine from '~/pages/Pets/Vaccine';
 
 export const AplicationNavigator = createStackNavigator(
   {
@@ -52,6 +53,12 @@ export const AplicationNavigatorPet = createStackNavigator(
       screen: Vermifugation,
       navigationOptions: () => ({
         title: 'Vermifugação',
+      }),
+    },
+    Vaccine: {
+      screen: Vaccine,
+      navigationOptions: () => ({
+        title: 'Vacina',
       }),
     },
   },

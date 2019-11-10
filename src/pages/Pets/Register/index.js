@@ -18,21 +18,10 @@ export default function RegisterPet() {
 
   return (
     <Content>
-      <ScrollView>
-        {/*<Header>
-					<ContentIcon onPress={() => BackRoute()}>
-						<IconArrow active name='arrow-left' size={30} color={'#FFF'}/>
-					</ContentIcon>
-					<ContentHeaderTitle>
-						<LabelTitle>
-							Cadastro de Pet <Icon active name='paw' size={25} color={'#FFF'}/>
-						</LabelTitle>
-					</ContentHeaderTitle>
-				</Header>*/}
-
-        <ContentForm>
+      <ContentForm>
+        <ScrollView>
           <ItemRow rounded>
-            <Icon active name="book" size={25} color={'#ffb300'} />
+            <Icon active name="book" size={25} color={'#08d2ce'} />
             <InputItem
               placeholder="Meu Nome ex: Ragnar Lord*"
               value={name}
@@ -41,7 +30,7 @@ export default function RegisterPet() {
           </ItemRow>
 
           <ItemRow>
-            <Icon active name="venus-mars" size={25} color={'#ffb300'} />
+            <Icon active name="venus-mars" size={25} color={'#08d2ce'} />
             <Select
               note
               mode="dropdown"
@@ -54,27 +43,27 @@ export default function RegisterPet() {
           </ItemRow>
 
           <ItemRow rounded>
-            <Icon active name="paw" size={25} color={'#ffb300'} />
+            <Icon active name="paw" size={25} color={'#08d2ce'} />
             <InputItem placeholder="Raça ex: Poodle, Siamês *..." />
           </ItemRow>
 
           <ItemRow rounded>
-            <Icon active name="paw" size={25} color={'#ffb300'} />
+            <Icon active name="paw" size={25} color={'#08d2ce'} />
             <InputItem placeholder="species ex: Cão, Gato *..." />
           </ItemRow>
 
           <ItemRow rounded>
-            <Icon active name="paw" size={25} color={'#ffb300'} />
+            <Icon active name="paw" size={25} color={'#08d2ce'} />
             <InputItem placeholder="Pelagem ex: curto, longo *..." />
           </ItemRow>
 
           <ItemRow rounded>
-            <Icon active name="calendar" size={25} color={'#ffb300'} />
+            <Icon active name="calendar" size={25} color={'#08d2ce'} />
             <InputItem placeholder="Nacimento ex: 27/10/1996 *..." />
           </ItemRow>
 
           <ItemRow rounded>
-            <Icon active name="user-md" size={25} color={'#ffb300'} />
+            <Icon active name="user-md" size={25} color={'#08d2ce'} />
             <InputItem placeholder="Médico veterinário" />
           </ItemRow>
 
@@ -83,9 +72,10 @@ export default function RegisterPet() {
               <LabelButton> 🐱 Salvar 🐶 </LabelButton>
             </ButtonAddPet>
           </ContentButton>
-        </ContentForm>
-      </ScrollView>
+        </ScrollView>
+      </ContentForm>
     </Content>
+
   );
 }
 
@@ -97,9 +87,9 @@ const LabelButton = styled.Text`
 const ButtonAddPet = styled(TouchableOpacity)`
   padding: 8px;
   border: 1px solid red;
-  margin-top: 10px;
-  background-color: #ffb300;
-  border: 1px solid #ffb300;
+  margin: 7px 0px 25px 0px;
+  background-color: #08d2ce;
+  border: 1px solid #08d2ce;
   border-radius: 10px;
   align-content: center;
 `;
@@ -107,6 +97,7 @@ const ButtonAddPet = styled(TouchableOpacity)`
 const ContentButton = styled.View`
   justify-content: center;
   align-items: center;
+  margin-bottom: 35px;
 `;
 
 const ItemSelect = styled(Picker.Item)`
@@ -116,7 +107,7 @@ const ItemSelect = styled(Picker.Item)`
 const Select = styled(Picker)`
   margin-top: 15px;
   color: #000000;
-  justifycontent: center;
+  justify-content: center;
 `;
 
 const LabelInput = styled.Text`
@@ -127,6 +118,8 @@ const LabelInput = styled.Text`
 
 const InputItem = styled(Input)`
   padding: 15px;
+  font-size: 17px;
+  height: 57px;
 `;
 
 const RowFormItem = styled(Row)`
@@ -139,11 +132,10 @@ const ItemRow = styled(Item)`
   margin-top: 15px;
   padding-right: 5px;
   padding-left: 5px;
-  justifycontent: space-around;
+  justify-content: space-around;
 `;
 
 const ContentForm = styled.View`
-  margin-top: 10px;
   padding: 5px;
 `;
 

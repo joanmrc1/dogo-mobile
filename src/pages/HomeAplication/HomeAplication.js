@@ -34,8 +34,7 @@ export default function HomeAplication() {
             <Row>
               <Icon name="heartbeat" size={20} color="#08d2ce" />
               <LabelLastConsultation>
-                {' '}
-                Ultima consulta 09/09/2019{' '}
+                Ultima consulta 09/09/2019
               </LabelLastConsultation>
             </Row>
           </CardInfoPets>

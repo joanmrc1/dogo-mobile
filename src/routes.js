@@ -16,6 +16,32 @@ import HomeAplication from '~/pages/HomeAplication/HomeAplication';
 import Pets from '~/pages/Pets/PetsScreen';
 import Profile from '~/pages/Profile/ProfileScreen';
 
+function navigationOptionsBottomNavigate(IconParm) {
+  return {
+    showLabel: false,
+    tabBarIcon: ({tintColor}) => (
+      <View>
+        <Icon name={IconParm} color={tintColor} size={28} />
+      </View>
+    ),
+    tabBarOptions: {
+      activeTintColor: '#08d2ce',
+      inactiveTintColor: 'rgba(0,0,0,0.41)',
+      style: {
+        position: 'absolute',
+        width: ExtraDimensions.getRealWindowWidth(),
+        backgroundColor: '#fff',
+        height: 55,
+      },
+      tabStyle: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+      },
+    },
+  }
+}
+
 const AuthStack = createStackNavigator(
   {
     Home: {
@@ -37,85 +63,19 @@ const HomeAplicationStack = createBottomTabNavigator(
   {
     Inicio: {
       screen: AplicationNavigator,
-      navigationOptions: {
-        showLabel: false,
-        tabBarIcon: ({tintColor}) => (
-          <View>
-            <Icon name="home" color={tintColor} size={28} />
-          </View>
-        ),
-        tabBarOptions: {
-          activeTintColor: '#08d2ce',
-          inactiveTintColor: 'rgba(0,0,0,0.41)',
-          style: {
-            position: 'absolute',
-            width: ExtraDimensions.getRealWindowWidth(),
-            backgroundColor: '#fff',
-            height: 55,
-          },
-          tabStyle: {
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#fff',
-          },
-        },
-      },
+      navigationOptions: navigationOptionsBottomNavigate('home'),
     },
     Pets: {
       screen: AplicationNavigatorPet,
-      navigationOptions: {
-        tabBarLabel: null,
-        tabBarIcon: ({tintColor}) => (
-          <View>
-            <Icon name="paw" color={tintColor} size={33} />
-          </View>
-        ),
-        tabBarOptions: {
-          activeTintColor: '#08d2ce',
-          inactiveTintColor: 'rgba(0,0,0,0.41)',
-          style: {
-            position: 'absolute',
-            width: ExtraDimensions.getRealWindowWidth(),
-            backgroundColor: '#fff',
-            height: 55,
-          },
-          tabStyle: {
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#fff',
-          },
-        },
-      },
+      navigationOptions: navigationOptionsBottomNavigate('paw'),
     },
     Profile: {
       screen: Profile,
-      navigationOptions: {
-        tabBarLabel: null,
-        tabBarIcon: ({tintColor}) => (
-          <View>
-            <Icon name="id-badge" color={tintColor} size={28} />
-          </View>
-        ),
-        tabBarOptions: {
-          activeTintColor: '#08d2ce',
-          inactiveTintColor: 'rgba(0,0,0,0.41)',
-          style: {
-            position: 'absolute',
-            width: ExtraDimensions.getRealWindowWidth(),
-            backgroundColor: '#fff',
-          },
-          tabStyle: {
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#fff',
-          },
-        },
-      },
+      navigationOptions: navigationOptionsBottomNavigate('id-badge'),
     },
   },
   {
     initialRoutes: 'HomeAplication',
-    // tabBarComponent: props => (<BottomContainer {...props} />),
   },
 );
 

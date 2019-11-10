@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 import {Item, Input} from 'native-base';
 import styled from 'styled-components';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../services/navigation';
 import Modal from 'react-native-modal';
+import ActionButton from 'react-native-action-button';
 
 export default function PetsScreen() {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
@@ -64,13 +65,13 @@ export default function PetsScreen() {
   };
 
   return (
+    <>
     <Content>
       <ModalNavigate />
 
       <ContentSerach>
         <LabelTitleName>
-          {' '}
-          Olá, <Text style={{color: '#076775'}}>Joan Marcos</Text>{' '}
+          Olá, <Text style={{color: '#076775'}}>Joan Marcos</Text>
         </LabelTitleName>
 
         <LabelSubTitle> Listagem de todos os seus queridos pets </LabelSubTitle>
@@ -83,12 +84,12 @@ export default function PetsScreen() {
       </ContentSerach>
 
       <ContentCard>
-        <ContentButton>
+        {/*<ContentButton>
           <ButtonAddPet
             onPress={() => NavigationService.navigate('RegisterPet')}>
             <LabelButton> 🐱 Adicionar Pet 🐶 </LabelButton>
           </ButtonAddPet>
-        </ContentButton>
+        </ContentButton>*/}
         <ScrollView>
           <CardPet onPress={() => setIsVisibleModal(true)}>
             <ContentImage>
@@ -148,8 +149,50 @@ export default function PetsScreen() {
         </ScrollView>
       </ContentCard>
     </Content>
+
+    <ContentFloatButton>
+      <ActionButton buttonColor="#3498db">
+
+        <ActionButton.Item 
+          buttonColor='#d9dc29'
+          title="Pet"
+          onPress={() => handlewNavigatePress('RegisterPet')}
+        >
+          <IconActionButton name="paw" />
+        </ActionButton.Item>
+
+        <ActionButton.Item 
+          buttonColor='#1abc9c'
+          title="Vermifugação"
+          onPress={() => handlewNavigatePress('Vermifugation')}
+        >
+          <IconActionButton name="file-medical" />
+        </ActionButton.Item>
+
+        <ActionButton.Item
+          buttonColor='#9b59b6'
+          title="Vacinas"
+          onPress={() => handlewNavigatePress('Vaccine')}
+        >
+          <IconActionButton name="thermometer" />
+        </ActionButton.Item>
+      </ActionButton>
+    </ContentFloatButton>
+    </>
   );
 }
+
+const IconActionButton = styled(Icon)`
+  font-size: 20px;
+  height: 22px;
+  color: #FFF;
+`;
+
+const ContentFloatButton = styled.View`
+  flex: 1;
+  margin-bottom: 30px;
+  margin-right: -5px;
+`;
 
 const LabelButtonSelect = styled.Text`
   font-size: 16px;
@@ -238,7 +281,8 @@ const LabelButton = styled.Text`
   color: #fff;
 `;
 
-const ContentRow = styled.View``;
+const ContentRow = styled.View`
+`;
 
 const ImgPet = styled.Image`
   width: 90px;
@@ -249,6 +293,7 @@ const ImgPet = styled.Image`
 const ContentImage = styled.View`
   padding: 10px;
   align-items: center;
+  zIndex: 0;
 `;
 
 const CardPet = styled(TouchableOpacity)`
@@ -281,10 +326,13 @@ const ItemSearch = styled(Item)`
   padding: 0px 15px;
   border: 1px solid white;
   background-color: white;
+  border-radius: 10px;
 `;
 
 const ContentInputSerach = styled.View`
   margin: 10px 0px;
 `;
 
-const Content = styled.View``;
+const Content = styled.View`
+  flex: 1;
+`;
