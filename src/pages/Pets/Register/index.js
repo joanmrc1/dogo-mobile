@@ -20,11 +20,11 @@ export default function RegisterPet() {
     <Content>
       <ContentForm>
         <ScrollView>
-          <ContentImage>//Colocar lib de upload de imagem :D
-            <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
+          <ContentImage>
+            <ImgPet source={require('../../../assets/img/rag_modelo.jpeg')} />
           </ContentImage>
           <ItemRow rounded>
-            <Icon active name="book" size={25} color={'#08d2ce'} />
+            <Icon active name="book" size={25} color='#08d2ce' />
             <InputItem
               placeholder="Meu Nome ex: Ragnar Lord*"
               value={name}
@@ -33,7 +33,7 @@ export default function RegisterPet() {
           </ItemRow>
 
           <ItemRow>
-            <Icon active name="venus-mars" size={25} color={'#08d2ce'} />
+            <Icon active name="venus-mars" size={25} color='#08d2ce' />
             <Select
               note
               mode="dropdown"
