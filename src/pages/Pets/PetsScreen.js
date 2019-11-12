@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../services/navigation';
 import Modal from 'react-native-modal';
+import ActionButton from 'react-native-action-button';
 
 export default function PetsScreen() {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
@@ -141,11 +142,36 @@ export default function PetsScreen() {
           </CardPet>
         </ScrollView>
       </ContentCard>
-    </Content>
+      <ContentFloatButton>
+        <ActionButton buttonColor="#3498db">
 
+          <ActionButton.Item 
+            buttonColor='#d9dc29'
+            title="Pet"
+            onPress={() => NavigationService.navigate('RegisterPet')}
+          >
+            <IconActionButton name="paw" />
+          </ActionButton.Item>
+
+        </ActionButton>
+      </ContentFloatButton>
+
+    </Content>
     </>
   );
 }
+
+const IconActionButton = styled(Icon)`
+  font-size: 20px;
+  height: 22px;
+  color: #FFF;
+`;
+
+const ContentFloatButton = styled.View`
+  margin-bottom: 35px;
+  flex: 1;
+  zIndex: 1;
+`;
 
 const LabelButtonSelect = styled.Text`
   font-size: 16px;

@@ -13,9 +13,10 @@ export default function Vermifugation() {
 	const [date, setDate] = useState(Date.now());
 	const [labelDate, setLabelDate] = useState('Data da consulta');
 	const [labelDateRetry, setLabelDateRetry] = useState('Repetir em');
+	const [vermifuge, setVermifuge] = useState('');
+	const [weight, setWeight] = useState('');
 
 	function handleSubmit() {
-
 	}
 
 	async function setValueDate(e, obj) {
@@ -101,12 +102,21 @@ export default function Vermifugation() {
 				<ContentForm>
 					<ItemRow rounded>
 			            <Icon active name="x-ray" size={25} color={'#08d2ce'} />
-			            <InputItem placeholder="Vermifugo" />
+			            <InputItem
+			            	placeholder="Vermifugo"
+			            	value={vermifuge}
+            				onChangeText={value => setVermifuge(value)}
+			            />
 			        </ItemRow>
 
 			        <ItemRow rounded>
 			            <Icon active name="weight" size={25} color={'#08d2ce'} />
-			            <InputItem placeholder="Peso" />
+			            <InputItem 
+			            	placeholder="Peso" 
+			            	keyboardType={'numeric'} 
+			            	value={weight}
+            				onChangeText={value => setWeight(value)}
+			            />
 			        </ItemRow>
 
 			        <ItemRow rounded>

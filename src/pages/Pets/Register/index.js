@@ -5,11 +5,21 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationService from '../../../services/navigation';
 import ImagePicker from 'react-native-image-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 export default function RegisterPet() {
   const [name, setName] = useState('');
+  const [sexo, setSexo] = useState('F');
+  const [breed, setBreed] = useState('');
+  const [species, setSpecies] = useState('');
+  const [fur, setFur] = useState('');
+  const [veterinary, setVeterinary] = useState('');
   const [preview, setPreview] = useState(null);
   const [avatar, setAvatar] = useState(null);
+  const [date, setDate] = useState(Date.now());
+  const [showDate, setShowDate] = useState(false);
+  const [labelDate, setLabelDate] = useState('Nascimento <3');
 
   function handleSelectImage() {
     ImagePicker.showImagePicker(
@@ -51,13 +61,20 @@ export default function RegisterPet() {
     );
   }
 
+  async function setValueDate(e, obj) {
+    const formatedDate = moment(obj)
+      .locale('pt-br')
+      .format('DD/MM/YYYY')
+      .toString();
+
+    setShowDate(false);
+    setLabelDate(formatedDate);
+  }
 
   function onValueChange() {}
 
-  function handleSubmit() {}
-
-  function BackRoute() {
-    NavigationService.navigate('Pets');
+  function handleSubmit() { 
+    console.tron.log(name,sexo, breed, species, fur, veterinary, preview, avatar, date, labelDate);
   }
 
   return (
@@ -65,14 +82,22 @@ export default function RegisterPet() {
       <ContentForm>
         <ScrollView>
           <ContentImage>
-            <TouchableOpacity
-              style={styles.selectButton}
-              onPress={handleSelectImage}>
-              <Text style={styles.selectButtonText}>Selecionar imagem</Text>
-            </TouchableOpacity>
+            { !preview &&
+              <TouchableOpacity
+                onPress={handleSelectImage}>
+                <Text>Selecionar imagem</Text>
+              </TouchableOpacity>
+            }
 
-            {preview && <Image style={styles.preview} source={preview} />}
+            { preview && 
+              <TouchableOpacity
+                onPress={handleSelectImage}
+              > 
+                <ImgPet source={preview} />
+              </TouchableOpacity>
+            }
           </ContentImage>
+
           <ItemRow rounded>
             <Icon active name="book" size={25} color='#08d2ce' />
             <InputItem
@@ -87,8 +112,9 @@ export default function RegisterPet() {
             <Select
               note
               mode="dropdown"
-              selectedValue={'default'}
-              onValueChange={onValueChange()}>
+              selectedValue={sexo}
+              onValueChange={(value) => setSexo(value)}
+            >
               <ItemSelect label="Selecione o Sexo" value="default" />
               <ItemSelect label="Fêmea" value="F" />
               <ItemSelect label="Macho" value="M" />
@@ -97,27 +123,51 @@ export default function RegisterPet() {
 
           <ItemRow rounded>
             <Icon active name="paw" size={25} color={'#08d2ce'} />
-            <InputItem placeholder="Raça ex: Poodle, Siamês *..." />
+            <InputItem placeholder="Raça ex: Poodle, Siamês *..." 
+              value={breed}
+              onChangeText={value => setBreed(value)}
+            />
           </ItemRow>
 
           <ItemRow rounded>
             <Icon active name="paw" size={25} color={'#08d2ce'} />
-            <InputItem placeholder="species ex: Cão, Gato *..." />
+            <InputItem placeholder="species ex: Cão, Gato *..." 
+              value={species}
+              onChangeText={value => setSpecies(value)}
+            />
           </ItemRow>
 
           <ItemRow rounded>
             <Icon active name="paw" size={25} color={'#08d2ce'} />
-            <InputItem placeholder="Pelagem ex: curto, longo *..." />
+            <InputItem placeholder="Pelagem ex: curto, longo *..." 
+              value={fur}
+              onChangeText={value => setFur(value)}
+            />
           </ItemRow>
 
           <ItemRow rounded>
             <Icon active name="calendar" size={25} color={'#08d2ce'} />
-            <InputItem placeholder="Nacimento ex: 27/10/1996 *..." />
+
+            <DateSelect onPress={() => setShowDate(true)}>
+              <LabelDate> {labelDate} </LabelDate>
+            </DateSelect>
           </ItemRow>
+
+          { showDate &&
+            <DateTimePicker
+              value={date}
+              mode="date"
+              display="default"
+              onChange={(e, date) => setValueDate(e, date)} 
+            />
+          }
 
           <ItemRow rounded>
             <Icon active name="user-md" size={25} color={'#08d2ce'} />
-            <InputItem placeholder="Médico veterinário" />
+            <InputItem placeholder="Médico veterinário" 
+              value={veterinary}
+              onChangeText={value => setVeterinary(value)}
+            />
           </ItemRow>
 
           <ContentButton>
@@ -131,6 +181,18 @@ export default function RegisterPet() {
 
   );
 }
+
+const LabelDate = styled.Text`
+  font-size:16px;
+  color: #000000;
+`;
+
+const DateSelect = styled(TouchableOpacity)`
+  height: 50px;
+  width: 90%;
+  padding-left: 10px;
+  justify-content: center;
+`;
 
 const ImgPet = styled.Image`
   width: 90px;
@@ -178,7 +240,7 @@ const LabelInput = styled.Text`
   font-size: 19px;
   font-weight: 800;
   color: #000000;
-`;;
+`;
 
 const InputItem = styled(Input)`
   padding: 15px;
@@ -227,35 +289,5 @@ const Header = styled.View`
   border: 1px solid #ffb300;
   elevation: 5;
 `;
-
-const styles = StyleSheet.create({
-  selectButton: {
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#FFF',
-    borderStyle: 'dashed',
-    height: 42,
-
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    padding: 20,
-    backgroundColor: 'rgba(0,0,0, .8)',
-  },
-
-  selectButtonText: {
-    fontSize: 16,
-    color: '#FFF',
-  },
-
-  preview: {
-    width: 100,
-    height: 100,
-    marginTop: 10,
-    alignSelf: 'center',
-    borderRadius: 4,
-    marginBottom: 20,
-  },
-});
 
 const Content = styled.View``;

@@ -18,14 +18,6 @@ export default function PetProfile() {
 		      <ActionButton buttonColor="#3498db">
 
 		        <ActionButton.Item 
-		          buttonColor='#d9dc29'
-		          title="Pet"
-		          onPress={() => NavigationService.navigate('RegisterPet')}
-		        >
-		          <IconActionButton name="paw" />
-		        </ActionButton.Item>
-
-		        <ActionButton.Item 
 		          buttonColor='#1abc9c'
 		          title="Vermifugação"
 		          onPress={() => NavigationService.navigate('Vermifugation')}
