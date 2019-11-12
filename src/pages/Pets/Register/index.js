@@ -1,12 +1,56 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, StyleSheet, Image} from 'react-native';
 import {Item, Input, Label, Row, Picker} from 'native-base';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationService from '../../../services/navigation';
+import ImagePicker from 'react-native-image-picker';
 
 export default function RegisterPet() {
   const [name, setName] = useState('');
+  const [preview, setPreview] = useState(null);
+  const [avatar, setAvatar] = useState(null);
+
+  function handleSelectImage() {
+    ImagePicker.showImagePicker(
+      {
+        title: 'Selecionar imagem',
+        takePhotoButtonTitle: 'Tire uma foto',
+        chooseFromLibraryButtonTitle: 'Escolha uma foto da galeria',
+        cancelButtonTitle: 'Cancelar',
+      },
+      upload => {
+        if (upload.error) {
+        } else if (upload.didCancel) {
+        } else {
+          const previewImage = {
+            uri: `data:image/jpeg;base64,${upload.data}`,
+          };
+
+          let prefix;
+          let ext;
+
+          if (upload.fileName) {
+            [prefix, ext] = upload.fileName.split('.');
+            ext = ext.toLowerCase() === 'heic' ? 'jpg' : ext;
+          } else {
+            prefix = new Date().getTime();
+            ext = 'jpg';
+          }
+
+          const image = {
+            uri: upload.uri,
+            type: upload.type,
+            name: `${prefix}.${ext}`,
+          };
+
+          setPreview(previewImage);
+          setAvatar(image);
+        }
+      },
+    );
+  }
+
 
   function onValueChange() {}
 
@@ -21,7 +65,13 @@ export default function RegisterPet() {
       <ContentForm>
         <ScrollView>
           <ContentImage>
-            <ImgPet source={require('../../../assets/img/rag_modelo.jpeg')} />
+            <TouchableOpacity
+              style={styles.selectButton}
+              onPress={handleSelectImage}>
+              <Text style={styles.selectButtonText}>Selecionar imagem</Text>
+            </TouchableOpacity>
+
+            {preview && <Image style={styles.preview} source={preview} />}
           </ContentImage>
           <ItemRow rounded>
             <Icon active name="book" size={25} color='#08d2ce' />
@@ -177,5 +227,35 @@ const Header = styled.View`
   border: 1px solid #ffb300;
   elevation: 5;
 `;
+
+const styles = StyleSheet.create({
+  selectButton: {
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#FFF',
+    borderStyle: 'dashed',
+    height: 42,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    padding: 20,
+    backgroundColor: 'rgba(0,0,0, .8)',
+  },
+
+  selectButtonText: {
+    fontSize: 16,
+    color: '#FFF',
+  },
+
+  preview: {
+    width: 100,
+    height: 100,
+    marginTop: 10,
+    alignSelf: 'center',
+    borderRadius: 4,
+    marginBottom: 20,
+  },
+});
 
 const Content = styled.View``;
