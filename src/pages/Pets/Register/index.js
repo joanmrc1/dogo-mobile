@@ -20,6 +20,9 @@ export default function RegisterPet() {
     <Content>
       <ContentForm>
         <ScrollView>
+          <ContentImage>//Colocar lib de upload de imagem :D
+            <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
+          </ContentImage>
           <ItemRow rounded>
             <Icon active name="book" size={25} color={'#08d2ce'} />
             <InputItem
@@ -78,6 +81,17 @@ export default function RegisterPet() {
 
   );
 }
+
+const ImgPet = styled.Image`
+  width: 90px;
+  height: 90px;
+  border-radius: 100px;
+`;
+
+const ContentImage = styled.View`
+  padding: 10px;
+  align-items: center;
+`;
 
 const LabelButton = styled.Text`
   font-size: 17px;

@@ -293,7 +293,6 @@ const ImgPet = styled.Image`
 const ContentImage = styled.View`
   padding: 10px;
   align-items: center;
-  zIndex: 0;
 `;
 
 const CardPet = styled(TouchableOpacity)`
