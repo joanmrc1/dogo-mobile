@@ -12,7 +12,6 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../services/navigation';
 import Modal from 'react-native-modal';
-import ActionButton from 'react-native-action-button';
 
 export default function PetsScreen() {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
@@ -84,14 +83,8 @@ export default function PetsScreen() {
       </ContentSerach>
 
       <ContentCard>
-        {/*<ContentButton>
-          <ButtonAddPet
-            onPress={() => NavigationService.navigate('RegisterPet')}>
-            <LabelButton> 🐱 Adicionar Pet 🐶 </LabelButton>
-          </ButtonAddPet>
-        </ContentButton>*/}
         <ScrollView>
-          <CardPet onPress={() => setIsVisibleModal(true)}>
+          <CardPet onPress={() => NavigationService.navigate('PetProfile')}>
             <ContentImage>
               <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
             </ContentImage>
@@ -150,49 +143,9 @@ export default function PetsScreen() {
       </ContentCard>
     </Content>
 
-    <ContentFloatButton>
-      <ActionButton buttonColor="#3498db">
-
-        <ActionButton.Item 
-          buttonColor='#d9dc29'
-          title="Pet"
-          onPress={() => handlewNavigatePress('RegisterPet')}
-        >
-          <IconActionButton name="paw" />
-        </ActionButton.Item>
-
-        <ActionButton.Item 
-          buttonColor='#1abc9c'
-          title="Vermifugação"
-          onPress={() => handlewNavigatePress('Vermifugation')}
-        >
-          <IconActionButton name="file-medical" />
-        </ActionButton.Item>
-
-        <ActionButton.Item
-          buttonColor='#9b59b6'
-          title="Vacinas"
-          onPress={() => handlewNavigatePress('Vaccine')}
-        >
-          <IconActionButton name="thermometer" />
-        </ActionButton.Item>
-      </ActionButton>
-    </ContentFloatButton>
     </>
   );
 }
-
-const IconActionButton = styled(Icon)`
-  font-size: 20px;
-  height: 22px;
-  color: #FFF;
-`;
-
-const ContentFloatButton = styled.View`
-  flex: 1;
-  margin-bottom: 30px;
-  margin-right: -5px;
-`;
 
 const LabelButtonSelect = styled.Text`
   font-size: 16px;
