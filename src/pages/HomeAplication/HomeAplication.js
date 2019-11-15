@@ -94,7 +94,7 @@ const ContentInfoPet = styled.View`
   justify-content: space-between;
 `;
 
-const CardPet = styled.View`
+const CardPet = styled(TouchableOpacity)`
   background: #d7fffb;
   border-radius: 30px;
   margin-top: 20px;

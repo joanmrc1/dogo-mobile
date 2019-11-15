@@ -10,7 +10,7 @@ import moment from 'moment';
 
 export default function RegisterPet() {
   const [name, setName] = useState('');
-  const [sexo, setSexo] = useState('F');
+  const [gender, setGender] = useState('F');
   const [breed, setBreed] = useState('');
   const [species, setSpecies] = useState('');
   const [fur, setFur] = useState('');
@@ -112,8 +112,8 @@ export default function RegisterPet() {
             <Select
               note
               mode="dropdown"
-              selectedValue={sexo}
-              onValueChange={(value) => setSexo(value)}
+              selectedValue={gender}
+              onValueChange={(value) => setGender(value)}
             >
               <ItemSelect label="Selecione o Sexo" value="default" />
               <ItemSelect label="Fêmea" value="F" />
