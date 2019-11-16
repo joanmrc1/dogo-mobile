@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, ScrollView, StyleSheet, Image} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 import {Item, Input, Label, Row, Picker} from 'native-base';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,7 +20,8 @@ export default function RegisterPet() {
   const [avatar, setAvatar] = useState(null);
   const [date, setDate] = useState(Date.now());
   const [showDate, setShowDate] = useState(false);
-  const [labelDate, setLabelDate] = useState('Nascimento <3');
+  const [birthday, setBirthday] = useState('Nascimento <3');
+  const dispatch = useDispatch();
 
   function handleSelectImage() {
     ImagePicker.showImagePicker(
@@ -68,13 +70,13 @@ export default function RegisterPet() {
       .toString();
 
     setShowDate(false);
-    setLabelDate(formatedDate);
+    setBirthday(formatedDate);
   }
 
-  function onValueChange() {}
-
-  function handleSubmit() { 
-    console.tron.log(name,sexo, breed, species, fur, veterinary, preview, avatar, date, labelDate);
+  function handleSubmit() {
+    dispatch({type: 'ASYNC_PET_STORAGE', payload: {
+      name, gender, breed, species, fur, veterinary, avatar, birthday
+    }});
   }
 
   return (
@@ -149,7 +151,7 @@ export default function RegisterPet() {
             <Icon active name="calendar" size={25} color={'#08d2ce'} />
 
             <DateSelect onPress={() => setShowDate(true)}>
-              <LabelDate> {labelDate} </LabelDate>
+              <LabelDate> {birthday} </LabelDate>
             </DateSelect>
           </ItemRow>
 

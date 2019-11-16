@@ -43,7 +43,9 @@ export default function PetProfile() {
 					
 				<ScrollView   horizontal>
 					<ContentCard>
-						<CardVaccine>
+						<CardVaccine
+							onPress={() => NavigationService.navigate('VaccineTable')}
+						>
 							<LabelCard> Vacina </LabelCard>
 							<ContentDateVaccine>
 								<LabelContentDate> 10/11/2019 </LabelContentDate>
@@ -51,7 +53,9 @@ export default function PetProfile() {
 							</ContentDateVaccine>
 						</CardVaccine>
 					
-						<CardVaccine>
+						<CardVaccine
+							onPress={() => NavigationService.navigate('VermifugationTable')}
+						>
 							<LabelCard> Vermifugação </LabelCard>
 							<ContentDateVaccine>
 								<LabelContentDate> 10/11/2019 </LabelContentDate>

@@ -14,10 +14,6 @@ export default function Login() {
   const [password, setPassword] = useState('123456');
   const [showPass, setShowPass] = useState('false');
 
-  useEffect(() => {
-    console.tron.log(error);
-  }, [error]);
-
   function submitLogin() {
     dispatch({type: 'ASYNC_LOGIN', payload: {email, password}});
   }

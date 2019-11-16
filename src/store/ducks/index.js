@@ -6,6 +6,7 @@ import theme from './theme';
 import pet from './pet';
 import vaccine from './vaccine';
 import vermifugation from './vermifugation';
+import user from './user';
 
 const reducers = combineReducers({
   login,
@@ -13,7 +14,8 @@ const reducers = combineReducers({
   theme,
   pet,
   vaccine,
-  vermifugation
+  vermifugation,
+  user
 });
 
 export default reducers;

@@ -1,20 +1,19 @@
 import React from 'react';
+import ExtraDimensions from 'react-native-extra-dimensions-android';
 import {View, Text} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
+import {AplicationNavigator, AplicationNavigatorPet} from './AplicationStack';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-import ExtraDimensions from 'react-native-extra-dimensions-android';
 import Home from '~/pages/Home/Home';
 import Login from '~/pages/Login/Login';
 import Register from '~/pages/Register/Register';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {AplicationNavigator, AplicationNavigatorPet} from './AplicationStack';
-import BottomContainer from './AplicationStack/BottomContainer';
-
 import HomeAplication from '~/pages/HomeAplication/HomeAplication';
 import Pets from '~/pages/Pets/PetsScreen';
 import Profile from '~/pages/Profile/ProfileScreen';
+import LoadingInfo from '~/services/loading';
 
 function navigationOptionsBottomNavigate(IconParm) {
   return {
@@ -44,6 +43,9 @@ function navigationOptionsBottomNavigate(IconParm) {
 
 const AuthStack = createStackNavigator(
   {
+    LoadingInfo:  {
+      screen: LoadingInfo,
+    },
     Home: {
       screen: Home,
     },

@@ -1,9 +1,13 @@
-import React, {Component} from 'react';
-import {TouchableOpacity} from 'react-native';
+import React, { useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import NavigationService from '../../services/navigation';
 
 export default function HomeAplication() {
+  const pet = useSelector(state => state.pet.favorityPet);
+
   return (
     <Content>
       <CardRadiusTop>
@@ -40,7 +44,12 @@ export default function HomeAplication() {
           </CardInfoPets>
         </CardContentInfoPet>
 
-        <CardPet>
+
+        <CardPet
+          onPress={() => NavigationService.navigate('PetProfile', {
+            id: pet.id
+          })}
+        >
           <ContentImage>
             <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
           </ContentImage>
@@ -48,7 +57,7 @@ export default function HomeAplication() {
             <ContentRow>
               <Row>
                 <Icon name="book" size={20} color="#FFF" />
-                <LabelNamePet>Ragnar Lord</LabelNamePet>
+                <LabelNamePet>{pet.name}</LabelNamePet>
               </Row>
 
               <Row>
@@ -58,7 +67,7 @@ export default function HomeAplication() {
 
               <Row>
                 <Icon name="venus-mars" size={20} color="#FFF" />
-                <LabelNamePet>Masculino</LabelNamePet>
+                <LabelNamePet>{pet.gender}</LabelNamePet>
               </Row>
             </ContentRow>
             <IconStar>

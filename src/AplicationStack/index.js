@@ -1,6 +1,5 @@
 import React from 'react';
 import {Platform, View, TouchableOpacity} from 'react-native';
-
 import {createStackNavigator} from 'react-navigation-stack';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -11,6 +10,8 @@ import RegisterPet from '~/pages/Pets/Register';
 import Vermifugation from '~/pages/Pets/Vermifugation';
 import Vaccine from '~/pages/Pets/Vaccine';
 import PetProfile from '~/pages/Pets/PetProfile';
+import VaccineTable from '~/pages/Pets/Vaccine/table';
+import VermifugationTable from '~/pages/Pets/Vermifugation/table';
 
 export const AplicationNavigator = createStackNavigator(
   {
@@ -66,6 +67,18 @@ export const AplicationNavigatorPet = createStackNavigator(
       screen: PetProfile,
       navigationOptions: () => ({
         headerShown: false,
+      }),
+    },
+    VaccineTable: {
+      screen: VaccineTable,
+      navigationOptions: () => ({
+        title: 'Tabela Vacina',
+      }),
+    },
+    VermifugationTable: {
+      screen: VermifugationTable,
+      navigationOptions: () => ({
+        title: 'Tabela Vermifugação',
       }),
     },
   },
