@@ -12,6 +12,7 @@ import Vaccine from '~/pages/Pets/Vaccine';
 import PetProfile from '~/pages/Pets/PetProfile';
 import VaccineTable from '~/pages/Pets/Vaccine/table';
 import VermifugationTable from '~/pages/Pets/Vermifugation/table';
+import LocationPet from '~/pages/Pets/Location';
 
 export const AplicationNavigator = createStackNavigator(
   {
@@ -79,6 +80,12 @@ export const AplicationNavigatorPet = createStackNavigator(
       screen: VermifugationTable,
       navigationOptions: () => ({
         title: 'Tabela Vermifugação',
+      }),
+    },
+    LocalePet: {
+      screen: LocationPet,
+      navigationOptions: () => ({
+        title: 'Localização',
       }),
     },
   },

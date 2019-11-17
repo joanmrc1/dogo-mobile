@@ -44,6 +44,15 @@ export default function PetProfile() {
 				<ScrollView   horizontal>
 					<ContentCard>
 						<CardVaccine
+							onPress={() => NavigationService.navigate('LocalePet')}
+						>
+							<LabelCard> Localização </LabelCard>
+							<ContentDateVaccine>
+								<IconCard name="globe-europe" size={30} />
+							</ContentDateVaccine>
+						</CardVaccine>
+
+						<CardVaccine
 							onPress={() => NavigationService.navigate('VaccineTable')}
 						>
 							<LabelCard> Vacina </LabelCard>
