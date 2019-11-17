@@ -7,6 +7,7 @@ import NavigationService from '../../services/navigation';
 
 export default function HomeAplication() {
   const pet = useSelector(state => state.pet.favorityPet);
+  const user = useSelector(state => state.user.user);
 
   return (
     <Content>
@@ -16,7 +17,7 @@ export default function HomeAplication() {
         </ContentImage>
 
         <ContentTitle>
-          <LabelTitleCard> Bem Vindo, Joan Marcos </LabelTitleCard>
+          <LabelTitleCard> Bem Vindo, {user.name} </LabelTitleCard>
         </ContentTitle>
       </CardRadiusTop>
 
@@ -44,37 +45,40 @@ export default function HomeAplication() {
           </CardInfoPets>
         </CardContentInfoPet>
 
+        {Object.entries(pet).length ? (
+            <CardPet
+              onPress={() => NavigationService.navigate('PetProfile', {
+                id: pet.id
+              })}
+            >
+              <ContentImage>
+                <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
+              </ContentImage>
+              <ContentInfoPet>
+                <ContentRow>
+                  <Row>
+                    <Icon name="book" size={20} color="#FFF" />
+                    <LabelNamePet>{pet.name}</LabelNamePet>
+                  </Row>
 
-        <CardPet
-          onPress={() => NavigationService.navigate('PetProfile', {
-            id: pet.id
-          })}
-        >
-          <ContentImage>
-            <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
-          </ContentImage>
-          <ContentInfoPet>
-            <ContentRow>
-              <Row>
-                <Icon name="book" size={20} color="#FFF" />
-                <LabelNamePet>{pet.name}</LabelNamePet>
-              </Row>
+                  <Row>
+                    <Icon name="paw" size={20} color="#FFF" />
+                    <LabelNamePet>10 anos</LabelNamePet>
+                  </Row>
 
-              <Row>
-                <Icon name="paw" size={20} color="#FFF" />
-                <LabelNamePet>10 anos</LabelNamePet>
-              </Row>
-
-              <Row>
-                <Icon name="venus-mars" size={20} color="#FFF" />
-                <LabelNamePet>{pet.gender}</LabelNamePet>
-              </Row>
-            </ContentRow>
-            <IconStar>
-              <Icon name="star" size={20} color="#FFF" />
-            </IconStar>
-          </ContentInfoPet>
-        </CardPet>
+                  <Row>
+                    <Icon name="venus-mars" size={20} color="#FFF" />
+                    <LabelNamePet>{pet.gender}</LabelNamePet>
+                  </Row>
+                </ContentRow>
+                <IconStar>
+                  <Icon name="star" size={20} color="#FFF" />
+                </IconStar>
+              </ContentInfoPet>
+            </CardPet>
+          ) : null
+        }
+        
       </Card>
     </Content>
   );

@@ -19,7 +19,7 @@ export default function loading() {
 	}
 
 	async function setAction({user, pets, favorityPet}) {
-		pet = favorityPet[0]
+		const pet = favorityPet.length ? favorityPet[0] : {};
 
 		await dispatch({type: 'SET_PETS', payload: { pets }});
 		await dispatch({type: 'SET_FAVORITY_PET', payload: { pet }});
