@@ -8,7 +8,6 @@ import moment from 'moment';
 
 export default function table({ navigation: { state: { params } } }) {
 	const [vermifugations, setVermifugations] = useState([]);
-
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {

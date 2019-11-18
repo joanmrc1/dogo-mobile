@@ -4,13 +4,25 @@ import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import api from '~/services/api';
 import NavigationService from '~/services/navigation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function loading() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		getInfo();
+	    verifyToken()
 	}, [])
+
+	async function verifyToken() {
+		const token = await AsyncStorage.getItem('@DogoApp:token');
+
+		if (token === null) {
+		    NavigationService.navigate('Login');
+		    return;
+		}
+
+		getInfo();
+	}
 
 	async function getInfo() {
 		const { data } = await api.get('info/user')

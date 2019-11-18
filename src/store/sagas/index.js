@@ -19,7 +19,7 @@ export default function* rootSaga() {
   yield all([
     takeLatest(LoginTypes.ASYNC_LOGIN, asyncAuth),
     takeLatest(RegisterTypes.ASYNC_REGISTER, asyncRegister),
-    takeLatest(PetTypes.ASYNC_PET, asyncPetStore),
+    takeLatest(PetTypes.ASYNC_PET_STORE, asyncPetStore),
     takeLatest(VaccineTypes.ASYNC_VACCINE, asyncVaccineStore),
     takeLatest(VermifingeTypes.ASYNC_VERMIFUGATION, asyncVermifugationStore),
   ]);

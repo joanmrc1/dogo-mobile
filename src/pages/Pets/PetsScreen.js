@@ -7,6 +7,7 @@ import {
   Dimensions,
   Platform,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 import api from '~/services/api';
 import { useSelector } from 'react-redux';
@@ -16,21 +17,13 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../services/navigation';
 import Modal from 'react-native-modal';
 import ActionButton from 'react-native-action-button';
+import { FAB } from 'react-native-paper';
 
 export default function PetsScreen() {
   const user = useSelector(state => state.user.user);
-  const [pets, setPets] = useState([]);
+  const pets = useSelector(state => state.pet.pets);
   const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    getPets()
-  },[])
-
-  async function getPets() {
-    const { data } = await api.get('my/pets');
-
-    setPets(data);
-  }
+  const [isLoading, setIsLoading] = useState(false);
 
   function setFilter(query) {
     setSearch(query);
@@ -41,6 +34,7 @@ export default function PetsScreen() {
   }
 
   return (
+    <ScrollView>
     <Content>
       <ContentSerach>
         <LabelTitleName>
@@ -61,7 +55,6 @@ export default function PetsScreen() {
       </ContentSerach>
 
       <ContentCard>
-        <ScrollView>
           {
             pets.length ?
               pets.map((pet) => {
@@ -99,27 +92,34 @@ export default function PetsScreen() {
                     </ContentInfoPet>
                   </CardPet>
                 )
-              })
-              : <ActivityIndicator size="large" color="#0000ff" />
+              }) : <NoResultText>Não há pets registradas ainda</NoResultText> 
           }
-        </ScrollView>
       </ContentCard>
-      <ContentFloatButton>
-        <ActionButton buttonColor="#3498db">
-
-          <ActionButton.Item 
-            buttonColor='#d9dc29'
-            title="Pet"
-            onPress={() => NavigationService.navigate('RegisterPet')}
-          >
-            <IconActionButton name="paw" />
-          </ActionButton.Item>
-
-        </ActionButton>
-      </ContentFloatButton>
+       <FAB
+          style={styles.fab}
+          icon="paw"
+          onPress={() => NavigationService.navigate('RegisterPet')}
+        />
     </Content>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    padding: 2,
+    backgroundColor: '#5c5cce'
+  },
+})
+
+const NoResultText = styled.Text`
+  padding: 20px 20px;
+  text-align: center;
+`;
 
 const IconActionButton = styled(Icon)`
   font-size: 20px;
@@ -128,7 +128,7 @@ const IconActionButton = styled(Icon)`
 `;
 
 const ContentFloatButton = styled.View`
-  margin-bottom: 35px;
+  margin-bottom: 31px;
   flex: 1;
   zIndex: 1;
 `;
@@ -200,6 +200,7 @@ const ContentInfoPet = styled.View`
   padding: 0px 10px;
   flex-direction: row;
   justify-content: space-between;
+  alignItems: center;
 `;
 
 const Row = styled.View`

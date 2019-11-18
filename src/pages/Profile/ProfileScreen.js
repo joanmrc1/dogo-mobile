@@ -4,6 +4,8 @@ import { ScrollView, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput } from 'react-native-paper';
+import AsyncStorage from '@react-native-community/async-storage';
+import NavigationService from '../../services/navigation';
 import moment from 'moment';
 
 export default function Pets() {
@@ -15,6 +17,12 @@ export default function Pets() {
 	function handleSubmit() {
 
 	}
+
+	function logout() {
+	    AsyncStorage.removeItem('@DogoApp:token');
+	    AsyncStorage.removeItem('@DogoApp:user');
+	    NavigationService.navigate('Login');
+	  }
 
 	return (
 		<ScrollView>
@@ -31,6 +39,9 @@ export default function Pets() {
 			  <ContentForm>
 			  	<HeaderForm>
 			  		<LabelHeader> Minha Conta </LabelHeader>
+		  			 <ButtonAddPet onPress={() => logout()}>
+		              <LabelButton> Sair </LabelButton>
+		            </ButtonAddPet>
 			  	</HeaderForm>
 			  	<ContentIunput>
 			  		<InputText
@@ -116,6 +127,9 @@ const LabelHeader = styled.Text`
 
 const HeaderForm = styled.View`
 	padding: 5px;
+	flex-direction: row;
+	justifyContent: space-between;
+	alignItems: center;
 `;
 
 const ContentIunput = styled.View`

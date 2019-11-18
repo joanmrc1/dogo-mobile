@@ -4,7 +4,6 @@ import api from '~/services/api';
 import NavigationService from '../../services/navigation';
 
 export function* asyncPetStore({ payload }) {
-
 	const options = {
 		headers: {
 		  'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
@@ -17,12 +16,18 @@ export function* asyncPetStore({ payload }) {
     	formData.append(key, payload[key]);
 	});
 
+	let oldPet = payload.oldPet;
+
 	try {
 		const { data } = yield call(api.post, 'pets', formData, options);
 
-		console.tron.log('error', data);
+		const pets = oldPet.push({data})
 
-		yield call(NavigationService.navigate, 'Pets');
+		console.tron.log(oldPet, pets);
+
+		// yield put({ type: 'SET_PETS', payload: { petsNew }} );
+
+		// yield call(NavigationService.navigate, 'Pets');
 	} catch (err) {
 		console.tron.log('ERROR: ',err);
 

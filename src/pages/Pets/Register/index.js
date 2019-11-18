@@ -10,6 +10,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
 export default function RegisterPet() {
+  const oldPet = useSelector(state => state.pet.pets);
   const [name, setName] = useState('');
   const [gender, setGender] = useState('F');
   const [breed, setBreed] = useState('');
@@ -74,8 +75,8 @@ export default function RegisterPet() {
   }
 
   function handleSubmit() {
-    dispatch({type: 'ASYNC_PET_STORAGE', payload: {
-      name, gender, breed, species, fur, veterinary, avatar, birthday
+    dispatch({type: 'ASYNC_PET_STORE', payload: {
+      name, gender, breed, species, fur, veterinary, avatar, birthday, oldPet
     }});
   }
 

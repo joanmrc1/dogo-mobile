@@ -3,7 +3,7 @@ import Reactotron from 'reactotron-react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const api = create({
-  baseURL: 'https://7f6b4bd0.ngrok.io/',
+  baseURL: 'https://bc2f21cb.ngrok.io/',
 });
 
 api.addAsyncRequestTransform(request => async () => {

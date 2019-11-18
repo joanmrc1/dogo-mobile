@@ -18,12 +18,6 @@ export default function Login() {
     dispatch({type: 'ASYNC_LOGIN', payload: {email, password}});
   }
 
-  function logout() {
-    AsyncStorage.removeItem('@DogoApp:token');
-    AsyncStorage.removeItem('@DogoApp:user');
-    NavigationService.navigate('Login');
-  }
-
   return (
     <ScrollView>
       <Content>
@@ -66,13 +60,13 @@ export default function Login() {
               <LabelButtonLogin> Acessar </LabelButtonLogin>
             </ButtonLogin>
 
-            <ButtonFogotPassword onPress={logout}>
+            <ButtonFogotPassword onPress={() => console.tron.log('recovery pass')}>
               <LabelFogotPassword> Esqueceu a senha ? </LabelFogotPassword>
             </ButtonFogotPassword>
           </CardLogin>
 
           <ButtonFogotPassword
-            onPress={() => NavigationService.navigate('Inicio')}>
+            onPress={() => NavigationService.navigate('Register')}>
             <LabelRegister> Não tem conta? Cadastre-se </LabelRegister>
           </ButtonFogotPassword>
         </ContentCard>
