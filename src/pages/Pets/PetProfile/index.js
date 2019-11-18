@@ -11,8 +11,6 @@ export default function PetProfile({ navigation: { state: { params } } }) {
 	const [pet, setPet] = useState(params.pet)
 	const user = useSelector(state => state.user.user);
 
-	console.tron.log(pet)
-
 	return (
 		<Content>
 			<ContentImg>
@@ -62,7 +60,9 @@ export default function PetProfile({ navigation: { state: { params } } }) {
 						</CardVaccine>
 
 						<CardVaccine
-							onPress={() => NavigationService.navigate('VaccineTable')}
+							onPress={() => NavigationService.navigate('VaccineTable', {
+								id: pet.id
+							})}	
 						>
 							<LabelCard> Vacina </LabelCard>
 							<ContentDateVaccine>
@@ -72,7 +72,9 @@ export default function PetProfile({ navigation: { state: { params } } }) {
 						</CardVaccine>
 					
 						<CardVaccine
-							onPress={() => NavigationService.navigate('VermifugationTable')}
+							onPress={() => NavigationService.navigate('VermifugationTable', {
+								id: pet.id
+							})}
 						>
 							<LabelCard> Vermifugação </LabelCard>
 							<ContentDateVaccine>

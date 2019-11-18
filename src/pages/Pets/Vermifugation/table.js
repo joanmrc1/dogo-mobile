@@ -1,15 +1,30 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { ActivityIndicator } from 'react-native'
 import { DataTable } from 'react-native-paper';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import api from '~/services/api';
+import moment from 'moment';
 
-export default function table() {
+export default function table({ navigation: { state: { params } } }) {
 	const [vermifugations, setVermifugations] = useState([]);
 
-	useEffect(() => {
+	const [isLoading, setIsLoading] = useState(false);
 
+	useEffect(() => {
+		getVermifugations	()
 	}, []);
+
+	async function getVermifugations() {
+		setIsLoading(true)
+
+		const { data } = await api.get('vermugations', {
+			petId: params.id
+		});
+
+		setIsLoading(false)
+		setVermifugations(data);
+	}
 
 	return (
 		<Container>
@@ -19,7 +34,7 @@ export default function table() {
 					<DataTable.Title>Data da Consulta</DataTable.Title>
 				</DataTable.Header>
 
-				{vermifugations && vermifugations.length > 0 ? (
+				{ vermifugations.length > 0 ? (
 		        	vermifugations.map(vermigurate => (
 		              <DataTable.Row key={vermigurate.id}>
 		                <DataTable.Cell>{vermigurate.name}</DataTable.Cell>
@@ -27,21 +42,14 @@ export default function table() {
 		                <DataTable.Cell
 		                  onPress={() => console.tron.log('oie')}
 		                >
-		                  {vermigurate.date_of_appointment}
+		                  {moment(vermigurate.date_of_appointment).format('DD/MM/YYYY')}
 		                </DataTable.Cell>
 		              </DataTable.Row>
 		            ))
 		          ) : (
-		            <NoResultText>Não há tipos vermifugação registradas ainda</NoResultText>
+		            isLoading ? <ActivityIndicator size="large" color="#0000ff" /> : <NoResultText>Não há tipos vermifugação registradas ainda</NoResultText>
 		          )
 		      	}
-
-				{/*<DataTable.Pagination
-					page={1}
-					numberOfPages={3}
-					onPageChange={(page) => { console.log(page); }}
-					label="1-2 of 6"
-				/>*/}
 			</DataTable>
 		</Container>
 	);

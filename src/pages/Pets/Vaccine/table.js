@@ -1,15 +1,29 @@
 import React, {useState, useEffect} from 'react';
+import { ActivityIndicator } from 'react-native'
 import { DataTable } from 'react-native-paper';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import api from '~/services/api';
+import moment from 'moment';
 
-export default function table() {
+export default function table({ navigation: { state: { params } } }) {
 	const [vaccines, setVaccines] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-
+		getVaccines()
 	}, []);
+
+	async function getVaccines() {
+		setIsLoading(true)
+
+		const { data } = await api.get('vaccines', {
+			petId: params.id
+		});
+
+		setIsLoading(false)
+		setVaccines(data);
+	}
 
 	return (
 		<Container>
@@ -19,21 +33,20 @@ export default function table() {
 					<DataTable.Title>Data da Consulta</DataTable.Title>
 				</DataTable.Header>
 
-				{vaccines && vaccines.length > 0 ? (
+				{vaccines.length > 0 ? (
 	            	vaccines.map(vaccine => (
-		              <DataTable.Row key={vaccine.id}>
+		              <DataTable.Row key={vaccine.id} style={{justifyContent: 'space-between'}}>
 		                <DataTable.Cell>{vaccine.name}</DataTable.Cell>
 
 		                <DataTable.Cell
-		                  numeric
 		                  onPress={() => console.tron.log('oie')}
 		                >
-		                  {vaccine.vaccine_in}
+		                  {moment(vaccine.vaccine_in).format('DD/MM/YYYY')}
 		                </DataTable.Cell>
 		              </DataTable.Row>
 		            ))
 		          ) : (
-		            <NoResultText>Não há tipos vacinas registradas ainda</NoResultText>
+		            isLoading ? <ActivityIndicator size="large" color="#0000ff" /> : <NoResultText>Não há tipos vacinas registradas ainda</NoResultText>
 		          )
 		      	}
 
