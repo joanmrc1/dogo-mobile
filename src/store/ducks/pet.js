@@ -1,7 +1,7 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
-    asyncPetStorage: ['name', 'gender', 'breed', 'species', 'fur', 'veterinary', 'avatar', 'birthday'],
+    asyncPet: ['name', 'gender', 'breed', 'species', 'fur', 'veterinary', 'avatar', 'birthday'],
     setPets: ['pets'],
     setFavorityPet: ['pet'],
 });

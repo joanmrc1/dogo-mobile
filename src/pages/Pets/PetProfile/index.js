@@ -5,8 +5,13 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../../services/navigation';
 import ActionButton from 'react-native-action-button';
+import { useSelector } from 'react-redux';
 
-export default function PetProfile() {
+export default function PetProfile({ navigation: { state: { params } } }) {
+	const [pet, setPet] = useState(params.pet)
+	const user = useSelector(state => state.user.user);
+
+	console.tron.log(pet)
 
 	return (
 		<Content>
@@ -18,17 +23,21 @@ export default function PetProfile() {
 		      <ActionButton buttonColor="#3498db">
 
 		        <ActionButton.Item 
-		          buttonColor='#1abc9c'
-		          title="Vermifugação"
-		          onPress={() => NavigationService.navigate('Vermifugation')}
+		            buttonColor='#1abc9c'
+		            title="Vermifugação"
+		            onPress={() => NavigationService.navigate('Vermifugation', {
+						id: pet.id
+					})}
 		        >
 		          <IconActionButton name="file-medical" />
 		        </ActionButton.Item>
 
 		        <ActionButton.Item
-		          buttonColor='#9b59b6'
-		          title="Vacinas"
-		          onPress={() => NavigationService.navigate('Vaccine')}
+		            buttonColor='#9b59b6'
+		            title="Vacinas"
+		        	onPress={() => NavigationService.navigate('Vaccine', {
+						id: pet.id
+					})}
 		        >
 		          <IconActionButton name="thermometer" />
 		        </ActionButton.Item>
@@ -37,8 +46,8 @@ export default function PetProfile() {
 
 			<ContentRadius>
 				<ContentLabel>
-					<LabelName> Ragnar </LabelName>
-					<LabelSir> Joan Marcos </LabelSir>
+					<LabelName> {pet.name} </LabelName>
+					<LabelSir> {user.name} </LabelSir>
 				</ContentLabel>
 					
 				<ScrollView   horizontal>

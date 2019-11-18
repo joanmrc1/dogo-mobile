@@ -1,7 +1,7 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
-    asyncVaccineStorage: ['name', 'type', 'labelDate', 'labelDateRetry']
+    asyncVaccine: ['name', 'petId', 'type', 'vaccineIn', 'nextVaccine']
 });
 
 const INITIAL_STATE = {};

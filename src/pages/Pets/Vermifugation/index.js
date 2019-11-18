@@ -5,18 +5,30 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../../services/navigation';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {useDispatch} from 'react-redux';
 import moment from 'moment';
 
-export default function Vermifugation() {
+export default function Vermifugation({ navigation: { state: { params } } }) {
 	const [showDate, setShowDate] = useState(false);
 	const [showDateRetry, setShowDateRetry] = useState(false);
 	const [date, setDate] = useState(Date.now());
 	const [labelDate, setLabelDate] = useState('Data da consulta');
 	const [labelDateRetry, setLabelDateRetry] = useState('Repetir em');
+	const [dateOfAppointment, setDateOfAppointment] = useState('');
+	const [repeatIn, setRepeatIn] = useState('');
 	const [vermifuge, setVermifuge] = useState('');
 	const [weight, setWeight] = useState('');
+	const [petId, setPetId] = useState(params.id);
+	const dispatch = useDispatch();
 
 	function handleSubmit() {
+		dispatch({type: 'ASYNC_VERMIFUGATION', payload: {
+			vermifuge,
+			petId,
+			weight,
+			dateOfAppointment,
+			repeatIn
+		}});
 	}
 
 	async function setValueDate(e, obj) {
@@ -24,11 +36,25 @@ export default function Vermifugation() {
 
 		const formatedDate = moment(obj)
 			.locale('pt-br')
-			.format('MMMM Do YYYY')
+			.format('Do MMMM YYYY')
 			.toString();
 
-		showPickerDate(false);
+		setShowDate(!showDate)
 		setLabelDate(formatedDate);
+		setDateOfAppointment(moment(obj).format('YYYY-MM-DD'));
+	}
+
+	function setValueDateRetry(e, obj) {
+		momentePtBr();
+
+		const formatedDate = moment(obj)
+			.locale('pt-br')
+			.format('Do MMMM YYYY')
+			.toString();
+
+		setShowDateRetry(!showDateRetry)
+		setLabelDateRetry(formatedDate);
+		setRepeatIn(moment(obj).format('YYYY-MM-DD'));
 	}
 
 	function momentePtBr() {
@@ -76,26 +102,6 @@ export default function Vermifugation() {
 	    });
 	}
 
-	function showPickerDate(bool) {
-		setShowDate(bool);
-	}
-
-	function showPickerDateRetry(bool) {
-		setShowDateRetry(bool);
-	}
-
-	function setValueDateRetry(e, obj) {
-		momentePtBr();
-
-		const formatedDate = moment(obj)
-			.locale('pt-br')
-			.format('MMMM Do YYYY')
-			.toString();
-
-		showPickerDateRetry(false);
-		setLabelDateRetry(formatedDate);
-	}
-
   	return (
 	    <Content>
 	    	<ScrollView>
@@ -121,14 +127,14 @@ export default function Vermifugation() {
 
 			        <ItemRow rounded>
 			            <Icon active name="calendar-alt" size={25} color={'#08d2ce'} />
-			            <DateSelect onPress={() => showPickerDate(true)}>
+			            <DateSelect onPress={() => setShowDate(!showDate)}>
 			            	<LabelDate> {labelDate} </LabelDate>
 			            </DateSelect>
 			        </ItemRow>
 
 			        <ItemRow rounded>
 			            <Icon active name="calendar-check" size={25} color={'#08d2ce'} />
-			            <DateSelect onPress={() => showPickerDateRetry(true)}>
+			            <DateSelect onPress={() => setShowDateRetry(!showDateRetry)}>
 			            	<LabelDate> {labelDateRetry} </LabelDate>
 			            </DateSelect>
 			        </ItemRow>

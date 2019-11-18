@@ -1,8 +1,10 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
-    asyncVetmifugationStorage: ['date', 'vermifuge', 'weight', 'labelDate', 'labelDateRetry' ]
+    asyncVermifugation: ['vermifuge', 'petId', 'weight', 'dateOfAppointment', 'repeatIn']
 });
+
+console.tron.log(Types);
 
 const INITIAL_STATE = {};
 

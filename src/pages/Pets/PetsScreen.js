@@ -6,7 +6,10 @@ import {
   ScrollView,
   Dimensions,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
+import api from '~/services/api';
+import { useSelector } from 'react-redux';
 import {Item, Input} from 'native-base';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -15,131 +18,90 @@ import Modal from 'react-native-modal';
 import ActionButton from 'react-native-action-button';
 
 export default function PetsScreen() {
-  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const user = useSelector(state => state.user.user);
+  const [pets, setPets] = useState([]);
+  const [search, setSearch] = useState('');
 
-  function handlewNavigatePress(route) {
-    setIsVisibleModal(false);
-    NavigationService.navigate(route);
+  useEffect(() => {
+    getPets()
+  },[])
+
+  async function getPets() {
+    const { data } = await api.get('my/pets');
+
+    setPets(data);
   }
 
-  const ModalNavigate = () => {
-    const deviceWidth = Dimensions.get('window').width;
-    const deviceHeight =
-      Platform.OS === 'ios'
-        ? Dimensions.get('window').height
-        : require('react-native-extra-dimensions-android').get(
-            'REAL_WINDOW_HEIGHT',
-          );
-
-    return (
-      <Modal
-        isVisible={isVisibleModal}
-        deviceWidth={deviceWidth}
-        deviceHeight={deviceHeight}
-        onBackdropPress={() => setIsVisibleModal(false)}>
-        <ContentModal>
-          <LabelTitleModal>Selecione a Informação</LabelTitleModal>
-          <ContentButtonSelect>
-            <Row>
-              <ButtonNavigateSelect
-                onPress={() => handlewNavigatePress('Vermifugation')}>
-                <LabelButtonSelect> Vermifugação > </LabelButtonSelect>
-              </ButtonNavigateSelect>
-            </Row>
-
-            <Row>
-              <ButtonNavigateSelect onPress={() => handlewNavigatePress('')}>
-                <LabelButtonSelect> Vacinas > </LabelButtonSelect>
-              </ButtonNavigateSelect>
-            </Row>
-
-            <Row>
-              <ButtonNavigateSelect onPress={() => handlewNavigatePress('')}>
-                <LabelButtonSelect> Minhas Informações > </LabelButtonSelect>
-              </ButtonNavigateSelect>
-            </Row>
-          </ContentButtonSelect>
-        </ContentModal>
-      </Modal>
-    );
-  };
+  function setFilter(query) {
+    setSearch(query);
+    
+    let result = pets.filter((el) => {
+      return el.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+    });
+  }
 
   return (
-    <>
     <Content>
-      <ModalNavigate />
-
       <ContentSerach>
         <LabelTitleName>
-          Olá, <Text style={{color: '#076775'}}>Joan Marcos</Text>
+          Olá, <Text style={{color: '#076775'}}>{user.name}</Text>
         </LabelTitleName>
 
         <LabelSubTitle> Listagem de todos os seus queridos pets </LabelSubTitle>
         <ContentInputSerach>
           <ItemSearch>
             <Icon active name="search" size={25} color={'#076775'} />
-            <Input placeholder="Nome do seu pet" />
+            <Input 
+              placeholder="Nome do seu pet"
+              value={search}
+              onChangeText={(value) => setFilter(value)}
+            />
           </ItemSearch>
         </ContentInputSerach>
       </ContentSerach>
 
       <ContentCard>
         <ScrollView>
-          <CardPet onPress={() => NavigationService.navigate('PetProfile')}>
-            <ContentImage>
-              <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
-            </ContentImage>
-            <ContentInfoPet>
-              <ContentRow>
-                <Row>
-                  <Icon name="book" size={20} color="#FFF" />
-                  <LabelNamePet>Ragnar Lord</LabelNamePet>
-                </Row>
+          {
+            pets.length ?
+              pets.map((pet) => {
+                return (
+                  <CardPet 
+                    onPress={() => NavigationService.navigate('PetProfile', {
+                      pet
+                    })} 
+                    key={pet.id}
+                  >
+                    <ContentImage>
+                      <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
+                    </ContentImage>
+                    <ContentInfoPet>
+                      <ContentRow>
+                        <Row>
+                          <Icon name="book" size={20} color="#FFF" />
+                          <LabelNamePet> {pet.name} </LabelNamePet>
+                        </Row>
 
-                <Row>
-                  <Icon name="paw" size={20} color="#FFF" />
-                  <LabelNamePet>10 anos</LabelNamePet>
-                </Row>
+                        <Row>
+                          <Icon name="paw" size={20} color="#FFF" />
+                          <LabelNamePet>10 anos</LabelNamePet>
+                        </Row>
 
-                <Row>
-                  <Icon name="venus-mars" size={20} color="#FFF" />
-                  <LabelNamePet>Masculino</LabelNamePet>
-                </Row>
-              </ContentRow>
+                        <Row>
+                          <Icon name="venus-mars" size={20} color="#FFF" />
+                          <LabelNamePet>{pet.gender}</LabelNamePet>
+                        </Row>
+                      </ContentRow>
 
-              <ButtonArrow>
-                <Icon name="chevron-right" size={28} color="#FFF" />
-              </ButtonArrow>
-            </ContentInfoPet>
-          </CardPet>
-
-          <CardPet>
-            <ContentImage>
-              <ImgPet source={require('../../assets/img/gato.jpeg')} />
-            </ContentImage>
-            <ContentInfoPet>
-              <ContentRow>
-                <Row>
-                  <Icon name="book" size={20} color="#FFF" />
-                  <LabelNamePet>Gatolina</LabelNamePet>
-                </Row>
-
-                <Row>
-                  <Icon name="paw" size={20} color="#FFF" />
-                  <LabelNamePet>6 anos</LabelNamePet>
-                </Row>
-
-                <Row>
-                  <Icon name="venus-mars" size={20} color="#FFF" />
-                  <LabelNamePet>Feminina</LabelNamePet>
-                </Row>
-              </ContentRow>
-
-              <ButtonArrow>
-                <Icon name="chevron-right" size={28} color="#FFF" />
-              </ButtonArrow>
-            </ContentInfoPet>
-          </CardPet>
+                      <ButtonArrow>
+                        <Icon name="chevron-right" size={28} color="#FFF" />
+                      </ButtonArrow>
+                    </ContentInfoPet>
+                  </CardPet>
+                )
+              })
+              : <ActivityIndicator size="large" color="#0000ff" />
+          }
         </ScrollView>
       </ContentCard>
       <ContentFloatButton>
@@ -155,9 +117,7 @@ export default function PetsScreen() {
 
         </ActionButton>
       </ContentFloatButton>
-
     </Content>
-    </>
   );
 }
 

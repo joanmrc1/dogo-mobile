@@ -31,4 +31,4 @@ export function* asyncPetStore({ payload }) {
 		  payload: { message: 'Falha na conexão, tente novamente' },
 		});
 	}	
-}6
+}

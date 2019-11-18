@@ -1,20 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, ScrollView, Platform} from 'react-native';
 import {Item, Input, Label, Row, Picker} from 'native-base';
+import DateTimePicker from '@react-native-community/datetimepicker'
+import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../../services/navigation';
+import moment from 'moment';
 
-export default function Vaccine() {
+export default function Vaccine({ navigation: { state: { params } } }) {
 	const [showDate, setShowDate] = useState(false);
 	const [showDateRetry, setShowDateRetry] = useState(false);
 	const [date, setDate] = useState(Date.now());
-	const [labelDate, setLabelDate] = useState('Data da vacina');
-	const [labelDateRetry, setLabelDateRetry] = useState('Repetir em ...');
+	const [vaccineIn, setVaccineIn] = useState('');
+	const [nextVaccine, setNextVaccine] = useState('');
+	const [labelVaccineIn, setLabelVaccineIn] = useState('Data da vacina');
+	const [labelNextVaccine, setLabelNextVaccine] = useState('Repetir em ...');
 	const [vaccine, setVaccine] = useState('');
 	const [type, setType] = useState('');
+	const [petId, setPetId] = useState(params.id);
+	const dispatch = useDispatch();
 
 	function handleSubmit() {
+		dispatch({type: 'ASYNC_VACCINE', payload: {
+			vaccine,
+			petId,
+			type,
+			vaccineIn,
+			nextVaccine
+		}});
 	}
 
 	async function setValueDate(e, obj) {
@@ -22,11 +36,25 @@ export default function Vaccine() {
 
 		const formatedDate = moment(obj)
 			.locale('pt-br')
-			.format('MMMM Do YYYY')
+			.format('Do MMMM YYYY')
 			.toString();
 
-		showPickerDate(false);
-		setLabelDate(formatedDate);
+		setShowDate(false);
+		setLabelVaccineIn(formatedDate);
+		setVaccineIn(moment(obj).format('YYYY-MM-DD'));
+	}
+
+	function setValueDateRetry(e, obj) {
+		momentePtBr();
+
+		const formatedDate = moment(obj)
+			.locale('pt-br')
+			.format('Do MMMM YYYY')
+			.toString();
+
+		setShowDateRetry(false);
+		setLabelNextVaccine(formatedDate);
+		setNextVaccine(moment(obj).format('YYYY-MM-DD'));
 	}
 
 	function momentePtBr() {
@@ -73,27 +101,7 @@ export default function Vaccine() {
 	        ordinal : '%dº'
 	    });
 	}
-
-	function showPickerDate(bool) {
-		setShowDate(bool);
-	}
-
-	function showPickerDateRetry(bool) {
-		setShowDateRetry(bool);
-	}
-
-	function setValueDateRetry(e, obj) {
-		momentePtBr();
-
-		const formatedDate = moment(obj)
-			.locale('pt-br')
-			.format('MMMM Do YYYY')
-			.toString();
-
-		showPickerDateRetry(false);
-		setLabelDateRetry(formatedDate);
-	}
-
+	
   	return (
 	    <Content>
 	    	<ScrollView>
@@ -103,7 +111,7 @@ export default function Vaccine() {
 			            <InputItem
 			            	placeholder="Vacina"
 			            	value={vaccine}
-            				onChangeText={value => setVermifuge(value)}
+            				onChangeText={value => setVaccine(value)}
 			            />
 			        </ItemRow>
 
@@ -111,7 +119,6 @@ export default function Vaccine() {
 			            <Icon active name="file-prescription" size={25} color={'#08d2ce'} />
 			            <InputItem 
 			            	placeholder="Tipo" 
-			            	keyboardType={'numeric'} 
 			            	value={type}
             				onChangeText={value => setType(value)}
 			            />
@@ -119,15 +126,15 @@ export default function Vaccine() {
 
 			        <ItemRow rounded>
 			            <Icon active name="calendar-alt" size={25} color={'#08d2ce'} />
-			            <DateSelect onPress={() => showPickerDate(true)}>
-			            	<LabelDate> {labelDate} </LabelDate>
+			            <DateSelect onPress={() => setShowDate(!showDate)}>
+			            	<LabelDate> {labelVaccineIn} </LabelDate>
 			            </DateSelect>
 			        </ItemRow>
 
 			        <ItemRow rounded>
 			            <Icon active name="calendar-check" size={25} color={'#08d2ce'} />
-			            <DateSelect onPress={() => showPickerDateRetry(true)}>
-			            	<LabelDate> {labelDateRetry} </LabelDate>
+			            <DateSelect onPress={() => setShowDateRetry(!showDateRetry)}>
+			            	<LabelDate> {labelNextVaccine} </LabelDate>
 			            </DateSelect>
 			        </ItemRow>
 

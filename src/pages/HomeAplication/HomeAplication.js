@@ -7,6 +7,7 @@ import NavigationService from '../../services/navigation';
 
 export default function HomeAplication() {
   const pet = useSelector(state => state.pet.favorityPet);
+  const pets = useSelector(state => state.pet.pets);
   const user = useSelector(state => state.user.user);
 
   return (
@@ -31,7 +32,7 @@ export default function HomeAplication() {
           <CardInfoPets>
             <Row>
               <Icon name="heart" size={20} color="#08d2ce" />
-              <LabelBirthday> Você tem 2 pets </LabelBirthday>
+              <LabelBirthday> Você tem {pets.length} pets </LabelBirthday>
             </Row>
           </CardInfoPets>
 
@@ -48,7 +49,7 @@ export default function HomeAplication() {
         {Object.entries(pet).length ? (
             <CardPet
               onPress={() => NavigationService.navigate('PetProfile', {
-                id: pet.id
+                pet
               })}
             >
               <ContentImage>
