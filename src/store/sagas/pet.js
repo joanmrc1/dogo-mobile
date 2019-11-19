@@ -10,20 +10,22 @@ export function* asyncPetStore({ payload }) {
 		},
 	};
 
+	let petsVelhos = [];
+
 	const formData = new FormData();
 
 	Object.keys(payload).forEach((key) => {
     	formData.append(key, payload[key]);
 	});
 
-	let oldPet = payload.oldPet;
+	petsVelhos.push(payload.oldPet);
+
+	console.tron.log(formData)
 
 	try {
-		const { data } = yield call(api.post, 'pets', formData, options);
+		const response = yield call(api.post, 'pets', formData, options);
 
-		const pets = oldPet.push({data})
-
-		console.tron.log(oldPet, pets);
+		console.tron.log(petsVelhos, response, payload);
 
 		// yield put({ type: 'SET_PETS', payload: { petsNew }} );
 
