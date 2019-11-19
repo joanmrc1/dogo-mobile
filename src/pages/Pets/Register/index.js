@@ -11,17 +11,17 @@ import moment from 'moment';
 
 export default function RegisterPet() {
   const oldPet = useSelector(state => state.pet.pets);
-  const [name, setName] = useState('');
+  const [name, setName] = useState('adasd');
   const [gender, setGender] = useState('F');
-  const [breed, setBreed] = useState('');
-  const [species, setSpecies] = useState('');
-  const [fur, setFur] = useState('');
-  const [veterinary, setVeterinary] = useState('');
+  const [breed, setBreed] = useState('asd');
+  const [species, setSpecies] = useState('asdasd');
+  const [fur, setFur] = useState('asd');
+  const [veterinary, setVeterinary] = useState('asd');
   const [preview, setPreview] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [date, setDate] = useState(Date.now());
   const [showDate, setShowDate] = useState(false);
-  const [birthday, setBirthday] = useState('Nascimento <3');
+  const [birthday, setBirthday] = useState('27/10/1996');
   const dispatch = useDispatch();
 
   function handleSelectImage() {

@@ -34,74 +34,76 @@ export default function PetsScreen() {
   }
 
   return (
+    <>
     <ScrollView>
-    <Content>
-      <ContentSerach>
-        <LabelTitleName>
-          Olá, <Text style={{color: '#076775'}}>{user.name}</Text>
-        </LabelTitleName>
+      <Content>
+        <ContentSerach>
+          <LabelTitleName>
+            Olá, <Text style={{color: '#076775'}}>{user.name}</Text>
+          </LabelTitleName>
 
-        <LabelSubTitle> Listagem de todos os seus queridos pets </LabelSubTitle>
-        <ContentInputSerach>
-          <ItemSearch>
-            <Icon active name="search" size={25} color={'#076775'} />
-            <Input 
-              placeholder="Nome do seu pet"
-              value={search}
-              onChangeText={(value) => setFilter(value)}
-            />
-          </ItemSearch>
-        </ContentInputSerach>
-      </ContentSerach>
+          <LabelSubTitle> Listagem de todos os seus queridos pets </LabelSubTitle>
+          <ContentInputSerach>
+            <ItemSearch>
+              <Icon active name="search" size={25} color={'#076775'} />
+              <Input 
+                placeholder="Nome do seu pet"
+                value={search}
+                onChangeText={(value) => setFilter(value)}
+              />
+            </ItemSearch>
+          </ContentInputSerach>
+        </ContentSerach>
 
-      <ContentCard>
-          {
-            pets.length ?
-              pets.map((pet) => {
-                return (
-                  <CardPet 
-                    onPress={() => NavigationService.navigate('PetProfile', {
-                      pet
-                    })} 
-                    key={pet.id}
-                  >
-                    <ContentImage>
-                      <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
-                    </ContentImage>
-                    <ContentInfoPet>
-                      <ContentRow>
-                        <Row>
-                          <Icon name="book" size={20} color="#FFF" />
-                          <LabelNamePet> {pet.name} </LabelNamePet>
-                        </Row>
+        <ContentCard>
+            {
+              pets.length ?
+                pets.map((pet) => {
+                  return (
+                    <CardPet 
+                      onPress={() => NavigationService.navigate('PetProfile', {
+                        pet
+                      })} 
+                      key={pet.id}
+                    >
+                      <ContentImage>
+                        <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
+                      </ContentImage>
+                      <ContentInfoPet>
+                        <ContentRow>
+                          <Row>
+                            <Icon name="book" size={20} color="#FFF" />
+                            <LabelNamePet> {pet.name} </LabelNamePet>
+                          </Row>
 
-                        <Row>
-                          <Icon name="paw" size={20} color="#FFF" />
-                          <LabelNamePet>10 anos</LabelNamePet>
-                        </Row>
+                          <Row>
+                            <Icon name="paw" size={20} color="#FFF" />
+                            <LabelNamePet>10 anos</LabelNamePet>
+                          </Row>
 
-                        <Row>
-                          <Icon name="venus-mars" size={20} color="#FFF" />
-                          <LabelNamePet>{pet.gender}</LabelNamePet>
-                        </Row>
-                      </ContentRow>
+                          <Row>
+                            <Icon name="venus-mars" size={20} color="#FFF" />
+                            <LabelNamePet>{pet.gender}</LabelNamePet>
+                          </Row>
+                        </ContentRow>
 
-                      <ButtonArrow>
-                        <Icon name="chevron-right" size={28} color="#FFF" />
-                      </ButtonArrow>
-                    </ContentInfoPet>
-                  </CardPet>
-                )
-              }) : <NoResultText>Não há pets registradas ainda</NoResultText> 
-          }
-      </ContentCard>
-       <FAB
-          style={styles.fab}
-          icon="paw"
-          onPress={() => NavigationService.navigate('RegisterPet')}
-        />
-    </Content>
+                        <ButtonArrow>
+                          <Icon name="chevron-right" size={28} color="#FFF" />
+                        </ButtonArrow>
+                      </ContentInfoPet>
+                    </CardPet>
+                  )
+                }) : <NoResultText>Não há pets registradas ainda</NoResultText> 
+            }
+        </ContentCard>
+      </Content>
     </ScrollView>
+    <FAB
+      style={styles.fab}
+      icon="paw"
+      onPress={() => NavigationService.navigate('RegisterPet')}
+    />
+    </>
   );
 }
 
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     margin: 16,
     right: 0,
-    bottom: 0,
+    bottom: 38,
     padding: 2,
     backgroundColor: '#5c5cce'
   },
