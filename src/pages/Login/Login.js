@@ -3,8 +3,9 @@ import {TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
+
+import Loading from '../Loading/Loading';
 import NavigationService from '../../services/navigation';
-import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Login() {
   const error = useSelector(state => state.login.error);
@@ -13,13 +14,16 @@ export default function Login() {
   const [email, setEmail] = useState('joanmrc96@gmail.com');
   const [password, setPassword] = useState('123456');
   const [showPass, setShowPass] = useState('false');
+  const [modalVisible, setModalVisible] = useState(false);
 
   function submitLogin() {
+    setModalVisible(true);
     dispatch({type: 'ASYNC_LOGIN', payload: {email, password}});
   }
 
   return (
     <ScrollView>
+      <Loading message={'Entrando'} isOpen={modalVisible} />
       <Content>
         <ContentLogo>
           <ImgLogo source={require('../../assets/img/logo.png')} />
@@ -60,7 +64,8 @@ export default function Login() {
               <LabelButtonLogin> Acessar </LabelButtonLogin>
             </ButtonLogin>
 
-            <ButtonFogotPassword onPress={() => console.tron.log('recovery pass')}>
+            <ButtonFogotPassword
+              onPress={() => console.tron.log('recovery pass')}>
               <LabelFogotPassword> Esqueceu a senha ? </LabelFogotPassword>
             </ButtonFogotPassword>
           </CardLogin>
