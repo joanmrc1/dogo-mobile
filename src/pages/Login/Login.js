@@ -3,8 +3,9 @@ import {TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
+
+import Loading from '../Loading/Loading';
 import NavigationService from '../../services/navigation';
-import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Login() {
   const error = useSelector(state => state.login.error);
@@ -13,23 +14,16 @@ export default function Login() {
   const [email, setEmail] = useState('joanmrc96@gmail.com');
   const [password, setPassword] = useState('123456');
   const [showPass, setShowPass] = useState('false');
-
-  useEffect(() => {
-    console.tron.log(error);
-  }, [error]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   function submitLogin() {
+    setModalVisible(true);
     dispatch({type: 'ASYNC_LOGIN', payload: {email, password}});
-  }
-
-  function logout() {
-    AsyncStorage.removeItem('@DogoApp:token');
-    AsyncStorage.removeItem('@DogoApp:user');
-    NavigationService.navigate('Login');
   }
 
   return (
     <ScrollView>
+      <Loading message={'Entrando'} isOpen={modalVisible} />
       <Content>
         <ContentLogo>
           <ImgLogo source={require('../../assets/img/logo.png')} />
@@ -37,10 +31,10 @@ export default function Login() {
 
         <ContentCard>
           <CardLogin>
-            <LabelTitleCard>Olá</LabelTitleCard>
-
-            <LabelSubTitleCard>faça login para continuar</LabelSubTitleCard>
-
+            <Welcome>
+              <LabelTitleCard>Olá,</LabelTitleCard>
+              <LabelSubTitleCard>faça login para continuar</LabelSubTitleCard>
+            </Welcome>
             {error !== true ? <LabelError>{error}</LabelError> : null}
 
             <ContentForm>
@@ -70,20 +64,27 @@ export default function Login() {
               <LabelButtonLogin> Acessar </LabelButtonLogin>
             </ButtonLogin>
 
-            <ButtonFogotPassword onPress={logout}>
+            <ButtonFogotPassword
+              onPress={() => console.tron.log('recovery pass')}>
               <LabelFogotPassword> Esqueceu a senha ? </LabelFogotPassword>
             </ButtonFogotPassword>
           </CardLogin>
 
           <ButtonFogotPassword
-            onPress={() => NavigationService.navigate('Inicio')}>
-            <LabelRegister> Não tem conta ? Cadastre-se </LabelRegister>
+            onPress={() => NavigationService.navigate('Register')}>
+            <LabelRegister> Não tem conta? Cadastre-se </LabelRegister>
           </ButtonFogotPassword>
         </ContentCard>
       </Content>
     </ScrollView>
   );
 }
+
+const Welcome = styled.View`
+  width: 100%;
+  padding: 0px 20px;
+  align-items: flex-start;
+`;
 
 const LabelError = styled.Text`
   color: red;
@@ -99,14 +100,14 @@ const ButtonFogotPassword = styled(TouchableOpacity)`
 `;
 
 const LabelFogotPassword = styled.Text`
-  color: #a9a9a9;
+  color: #076775;
   font-weight: 700;
   font-size: 14px;
   margin-top: 10px;
 `;
 
 const LabelRegister = styled.Text`
-  color: #a9a9a9;
+  color: #076775;
   font-weight: 700;
   font-size: 14px;
   margin-top: 26px;
@@ -120,10 +121,10 @@ const LabelButtonLogin = styled.Text`
 
 const ButtonLogin = styled(TouchableOpacity)`
   border-radius: 20px;
-  border: 1px solid #ffb300;
+  border: 1px solid #08d2ce;
   height: 45px;
-  background-color: #ffb300;
-  elevation: 11;
+  background-color: #08d2ce;
+  elevation: 7;
   padding: 10px;
   flex-direction: row;
   justify-content: center;
@@ -164,7 +165,7 @@ const ContentForm = styled.View`
 `;
 
 const LabelSubTitleCard = styled.Text`
-  color: #c8c8c8;
+  color: #08d2ce;
   font-size: 20;
   font-weight: bold;
   text-align: center;
@@ -172,7 +173,7 @@ const LabelSubTitleCard = styled.Text`
 `;
 
 const LabelTitleCard = styled.Text`
-  color: #ffb300;
+  color: #076775;
   font-size: 37;
   font-weight: bold;
   text-align: center;
@@ -202,7 +203,7 @@ const ContentCard = styled.View`
 const ContentLogo = styled.View`
   height: 260px;
   width: 100%;
-  background-color: #ffb300;
+  background-color: #08d2ce;
   position: absolute;
   flex-direction: column;
   justify-content: flex-start;

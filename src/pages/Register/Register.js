@@ -11,9 +11,9 @@ export default function Register() {
 
   const [name, setName] = useState('joan');
   const [birthday, setBirthday] = useState('27/10/1996');
-  const [email, setEmail] = useState('joanmrc96@gmail.com');
+  const [email, setEmail] = useState('joanmrc3@gmail.com');
   const [password, setPassword] = useState('123456');
-  const [confirmPassword, setConfirmPassword] = useState('123457');
+  const [confirmPassword, setConfirmPassword] = useState('123456');
   const [showPass, setShowPass] = useState('false');
 
   useEffect(() => {
@@ -36,7 +36,6 @@ export default function Register() {
   }
 
   function validateForm() {
-    console.tron.log('opa');
     if (password !== confirmPassword) {
       dispatch({
         type: 'ERROR_REGISTER',
@@ -45,6 +44,8 @@ export default function Register() {
 
       return false;
     }
+
+    return true;
   }
 
   return (
@@ -58,9 +59,8 @@ export default function Register() {
           <CardLogin>
             <ContentTitle>
               <LabelTitleCard>Olá, preencha os campos</LabelTitleCard>
-              <LabelSubTitleCard>com seus dados</LabelSubTitleCard>
+              {error !== true ? <LabelError>{error}</LabelError> : null}
             </ContentTitle>
-            {error !== true ? <LabelError>{error}</LabelError> : null}
             <ContentForm>
               <InputData
                 placeholder="Nome"
@@ -120,8 +120,7 @@ export default function Register() {
 
           <ButtonBackLogin onPress={() => NavigationService.navigate('Login')}>
             <LabelFogotPassword>
-              {' '}
-              Já tem uma conta ? Faça login{' '}
+              Já tem uma conta ? Faça login
             </LabelFogotPassword>
           </ButtonBackLogin>
         </ContentCard>
@@ -134,6 +133,7 @@ const LabelError = styled.Text`
   color: red;
   font-size: 19px;
   font-weight: bold;
+  padding-left: 10px;
 `;
 
 const ContentButton = styled.View`
@@ -149,7 +149,7 @@ const ButtonBackLogin = styled(TouchableOpacity)`
 `;
 
 const LabelFogotPassword = styled.Text`
-  color: #a9a9a9;
+  color: #076775;
   font-weight: 700;
   font-size: 14px;
   margin-top: 17px;
@@ -163,9 +163,9 @@ const LabelButtonLogin = styled.Text`
 
 const ButtonSubmit = styled(TouchableOpacity)`
   border-radius: 20px;
-  border: 1px solid #ffb300;
+  border: 1px solid #08d2ce;
   height: 45px;
-  background-color: #ffb300;
+  background-color: #08d2ce;
   elevation: 11;
   padding: 10px;
   flex-direction: row;
@@ -208,6 +208,7 @@ const ContentForm = styled.View`
 `;
 
 const ContentTitle = styled.View`
+  padding: 0px 10px;
   flex-direction: column;
   align-content: flex-start;
   align-items: flex-start;
@@ -222,7 +223,7 @@ const LabelSubTitleCard = styled.Text`
 `;
 
 const LabelTitleCard = styled.Text`
-  color: #ffb300;
+  color: #08d2ce;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
@@ -251,7 +252,7 @@ const ContentCard = styled.View`
 const ContentLogo = styled.View`
   height: 260px;
   width: 100%;
-  background-color: #ffb300;
+  background-color: #08d2ce;
   position: absolute;
   flex-direction: column;
   justify-content: flex-start;
@@ -261,7 +262,7 @@ const ContentLogo = styled.View`
 const ImgLogo = styled.Image`
   height: 50px;
   width: 150px;
-  margin-top: 40px;
+  margin-top: 30px;
 `;
 
 const Content = styled.View`

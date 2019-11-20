@@ -18,10 +18,20 @@ export function* asyncAuth({ payload }) {
 
     if (!response) return;
 
+    console.tron.log(data)
+
+    const pet = data.favorityPet.length ? data.favorityPet[0] : {};
+
+    const { pets, user } = data;
+    
     yield call(AsyncStorage.multiSet, [
-      [`@DogoApp:token`, data.token.token],
+      [`@DogoApp:token`, data.token.token ],
       [`@DogoApp:user`, JSON.stringify(data.user)],
     ]);
+
+    yield put({ type: 'SET_PETS', payload: { pets }} );
+    yield put({ type: 'SET_FAVORITY_PET', payload: { pet }} );
+    yield put({ type: 'SET_USER', payload: { user }} );
 
     yield call(NavigationService.navigate, 'HomeAplication');
     

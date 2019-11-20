@@ -1,33 +1,33 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, ScrollView, Platform} from 'react-native';
 import {Item, Input, Label, Row, Picker} from 'native-base';
+import DateTimePicker from '@react-native-community/datetimepicker'
+import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../../services/navigation';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import {useDispatch} from 'react-redux';
 import moment from 'moment';
 
-export default function Vermifugation({ navigation: { state: { params } } }) {
+export default function Vaccine({ navigation: { state: { params } } }) {
 	const [showDate, setShowDate] = useState(false);
 	const [showDateRetry, setShowDateRetry] = useState(false);
 	const [date, setDate] = useState(Date.now());
-	const [labelDate, setLabelDate] = useState('Data da consulta');
-	const [labelDateRetry, setLabelDateRetry] = useState('Repetir em');
-	const [dateOfAppointment, setDateOfAppointment] = useState('');
-	const [repeatIn, setRepeatIn] = useState('');
-	const [vermifuge, setVermifuge] = useState('');
-	const [weight, setWeight] = useState('');
+	const [vaccineIn, setVaccineIn] = useState('');
+	const [nextVaccine, setNextVaccine] = useState('');
+	const [labelVaccineIn, setLabelVaccineIn] = useState('Data da vacina');
+	const [labelNextVaccine, setLabelNextVaccine] = useState('Repetir em ...');
+	const [vaccine, setVaccine] = useState('');
+	const [type, setType] = useState('');
 	const [petId, setPetId] = useState(params.id);
 	const dispatch = useDispatch();
 
 	function handleSubmit() {
-		dispatch({type: 'ASYNC_VERMIFUGATION', payload: {
-			vermifuge,
+		dispatch({type: 'ASYNC_VACCINE', payload: {
+			vaccine,
 			petId,
-			weight,
-			dateOfAppointment,
-			repeatIn
+			type,
+			vaccineIn,
+			nextVaccine
 		}});
 	}
 
@@ -39,9 +39,9 @@ export default function Vermifugation({ navigation: { state: { params } } }) {
 			.format('Do MMMM YYYY')
 			.toString();
 
-		setShowDate(!showDate)
-		setLabelDate(formatedDate);
-		setDateOfAppointment(moment(obj).format('YYYY-MM-DD'));
+		setShowDate(false);
+		setLabelVaccineIn(formatedDate);
+		setVaccineIn(moment(obj).format('YYYY-MM-DD'));
 	}
 
 	function setValueDateRetry(e, obj) {
@@ -52,9 +52,9 @@ export default function Vermifugation({ navigation: { state: { params } } }) {
 			.format('Do MMMM YYYY')
 			.toString();
 
-		setShowDateRetry(!showDateRetry)
-		setLabelDateRetry(formatedDate);
-		setRepeatIn(moment(obj).format('YYYY-MM-DD'));
+		setShowDateRetry(false);
+		setLabelNextVaccine(formatedDate);
+		setNextVaccine(moment(obj).format('YYYY-MM-DD'));
 	}
 
 	function momentePtBr() {
@@ -101,41 +101,40 @@ export default function Vermifugation({ navigation: { state: { params } } }) {
 	        ordinal : '%dº'
 	    });
 	}
-
+	
   	return (
 	    <Content>
 	    	<ScrollView>
 				<ContentForm>
 					<ItemRow rounded>
-			            <Icon active name="x-ray" size={25} color={'#08d2ce'} />
+			            <Icon active name="syringe" size={25} color={'#08d2ce'} />
 			            <InputItem
-			            	placeholder="Vermifugo"
-			            	value={vermifuge}
-            				onChangeText={value => setVermifuge(value)}
+			            	placeholder="Vacina"
+			            	value={vaccine}
+            				onChangeText={value => setVaccine(value)}
 			            />
 			        </ItemRow>
 
 			        <ItemRow rounded>
-			            <Icon active name="weight" size={25} color={'#08d2ce'} />
+			            <Icon active name="file-prescription" size={25} color={'#08d2ce'} />
 			            <InputItem 
-			            	placeholder="Peso" 
-			            	keyboardType={'numeric'} 
-			            	value={weight}
-            				onChangeText={value => setWeight(value)}
+			            	placeholder="Tipo" 
+			            	value={type}
+            				onChangeText={value => setType(value)}
 			            />
 			        </ItemRow>
 
 			        <ItemRow rounded>
 			            <Icon active name="calendar-alt" size={25} color={'#08d2ce'} />
 			            <DateSelect onPress={() => setShowDate(!showDate)}>
-			            	<LabelDate> {labelDate} </LabelDate>
+			            	<LabelDate> {labelVaccineIn} </LabelDate>
 			            </DateSelect>
 			        </ItemRow>
 
 			        <ItemRow rounded>
 			            <Icon active name="calendar-check" size={25} color={'#08d2ce'} />
 			            <DateSelect onPress={() => setShowDateRetry(!showDateRetry)}>
-			            	<LabelDate> {labelDateRetry} </LabelDate>
+			            	<LabelDate> {labelNextVaccine} </LabelDate>
 			            </DateSelect>
 			        </ItemRow>
 
