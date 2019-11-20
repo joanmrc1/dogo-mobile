@@ -12,7 +12,7 @@ export const INITIAL_STATE = {
 };
 
 export const setPets = (state = INITIAL_STATE, { payload }) => {
-    return { ...state, pets: payload.pets }
+    return { ...state, pets: [...INITIAL_STATE.pets, ...payload.pets] }
 };
 
 export const setFavorityPet = (state = INITIAL_STATE, { payload }) => {
