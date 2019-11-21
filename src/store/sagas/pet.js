@@ -10,26 +10,29 @@ export function* asyncPetStore({ payload }) {
 		},
 	};
 
-	let petsVelhos = [];
+	const { name, gender, breed, species, fur, veterinary, avatar, birthday } = payload;
 
-	const formData = new FormData();
+	// const formData = new FormData();
 
-	Object.keys(payload).forEach((key) => {
-    	formData.append(key, payload[key]);
-	});
-
-	petsVelhos.push(payload.oldPet);
-
-	console.tron.log(formData)
+	// Object.keys(payload).forEach((key) => {
+ //    	formData.append(key, payload[key]);
+	// });
 
 	try {
-		const response = yield call(api.post, 'pets', formData, options);
+		const { data } = yield call(api.post, 'pets', {
+			name, gender, breed, species, fur, veterinary, avatar, birthday
+		});
 
-		console.tron.log(petsVelhos, response, payload);
+		const pets = data;
 
-		// yield put({ type: 'SET_PETS', payload: { petsNew }} );
+		console.tron.log(pets)
 
-		// yield call(NavigationService.navigate, 'Pets');
+		yield put({ 
+			type: 'SET_PETS', 
+			pets
+		});
+
+	    yield call(NavigationService.navigate, 'Pets');
 	} catch (err) {
 		console.tron.log('ERROR: ',err);
 

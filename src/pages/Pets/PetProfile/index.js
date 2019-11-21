@@ -83,7 +83,11 @@ export default function PetProfile({ navigation: { state: { params } } }) {
 							</ContentDateVaccine>
 						</CardVaccine>
 					
-						<CardVaccine>
+						<CardVaccine
+							onPress={() => NavigationService.navigate('RegisterPet', {
+								pet
+							})}
+						>
 							<LabelCard> Informações </LabelCard>
 							<ContentDateVaccine>
 								<LabelContentDate> 10/11/2019 </LabelContentDate>

@@ -9,12 +9,21 @@ import ImagePicker from 'react-native-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
-export default function RegisterPet() {
-  const oldPet = useSelector(state => state.pet.pets);
-  const [name, setName] = useState('adasd');
-  const [gender, setGender] = useState('F');
-  const [breed, setBreed] = useState('asd');
-  const [species, setSpecies] = useState('asdasd');
+export default function RegisterPet({ navigation }) {
+
+  useEffect(() => {
+
+    setPet(navigation.getParam('pet') || {})
+
+    console.tron.log(pet);
+
+  }, [])
+
+  const [pet, setPet] = useState('')
+  const [name, setName] = useState(pet.name || '');
+  const [gender, setGender] = useState(pet.gender || 'F');
+  const [breed, setBreed] = useState(pet.breed || '');
+  const [species, setSpecies] = useState(pet.species || '');
   const [fur, setFur] = useState('asd');
   const [veterinary, setVeterinary] = useState('asd');
   const [preview, setPreview] = useState(null);
@@ -76,7 +85,7 @@ export default function RegisterPet() {
 
   function handleSubmit() {
     dispatch({type: 'ASYNC_PET_STORE', payload: {
-      name, gender, breed, species, fur, veterinary, avatar, birthday, oldPet
+      name, gender, breed, species, fur, veterinary, avatar, birthday
     }});
   }
 

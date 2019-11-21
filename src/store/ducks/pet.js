@@ -11,8 +11,10 @@ export const INITIAL_STATE = {
 	favorityPet: {},
 };
 
-export const setPets = (state = INITIAL_STATE, { payload }) => {
-    return { ...state, pets: [...INITIAL_STATE.pets, ...payload.pets] }
+export const setPets = (state = INITIAL_STATE, action) => {
+	console.tron.log(state.pets, action);
+
+    return { ...state, pets: [...state.pets, ...action.pets] }
 };
 
 export const setFavorityPet = (state = INITIAL_STATE, { payload }) => {

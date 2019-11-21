@@ -13,7 +13,6 @@ import Register from '~/pages/Register/Register';
 import HomeAplication from '~/pages/HomeAplication/HomeAplication';
 import Pets from '~/pages/Pets/PetsScreen';
 import Profile from '~/pages/Profile/ProfileScreen';
-import LoadingInfo from '~/services/loading';
 
 function navigationOptionsBottomNavigate(IconParm) {
   return {
@@ -43,9 +42,6 @@ function navigationOptionsBottomNavigate(IconParm) {
 
 const AuthStack = createStackNavigator(
   {
-    LoadingInfo:  {
-      screen: LoadingInfo,
-    },
     Home: {
       screen: Home,
     },
