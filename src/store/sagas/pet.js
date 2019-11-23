@@ -12,11 +12,6 @@ export function* asyncPetStore({ payload }) {
 
 	const { name, gender, breed, species, fur, veterinary, avatar, birthday } = payload;
 
-	// const formData = new FormData();
-
-	// Object.keys(payload).forEach((key) => {
- //    	formData.append(key, payload[key]);
-	// });
 
 	try {
 		const { data } = yield call(api.post, 'pets', {
