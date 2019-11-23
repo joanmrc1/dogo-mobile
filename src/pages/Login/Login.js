@@ -16,14 +16,25 @@ export default function Login() {
   const [showPass, setShowPass] = useState('false');
   const [modalVisible, setModalVisible] = useState(false);
 
-  function submitLogin() {
+  async function submitLogin() {
     setModalVisible(true);
-    dispatch({type: 'ASYNC_LOGIN', payload: {email, password}});
+
+    const user = {
+      id: Math.random(),
+      name: email.split('@')[0],
+      email,
+      birthday: '27/10/1996'
+    }
+
+    await dispatch({type: 'SET_USER', user });
+
+    NavigationService.navigate('HomeAplication');
   }
 
   return (
     <ScrollView>
       <Loading message={'Entrando'} isOpen={modalVisible} />
+
       <Content>
         <ContentLogo>
           <ImgLogo source={require('../../assets/img/logo.png')} />
