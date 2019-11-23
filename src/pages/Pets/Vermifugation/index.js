@@ -8,7 +8,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import {useDispatch} from 'react-redux';
 import moment from 'moment';
 
-export default function Vermifugation({ navigation: { state: { params } } }) {
+export default function Vermifugation({ navigation }) {
+	useEffect(() => {
+		if(navigation.getParam('vermifugateDate')) setValuesUpdateDate(navigation.getParam('vermifugateDate'));
+	}, [])
+
+	const dispatch = useDispatch();
 	const [showDate, setShowDate] = useState(false);
 	const [showDateRetry, setShowDateRetry] = useState(false);
 	const [date, setDate] = useState(Date.now());
@@ -18,17 +23,32 @@ export default function Vermifugation({ navigation: { state: { params } } }) {
 	const [repeatIn, setRepeatIn] = useState('');
 	const [vermifuge, setVermifuge] = useState('');
 	const [weight, setWeight] = useState('');
-	const [petId, setPetId] = useState(params.id);
-	const dispatch = useDispatch();
+	const [petId, setPetId] = useState(navigation.state.params.id);
 
-	function handleSubmit() {
-		dispatch({type: 'ASYNC_VERMIFUGATION', payload: {
-			vermifuge,
-			petId,
-			weight,
-			dateOfAppointment,
-			repeatIn
-		}});
+	function setValuesUpdateDate(data) {
+		setVermifuge(data.vermifuge);
+		setWeight(data.weight);
+		setDateOfAppointment(data.dateOfAppointment);
+		setRepeatIn(data.repeatIn);
+		setLabelDate(data.dateOfAppointment);
+		setLabelDateRetry(data.repeatIn);
+	}
+
+	async function handleSubmit() {
+		const vermifugations = [
+			{
+				id: Math.random(),
+				vermifuge,
+				petId,
+				weight,
+				dateOfAppointment,
+				repeatIn
+			}
+		]
+
+		await dispatch({type: 'SET_VERMIFUGATION', vermifugations });
+
+		NavigationService.navigate('Pets');
 	}
 
 	async function setValueDate(e, obj) {
