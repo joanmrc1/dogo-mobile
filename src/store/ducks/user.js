@@ -1,15 +1,15 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
-    setUser: ['id', 'nome', 'email', 'birthday']
+    setUser: ['user']
 });
 
 const INITIAL_STATE = {
     user: {},
 };
 
-const setUser = (state = INITIAL_STATE, { payload }) => {
-    return { ...state, user: payload.user}
+const setUser = (state = INITIAL_STATE, action) => {
+    return { ...state, user: action.user}
 };
 
 export default createReducer(INITIAL_STATE, {

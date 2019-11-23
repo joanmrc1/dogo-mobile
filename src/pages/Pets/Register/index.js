@@ -13,17 +13,15 @@ export default function RegisterPet({ navigation }) {
 
   useEffect(() => {
 
-    setPet(navigation.getParam('pet') || {})
-
-    console.tron.log(pet);
+    setPet(navigation.getParam('pet') || {});
 
   }, [])
 
   const [pet, setPet] = useState('')
-  const [name, setName] = useState(pet.name || '');
+  const [name, setName] = useState(pet.name || 'zxc');
   const [gender, setGender] = useState(pet.gender || 'F');
-  const [breed, setBreed] = useState(pet.breed || '');
-  const [species, setSpecies] = useState(pet.species || '');
+  const [breed, setBreed] = useState(pet.breed || 'zxc');
+  const [species, setSpecies] = useState(pet.species || 'zcxzc');
   const [fur, setFur] = useState('asd');
   const [veterinary, setVeterinary] = useState('asd');
   const [preview, setPreview] = useState(null);
@@ -83,10 +81,12 @@ export default function RegisterPet({ navigation }) {
     setBirthday(formatedDate);
   }
 
-  function handleSubmit() {
-    dispatch({type: 'ASYNC_PET_STORE', payload: {
-      name, gender, breed, species, fur, veterinary, avatar, birthday
-    }});
+  async function handleSubmit() {
+    const pets = [{ id: Math.random(), name, gender, breed, species, fur, veterinary, avatar, birthday }]
+
+    await dispatch({type: 'SET_PETS', pets });
+
+    NavigationService.navigate('Pets');
   }
 
   return (

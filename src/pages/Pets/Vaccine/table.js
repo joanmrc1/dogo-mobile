@@ -1,17 +1,30 @@
 import React, {useState, useEffect} from 'react';
 import { ActivityIndicator } from 'react-native'
 import { DataTable } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import api from '~/services/api';
+import NavigationService from '../../../services/navigation';
 import moment from 'moment';
 
 export default function table({ navigation: { state: { params } } }) {
+	const vaccinies = useSelector(state => state.vaccine.vaccinies);
 	const [vaccines, setVaccines] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		getVaccines()
+		setIsLoading(true)
+
+		setTimeout( function() {
+			const vacciFilter = vaccinies.filter((item) => {
+				return item.petId == params.id
+			})
+
+			setVaccines(vacciFilter)
+
+	      	setIsLoading(false)
+	    }, 2000);
 	}, []);
 
 	async function getVaccines() {
@@ -36,12 +49,13 @@ export default function table({ navigation: { state: { params } } }) {
 				{vaccines.length > 0 ? (
 	            	vaccines.map(vaccine => (
 		              <DataTable.Row key={vaccine.id} style={{justifyContent: 'space-between'}}>
-		                <DataTable.Cell>{vaccine.name}</DataTable.Cell>
+		                <DataTable.Cell>{vaccine.vaccine}</DataTable.Cell>
 
 		                <DataTable.Cell
-		                  onPress={() => console.tron.log('oie')}
+		                  onPress={() => NavigationService.navigate('Vaccine', { vaccineData: vaccine } )}
 		                >
-		                  {moment(vaccine.vaccine_in).format('DD/MM/YYYY')}
+		                  {/*{moment(vaccine.vaccine_in).format('DD/MM/YYYY')}*/}
+		                  {vaccine.vaccineIn}
 		                </DataTable.Cell>
 		              </DataTable.Row>
 		            ))

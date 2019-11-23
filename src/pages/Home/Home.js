@@ -10,7 +10,11 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      verifyToken()
+
+    setTimeout( function() { 
+      NavigationService.navigate('HomeAplication'); 
+    }, 3500);
+
   }, [])
 
   async function verifyToken() {

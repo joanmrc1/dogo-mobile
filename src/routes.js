@@ -26,7 +26,7 @@ function navigationOptionsBottomNavigate(IconParm) {
       activeTintColor: '#08d2ce',
       inactiveTintColor: 'rgba(0,0,0,0.41)',
       style: {
-        position: 'relative',
+        position: 'absolute',
         width: ExtraDimensions.getRealWindowWidth(),
         backgroundColor: '#fff',
         height: 55,

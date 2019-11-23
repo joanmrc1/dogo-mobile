@@ -20,19 +20,21 @@ export default function Register() {
     console.tron.log(error);
   }, [error]);
 
-  function submitRegister() {
+  async function submitRegister() {
     if (!validateForm()) {
       return;
     }
-
-    const body = {
+    
+    const user = {
+      id: Math.random(),
       name,
-      birthday,
       email,
-      password,
-    };
+      birthday: '27/10/1996'
+    }
 
-    dispatch({type: 'ASYNC_REGISTER', payload: body});
+    await dispatch({type: 'SET_USER', user });
+
+    NavigationService.navigate('HomeAplication');
   }
 
   function validateForm() {

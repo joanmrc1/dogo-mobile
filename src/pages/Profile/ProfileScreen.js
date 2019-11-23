@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ScrollView, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,12 +10,23 @@ import moment from 'moment';
 
 export default function Pets() {
 	const user = useSelector(state => state.user.user);
+	const dispatch = useDispatch();
+	
 	const [name, setName] = useState(user.name);
 	const [email, setEmail] = useState(user.email);
 	const [birthday, setBirthday] = useState(user.birthday);
 
-	function handleSubmit() {
+	async function handleSubmit() {
+		const user = {
+	      id: Math.random(),
+	      name,
+	      email,
+	      birthday: '27/10/1996'
+	    }
 
+	    await dispatch({type: 'SET_USER', user });
+
+	    NavigationService.navigate('HomeAplication');
 	}
 
 	function logout() {

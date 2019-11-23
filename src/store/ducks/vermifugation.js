@@ -1,11 +1,20 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
-    asyncVermifugation: ['vermifuge', 'petId', 'weight', 'dateOfAppointment', 'repeatIn']
+    asyncVermifugation: ['vermifuge', 'petId', 'weight', 'dateOfAppointment', 'repeatIn'],
+	setVermifugation: ['vermifugations']
 });
 
-console.tron.log(Types);
+export const INITIAL_STATE = {
+	vermifugations: [],
+};
 
-const INITIAL_STATE = {};
+export const setVermifugation = (state = INITIAL_STATE, action) => {
+	console.tron.log(state.vermifugations, action);
 
-export default createReducer(INITIAL_STATE, {});
+    return { ...state, vermifugations: [...state.vermifugations, ...action.vermifugations] }
+};
+
+export default createReducer(INITIAL_STATE, {
+	[Types.SET_VERMIFUGATION]: setVermifugation,
+});

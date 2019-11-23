@@ -7,8 +7,38 @@ export const { Types, Creators } = createActions({
 });
 
 export const INITIAL_STATE = {
-	pets: [],
-	favorityPet: {},
+	pets: [
+		{	
+			name: "Ragnar Lord",
+		    gender: "M",
+		    breed: "asdsadsa",
+		    species: "asd",
+		    fur: "asdsad",
+		    birthday: "27/10/2016",
+		    veterinary: "Caus",
+		    avatar: null,
+		    user_id: 1,
+		    favorite: false,
+		    created_at: "2019-11-21 01:57:48",
+		    updated_at: "2019-11-21 01:57:48",
+		    id: 1
+		}
+	],
+	favorityPet: {
+		name: "Ragnar Lord",
+	    gender: "M",
+	    breed: "asdsadsa",
+	    species: "asd",
+	    fur: "asdsad",
+	    birthday: "27/10/2016",
+	    veterinary: "Caus",
+	    avatar: null,
+	    user_id: 1,
+	    favorite: false,
+	    created_at: "2019-11-21 01:57:48",
+	    updated_at: "2019-11-21 01:57:48",
+	    id: 1
+	},
 };
 
 export const setPets = (state = INITIAL_STATE, action) => {

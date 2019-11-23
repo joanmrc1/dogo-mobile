@@ -8,27 +8,47 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../../services/navigation';
 import moment from 'moment';
 
-export default function Vaccine({ navigation: { state: { params } } }) {
+export default function Vaccine({ navigation }) {
+	useEffect(() => {
+		if(navigation.getParam('vaccineData')) setValuesUpdateDate(navigation.getParam('vaccineData'));
+	}, [])
+
+	const dispatch = useDispatch();
 	const [showDate, setShowDate] = useState(false);
 	const [showDateRetry, setShowDateRetry] = useState(false);
 	const [date, setDate] = useState(Date.now());
-	const [vaccineIn, setVaccineIn] = useState('');
-	const [nextVaccine, setNextVaccine] = useState('');
+	const [vaccineIn, setVaccineIn] = useState();
+	const [nextVaccine, setNextVaccine] = useState();
 	const [labelVaccineIn, setLabelVaccineIn] = useState('Data da vacina');
 	const [labelNextVaccine, setLabelNextVaccine] = useState('Repetir em ...');
-	const [vaccine, setVaccine] = useState('');
-	const [type, setType] = useState('');
-	const [petId, setPetId] = useState(params.id);
-	const dispatch = useDispatch();
+	const [vaccine, setVaccine] = useState();
+	const [type, setType] = useState();
+	const [petId, setPetId] = useState(navigation.state.params.id);
 
-	function handleSubmit() {
-		dispatch({type: 'ASYNC_VACCINE', payload: {
-			vaccine,
-			petId,
-			type,
-			vaccineIn,
-			nextVaccine
-		}});
+	function setValuesUpdateDate(data) {
+		setVaccine(data.vaccine);
+		setType(data.type);
+		setNextVaccine(data.nextVaccine);
+		setVaccineIn(data.vaccineIn);
+		setLabelVaccineIn(data.vaccineIn);
+		setLabelNextVaccine(data.nextVaccine);
+	}
+
+	async function handleSubmit() {
+		const vaccinies = [
+			{
+				id: Math.random(),
+				vaccine,
+				petId,
+				type,
+				vaccineIn,
+				nextVaccine
+			}
+		]
+
+		await dispatch({type: 'SET_VACCINE', vaccinies });
+
+		NavigationService.navigate('Pets');
 	}
 
 	async function setValueDate(e, obj) {

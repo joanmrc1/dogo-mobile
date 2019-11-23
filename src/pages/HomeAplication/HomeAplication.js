@@ -10,6 +10,25 @@ export default function HomeAplication() {
   const pets = useSelector(state => state.pet.pets);
   const user = useSelector(state => state.user.user);
 
+  function getIdade(ano_aniversario, mes_aniversario, dia_aniversario) {
+    var d = new Date,
+    ano_atual = d.getFullYear(),
+    mes_atual = d.getMonth() + 1,
+    dia_atual = d.getDate(),
+
+    ano_aniversario = +ano_aniversario,
+    mes_aniversario = +mes_aniversario,
+    dia_aniversario = +dia_aniversario,
+
+    quantos_anos = ano_atual - ano_aniversario;
+
+    if (mes_atual < mes_aniversario || mes_atual == mes_aniversario && dia_atual < dia_aniversario) {
+      quantos_anos--; 
+    }
+
+    return quantos_anos < 0 ? 0 : quantos_anos;
+  }
+
   return (
     <Content>
       <CardRadiusTop>
@@ -64,7 +83,15 @@ export default function HomeAplication() {
 
                   <Row>
                     <Icon name="paw" size={20} color="#FFF" />
-                    <LabelNamePet>10 anos</LabelNamePet>
+                    <LabelNamePet>
+                      {
+                        getIdade(
+                          parseInt(pet.birthday.split('/')[2]), 
+                          parseInt(pet.birthday.split('/')[1]), 
+                          parseInt(pet.birthday.split('/')[0])
+                        )
+                      } anos
+                    </LabelNamePet>
                   </Row>
 
                   <Row>
