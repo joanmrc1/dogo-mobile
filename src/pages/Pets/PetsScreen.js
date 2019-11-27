@@ -10,7 +10,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import api from '~/services/api';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import {Item, Input} from 'native-base';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -20,17 +20,27 @@ import ActionButton from 'react-native-action-button';
 import { FAB } from 'react-native-paper';
 
 export default function PetsScreen() {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
-  const pets = useSelector(state => state.pet.pets);
+  const petsDuck = useSelector(state => state.pet.pets);
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  function setFilter(query) {
+  async function setFilter(query) {
     setSearch(query);
-    
-    let result = pets.filter((el) => {
+
+    const pets = [];
+
+    const result = petsDuck.filter((el) => {
       return el.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
     });
+
+    // await pets.push(result);
+
+    // await dispatch({
+    //   type: 'SET_PETS', 
+    //   pets 
+    // });
   }
 
   function getIdade(ano_aniversario, mes_aniversario, dia_aniversario) {
@@ -76,8 +86,8 @@ export default function PetsScreen() {
 
         <ContentCard>
             {
-              pets.length ?
-                pets.map((pet) => {
+              petsDuck.length ?
+                petsDuck.map((pet) => {
                   return (
                     <CardPet 
                       onPress={() => NavigationService.navigate('PetProfile', {
@@ -218,7 +228,9 @@ const ButtonArrow = styled(TouchableOpacity)`
   margin-right: 5px;
 `;
 
-const ContentCard = styled.View``;
+const ContentCard = styled.View`
+  margin-bottom: 60px;
+`;
 
 const ContentInfoPet = styled.View`
   border: 1px solid #08d2ce;
