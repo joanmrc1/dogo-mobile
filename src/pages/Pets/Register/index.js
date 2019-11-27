@@ -8,28 +8,41 @@ import NavigationService from '../../../services/navigation';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import SimpleReactValidator from 'simple-react-validator';
+import { momentePtBr } from '../../../services/utils';
 
 export default function RegisterPet({ navigation }) {
 
   useEffect(() => {
 
-    setPet(navigation.getParam('pet') || {});
+    if(navigation.getParam('pet')) setValuesUpdateDate(navigation.getParam('pet'));
 
   }, [])
 
   const [pet, setPet] = useState('')
-  const [name, setName] = useState(pet.name || 'zxc');
-  const [gender, setGender] = useState(pet.gender || 'F');
-  const [breed, setBreed] = useState(pet.breed || 'zxc');
-  const [species, setSpecies] = useState(pet.species || 'zcxzc');
-  const [fur, setFur] = useState('asd');
-  const [veterinary, setVeterinary] = useState('asd');
+  const [validator, setValidator] = useState(new SimpleReactValidator())
+  const [name, setName] = useState('');
+  const [gender, setGender] = useState('');
+  const [breed, setBreed] = useState('');
+  const [species, setSpecies] = useState('');
+  const [fur, setFur] = useState('');
+  const [veterinary, setVeterinary] = useState('');
   const [preview, setPreview] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [date, setDate] = useState(Date.now());
   const [showDate, setShowDate] = useState(false);
-  const [birthday, setBirthday] = useState('27/10/1996');
+  const [birthday, setBirthday] = useState('Data de niver');
   const dispatch = useDispatch();
+
+  function setValuesUpdateDate(data) {
+    setName(data.name || '')
+    setGender(data.gender || '')
+    setBreed(data.breed || '')
+    setSpecies(data.species || '')
+    setFur(data.fur || '')
+    setVeterinary(data.veterinary || '')
+    setBirthday(data.birthday || '')
+  }
 
   function handleSelectImage() {
     ImagePicker.showImagePicker(
@@ -72,6 +85,8 @@ export default function RegisterPet({ navigation }) {
   }
 
   async function setValueDate(e, obj) {
+    momentePtBr();
+
     const formatedDate = moment(obj)
       .locale('pt-br')
       .format('DD/MM/YYYY')
@@ -116,7 +131,10 @@ export default function RegisterPet({ navigation }) {
               placeholder="Meu Nome ex: Ragnar Lord*"
               value={name}
               onChangeText={value => setName(value)}
+              onBlur={() => validator.showMessageFor('name')}
             />
+
+            <Text> {validator.message('name', name, 'required|email')} </Text>
           </ItemRow>
 
           <ItemRow>
