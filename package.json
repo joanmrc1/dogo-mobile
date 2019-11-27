@@ -45,6 +45,7 @@
     "redux-saga": "^1.1.1",
     "reduxsauce": "^1.1.0",
     "seamless-immutable": "^7.1.4",
+    "simple-react-validator": "^1.2.4",
     "styled-components": "^4.4.0"
   },
   "devDependencies": {

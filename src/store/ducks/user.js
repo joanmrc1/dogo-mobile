@@ -5,7 +5,11 @@ export const { Types, Creators } = createActions({
 });
 
 const INITIAL_STATE = {
-    user: {},
+    user: {
+    	name: 'Joan Marcos',
+    	email: 'joanmrc96@gmail.com',
+    	birthday: '27/10/1996'
+    },
 };
 
 const setUser = (state = INITIAL_STATE, action) => {
