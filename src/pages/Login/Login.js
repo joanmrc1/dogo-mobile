@@ -51,11 +51,7 @@ export default function Login() {
                   onChangeText={text => setPassword(text)}
                 />
                 <TouchableOpacity onPress={() => setShowPass(!showPass)}>
-                  <CustomIcon
-                    name={showPass ? 'eye' : 'eye-slash'}
-                    color={'#000'}
-                    size={20}
-                  />
+                  <CustomIcon name={showPass ? 'eye' : 'eye-slash'} size={20} />
                 </TouchableOpacity>
               </FormIcon>
             </ContentForm>
@@ -88,9 +84,8 @@ const Welcome = styled.View`
 
 const LabelError = styled.Text`
   color: red;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  margin-top: 10px;
 `;
 
 const ButtonFogotPassword = styled(TouchableOpacity)`
@@ -100,14 +95,14 @@ const ButtonFogotPassword = styled(TouchableOpacity)`
 `;
 
 const LabelFogotPassword = styled.Text`
-  color: #076775;
+  color: #636e72;
   font-weight: 700;
   font-size: 14px;
   margin-top: 10px;
 `;
 
 const LabelRegister = styled.Text`
-  color: #076775;
+  color: #636e72;
   font-weight: 700;
   font-size: 14px;
   margin-top: 26px;
@@ -116,7 +111,7 @@ const LabelRegister = styled.Text`
 const LabelButtonLogin = styled.Text`
   color: white;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 16px;
 `;
 
 const ButtonLogin = styled(TouchableOpacity)`
@@ -124,7 +119,6 @@ const ButtonLogin = styled(TouchableOpacity)`
   border: 1px solid #08d2ce;
   height: 45px;
   background-color: #08d2ce;
-  elevation: 7;
   padding: 10px;
   flex-direction: row;
   justify-content: center;
@@ -134,7 +128,7 @@ const ButtonLogin = styled(TouchableOpacity)`
 `;
 
 const CustomIcon = styled(Icon)`
-  color: ${props => props.color};
+  color: #076775;
   font-size: ${props => props.size};
   padding: 14px;
 `;
@@ -146,16 +140,19 @@ const FormIcon = styled.View`
 `;
 
 const InputData = styled(TextInput)`
+  color: #076775;
   border: 1px solid #e3e3e3;
   margin-top: 15px;
   padding-left: 15px;
   width: 100%;
+  font-size: 14px;
 `;
 
 const InputPass = styled(TextInput)`
+  color: #076775;
   width: 82%;
   padding-left: 15px;
-  color: #000;
+  font-size: 14px;
 `;
 
 const ContentForm = styled.View`
@@ -166,7 +163,7 @@ const ContentForm = styled.View`
 
 const LabelSubTitleCard = styled.Text`
   color: #08d2ce;
-  font-size: 20;
+  font-size: 21px;
   font-weight: bold;
   text-align: center;
   padding: 5px;
@@ -174,7 +171,7 @@ const LabelSubTitleCard = styled.Text`
 
 const LabelTitleCard = styled.Text`
   color: #076775;
-  font-size: 37;
+  font-size: 31px;
   font-weight: bold;
   text-align: center;
   padding: 5px;
@@ -186,6 +183,7 @@ const CardLogin = styled.View`
   border-radius: 10px;
   border: 1px solid white;
   background-color: white;
+  justify-content: center;
   align-items: center;
   height: 430px;
   width: 300px;

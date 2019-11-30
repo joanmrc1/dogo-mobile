@@ -58,7 +58,8 @@ export default function Register() {
         <ContentCard>
           <CardLogin>
             <ContentTitle>
-              <LabelTitleCard>Olá, preencha os campos</LabelTitleCard>
+              <LabelTitleCard>Preencha os campos</LabelTitleCard>
+              <LabelSubTitleCard>para se registrar no DoGo</LabelSubTitleCard>
               {error !== true ? <LabelError>{error}</LabelError> : null}
             </ContentTitle>
             <ContentForm>
@@ -131,7 +132,7 @@ export default function Register() {
 
 const LabelError = styled.Text`
   color: red;
-  font-size: 19px;
+  font-size: 14px;
   font-weight: bold;
   padding-left: 10px;
 `;
@@ -149,7 +150,7 @@ const ButtonBackLogin = styled(TouchableOpacity)`
 `;
 
 const LabelFogotPassword = styled.Text`
-  color: #076775;
+  color: #636e72;
   font-weight: 700;
   font-size: 14px;
   margin-top: 17px;
@@ -158,7 +159,7 @@ const LabelFogotPassword = styled.Text`
 const LabelButtonLogin = styled.Text`
   color: white;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 16px;
 `;
 
 const ButtonSubmit = styled(TouchableOpacity)`
@@ -166,7 +167,6 @@ const ButtonSubmit = styled(TouchableOpacity)`
   border: 1px solid #08d2ce;
   height: 45px;
   background-color: #08d2ce;
-  elevation: 11;
   padding: 10px;
   flex-direction: row;
   justify-content: center;
@@ -175,7 +175,7 @@ const ButtonSubmit = styled(TouchableOpacity)`
 `;
 
 const CustomIcon = styled(Icon)`
-  color: ${props => props.color};
+  color: #076775;
   font-size: ${props => props.size};
   padding: 14px;
 `;
@@ -192,12 +192,13 @@ const InputData = styled(TextInput)`
   padding-left: 15px;
   width: 100%;
   height: 40px;
+  color: #076775;
 `;
 
 const InputPass = styled(TextInput)`
   width: 82%;
   padding-left: 15px;
-  color: #000;
+  color: #076775;
 `;
 
 const ContentForm = styled.View`
@@ -215,7 +216,7 @@ const ContentTitle = styled.View`
 `;
 
 const LabelSubTitleCard = styled.Text`
-  color: #c8c8c8;
+  color: #08d2ce;
   font-size: 16;
   font-weight: bold;
   text-align: left;
@@ -223,12 +224,12 @@ const LabelSubTitleCard = styled.Text`
 `;
 
 const LabelTitleCard = styled.Text`
-  color: #08d2ce;
+  color: #076775;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  margin-top: 20px;
   margin-left: 10px;
+  margin-top: 10px;
 `;
 
 const CardLogin = styled.View`
