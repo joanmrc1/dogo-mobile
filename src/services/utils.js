@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function momentePtBr() {
 	return moment.defineLocale('pt-br', {
         months : 'janeiro_fevereiro_março_abril_maio_junho_julho_agosto_setembro_outubro_novembro_dezembro'.split('_'),

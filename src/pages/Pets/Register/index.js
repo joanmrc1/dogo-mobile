@@ -8,7 +8,6 @@ import NavigationService from '../../../services/navigation';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
-import SimpleReactValidator from 'simple-react-validator';
 import { momentePtBr } from '../../../services/utils';
 
 export default function RegisterPet({ navigation }) {
@@ -20,9 +19,8 @@ export default function RegisterPet({ navigation }) {
   }, [])
 
   const [pet, setPet] = useState('')
-  const [validator, setValidator] = useState(new SimpleReactValidator())
   const [name, setName] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState('M');
   const [breed, setBreed] = useState('');
   const [species, setSpecies] = useState('');
   const [fur, setFur] = useState('');
@@ -131,10 +129,8 @@ export default function RegisterPet({ navigation }) {
               placeholder="Meu Nome ex: Ragnar Lord*"
               value={name}
               onChangeText={value => setName(value)}
-              onBlur={() => validator.showMessageFor('name')}
             />
 
-            <Text> {validator.message('name', name, 'required|email')} </Text>
           </ItemRow>
 
           <ItemRow>
@@ -145,9 +141,9 @@ export default function RegisterPet({ navigation }) {
               selectedValue={gender}
               onValueChange={(value) => setGender(value)}
             >
-              <ItemSelect label="Selecione o Sexo" value="default" />
-              <ItemSelect label="Fêmea" value="F" />
               <ItemSelect label="Macho" value="M" />
+              <ItemSelect label="Selecione o Sexo"/>
+              <ItemSelect label="Fêmea" value="F" />
             </Select>
           </ItemRow>
 

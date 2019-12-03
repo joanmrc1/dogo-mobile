@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
 
     setTimeout( function() { 
-      NavigationService.navigate('HomeAplication'); 
+      NavigationService.navigate('Login');
     }, 3500);
 
   }, [])

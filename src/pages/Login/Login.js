@@ -28,7 +28,11 @@ export default function Login() {
 
     await dispatch({type: 'SET_USER', user });
 
-    NavigationService.navigate('HomeAplication');
+    setTimeout( function() {
+      setModalVisible(false);
+      NavigationService.navigate('HomeAplication');
+    }, 2500);
+
   }
 
   return (
