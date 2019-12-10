@@ -5,11 +5,27 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import NavigationService from '../../../services/navigation';
 import ActionButton from 'react-native-action-button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function PetProfile({ navigation: { state: { params } } }) {
 	const [pet, setPet] = useState(params.pet)
 	const user = useSelector(state => state.user.user);
+	const oldPets = useSelector(state => state.pet.pets);
+	const dispatch = useDispatch();
+
+	async function deletePet(id) {
+		const index = oldPets.map(function(e) { return e.id; }).indexOf(id);
+
+	    if (index >= 0) {
+	      await oldPets.splice(index, 1);
+
+	      const pets = [...oldPets];
+
+	      await dispatch({type: 'SET_PETS', pets });
+
+	      NavigationService.navigate('Pets');
+	    }
+	}
 
 	return (
 		<Content>
@@ -19,6 +35,14 @@ export default function PetProfile({ navigation: { state: { params } } }) {
 
 			<ContentFloatButton>
 		      <ActionButton buttonColor="#3498db">
+
+		        <ActionButton.Item 
+		            buttonColor='#e92b3c'
+		            title="Apagar"
+		            onPress={() => deletePet(pet.id)}
+		        >
+		          <IconActionButton name="trash" />
+		        </ActionButton.Item>
 
 		        <ActionButton.Item 
 		            buttonColor='#1abc9c'

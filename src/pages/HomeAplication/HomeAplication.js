@@ -51,7 +51,7 @@ export default function HomeAplication() {
           <CardInfoPets>
             <Row>
               <Icon name="heart" size={20} color="#08d2ce" />
-              <LabelBirthday> Você tem {pets.length} pets </LabelBirthday>
+              <LabelBirthday> Você tem {typeof pets !== 'undefined' ? pets.length : '' } pets </LabelBirthday>
             </Row>
           </CardInfoPets>
 
@@ -65,47 +65,48 @@ export default function HomeAplication() {
           </CardInfoPets>
         </CardContentInfoPet>
 
-        {Object.entries(pet).length ? (
-            <CardPet
-              onPress={() => NavigationService.navigate('PetProfile', {
-                pet
-              })}
-            >
-              <ContentImage>
-                <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
-              </ContentImage>
-              <ContentInfoPet>
-                <ContentRow>
-                  <Row>
-                    <Icon name="book" size={20} color="#FFF" />
-                    <LabelNamePet>{pet.name}</LabelNamePet>
-                  </Row>
+        {typeof pets !== 'undefined' ?
+          Object.entries(pet).length ? (
+              <CardPet
+                onPress={() => NavigationService.navigate('PetProfile', {
+                  pet
+                })}
+              >
+                <ContentImage>
+                  <ImgPet source={require('../../assets/img/rag_modelo.jpeg')} />
+                </ContentImage>
+                <ContentInfoPet>
+                  <ContentRow>
+                    <Row>
+                      <Icon name="book" size={20} color="#FFF" />
+                      <LabelNamePet>{pet.name}</LabelNamePet>
+                    </Row>
 
-                  <Row>
-                    <Icon name="paw" size={20} color="#FFF" />
-                    <LabelNamePet>
-                      {
-                        getIdade(
-                          parseInt(pet.birthday.split('/')[2]), 
-                          parseInt(pet.birthday.split('/')[1]), 
-                          parseInt(pet.birthday.split('/')[0])
-                        )
-                      } anos
-                    </LabelNamePet>
-                  </Row>
+                    <Row>
+                      <Icon name="paw" size={20} color="#FFF" />
+                      <LabelNamePet>
+                        {
+                          getIdade(
+                            parseInt(pet.birthday.split('/')[2]), 
+                            parseInt(pet.birthday.split('/')[1]), 
+                            parseInt(pet.birthday.split('/')[0])
+                          )
+                        } anos
+                      </LabelNamePet>
+                    </Row>
 
-                  <Row>
-                    <Icon name="venus-mars" size={20} color="#FFF" />
-                    <LabelNamePet>{pet.gender}</LabelNamePet>
-                  </Row>
-                </ContentRow>
-                <IconStar>
-                  <Icon name="star" size={20} color="#FFF" />
-                </IconStar>
-              </ContentInfoPet>
-            </CardPet>
-          ) : null
-        }
+                    <Row>
+                      <Icon name="venus-mars" size={20} color="#FFF" />
+                      <LabelNamePet>{pet.gender}</LabelNamePet>
+                    </Row>
+                  </ContentRow>
+                  <IconStar>
+                    <Icon name="star" size={20} color="#FFF" />
+                  </IconStar>
+                </ContentInfoPet>
+              </CardPet>
+            ) : null
+        : null }
         
       </Card>
     </Content>

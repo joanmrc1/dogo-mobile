@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import NavigationService from '../../services/navigation';
+import Loading from '../Loading/Loading';
 
 export default function Register() {
   const error = useSelector(state => state.register.error);
@@ -15,26 +16,30 @@ export default function Register() {
   const [password, setPassword] = useState('123456');
   const [confirmPassword, setConfirmPassword] = useState('123456');
   const [showPass, setShowPass] = useState('false');
-
-  useEffect(() => {
-    console.tron.log(error);
-  }, [error]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   async function submitRegister() {
     if (!validateForm()) {
       return;
     }
+
+    await setModalVisible(true);
     
-    const user = {
+    const user = await {
       id: Math.random(),
       name,
       email,
       birthday: '27/10/1996'
     }
 
-    await dispatch({type: 'SET_USER', user });
+    setTimeout( async function() {
+      await NavigationService.navigate('HomeAplication');
 
-    NavigationService.navigate('HomeAplication');
+      await setModalVisible(false);
+
+      await dispatch({type: 'SET_USER', user });
+    }, 2000);
+
   }
 
   function validateForm() {
@@ -52,6 +57,8 @@ export default function Register() {
 
   return (
     <Content>
+      <Loading message={'Cadastrando'} isOpen={modalVisible} />
+
       <ScrollView>
         <ContentLogo>
           <ImgLogo source={require('../../assets/img/logo.png')} />

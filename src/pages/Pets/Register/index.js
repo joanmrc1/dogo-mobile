@@ -9,6 +9,7 @@ import ImagePicker from 'react-native-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { momentePtBr } from '../../../services/utils';
+import Loading from '../../Loading/Loading';
 
 export default function RegisterPet({ navigation }) {
 
@@ -18,21 +19,25 @@ export default function RegisterPet({ navigation }) {
 
   }, [])
 
-  const [pet, setPet] = useState('')
-  const [name, setName] = useState('');
-  const [gender, setGender] = useState('M');
-  const [breed, setBreed] = useState('');
-  const [species, setSpecies] = useState('');
-  const [fur, setFur] = useState('');
-  const [veterinary, setVeterinary] = useState('');
+  const [pet, setPet] = useState('asd')
+  const [name, setName] = useState('asd');
+  const [gender, setGender] = useState('Macho');
+  const [breed, setBreed] = useState('asd');
+  const [species, setSpecies] = useState('asd');
+  const [fur, setFur] = useState('asd');
+  const [veterinary, setVeterinary] = useState('asd');
   const [preview, setPreview] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [date, setDate] = useState(Date.now());
+  const [id, setId] = useState(null);
   const [showDate, setShowDate] = useState(false);
   const [birthday, setBirthday] = useState('Data de niver');
+  const [modalVisible, setModalVisible] = useState(false);
+  const oldPets = useSelector(state => state.pet.pets);
   const dispatch = useDispatch();
 
   function setValuesUpdateDate(data) {
+    console.tron.log(data.id);
     setName(data.name || '')
     setGender(data.gender || '')
     setBreed(data.breed || '')
@@ -40,6 +45,7 @@ export default function RegisterPet({ navigation }) {
     setFur(data.fur || '')
     setVeterinary(data.veterinary || '')
     setBirthday(data.birthday || '')
+    setId(data.id || null)
   }
 
   function handleSelectImage() {
@@ -94,16 +100,54 @@ export default function RegisterPet({ navigation }) {
     setBirthday(formatedDate);
   }
 
+  async function handleSelectSubmit() {
+    await setModalVisible(true);
+
+    if (navigation.getParam('pet')) { 
+      await handleUpdate(); 
+
+      return;
+    }
+
+    await handleSubmit();
+  }
+
   async function handleSubmit() {
-    const pets = [{ id: Math.random(), name, gender, breed, species, fur, veterinary, avatar, birthday }]
+    const newPets = [{ id: Math.random(), name, gender, breed, species, fur, veterinary, avatar, birthday }]
+
+    const pets = await [...oldPets, ...newPets];
 
     await dispatch({type: 'SET_PETS', pets });
 
-    NavigationService.navigate('Pets');
+    setTimeout( function() {
+      setModalVisible(false);
+      NavigationService.navigate('Pets');
+    }, 2500);
+  }
+
+  async function handleUpdate() {
+    const newPets = [{ id, name, gender, breed, species, fur, veterinary, avatar, birthday }]
+
+    const index = oldPets.map(function(e) { return e.id; }).indexOf(id);
+
+    if (index >= 0) {
+      await oldPets.splice(index, 1);
+
+      const pets = [...oldPets, ...newPets];
+
+      await dispatch({type: 'SET_PETS', pets });
+
+      setTimeout( function() {
+        setModalVisible(false);
+        NavigationService.navigate('Pets');
+      }, 2500);
+    }
   }
 
   return (
     <Content>
+      <Loading message={navigation.getParam('pet') ? 'Atualizando' : 'Cadastrando'} isOpen={modalVisible} />
+
       <ContentForm>
         <ScrollView>
           <ContentImage>
@@ -141,9 +185,9 @@ export default function RegisterPet({ navigation }) {
               selectedValue={gender}
               onValueChange={(value) => setGender(value)}
             >
-              <ItemSelect label="Macho" value="M" />
               <ItemSelect label="Selecione o Sexo"/>
-              <ItemSelect label="Fêmea" value="F" />
+              <ItemSelect label="Macho" value="Macho" />
+              <ItemSelect label="Fêmea" value="Femia" />
             </Select>
           </ItemRow>
 
@@ -197,7 +241,7 @@ export default function RegisterPet({ navigation }) {
           </ItemRow>
 
           <ContentButton>
-            <ButtonAddPet onPress={() => handleSubmit()}>
+            <ButtonAddPet onPress={() => handleSelectSubmit()}>
               <LabelButton> 🐱 Salvar 🐶 </LabelButton>
             </ButtonAddPet>
           </ContentButton>

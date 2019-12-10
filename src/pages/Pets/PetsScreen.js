@@ -34,13 +34,6 @@ export default function PetsScreen() {
     const result = petsDuck.filter((el) => {
       return el.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
     });
-
-    // await pets.push(result);
-
-    // await dispatch({
-    //   type: 'SET_PETS', 
-    //   pets 
-    // });
   }
 
   function getIdade(ano_aniversario, mes_aniversario, dia_aniversario) {

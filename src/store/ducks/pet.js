@@ -4,6 +4,7 @@ export const { Types, Creators } = createActions({
     asyncPetStore: ['name', 'gender', 'avatar', 'breed', 'species', 'fur', 'veterinary', 'avatar', 'birthday', 'oldPet'],
     setPets: ['pets'],
     setFavorityPet: ['pet'],
+    removePet: ['id']
 });
 
 export const INITIAL_STATE = {
@@ -16,7 +17,9 @@ export const INITIAL_STATE = {
 		    fur: "liso",
 		    birthday: "27/10/2016",
 		    veterinary: "Dr. Emanuel",
-		    avatar: null,
+		    avatar: {
+		    	preview: ''
+		    },
 		    user_id: 1,
 		    favorite: false,
 		    created_at: "2019-11-21 01:57:48",
@@ -44,7 +47,14 @@ export const INITIAL_STATE = {
 export const setPets = (state = INITIAL_STATE, action) => {
 	console.tron.log(state.pets, action);
 
-    return { ...state, pets: [...state.pets, ...action.pets] }
+    return { ...state, pets: [...action.pets] }
+};
+
+export const removePet = async (state = INITIAL_STATE, action) => {
+
+	const newPets = await state.pets.filter(item => item.id !== action.id)
+
+    return { ...state, pets: [...newPets] }
 };
 
 export const setFavorityPet = (state = INITIAL_STATE, { payload }) => {
@@ -53,6 +63,7 @@ export const setFavorityPet = (state = INITIAL_STATE, { payload }) => {
 
 export default createReducer(INITIAL_STATE, {
 	[Types.SET_PETS]: setPets,
+	[Types.REMOVE_PET]: removePet,
 	[Types.SET_FAVORITY_PET]: setFavorityPet
 });
 
