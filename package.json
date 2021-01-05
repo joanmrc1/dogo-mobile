@@ -13,7 +13,7 @@
     "@react-native-community/async-storage": "github:react-native-community/async-storage",
     "@react-native-community/datetimepicker": "^2.1.0",
     "apisauce": "^1.1.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "jetifier": "^1.6.4",
     "lottie-react-native": "^3.3.2",
     "moment": "^2.24.0",
