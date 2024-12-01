@@ -20,7 +20,7 @@
     "native-base": "^2.13.8",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
-    "react-native": "0.61.2",
+    "react-native": "0.62.3",
     "react-native-action-button": "^2.8.5",
     "react-native-extra-dimensions-android": "^1.2.5",
     "react-native-geocoding": "^0.4.0",
